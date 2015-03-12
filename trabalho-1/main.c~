@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include "ARVORE.H"
+
+int main( void )
+{
+	ARV_CriarArvore( ) ;
+
+	ARV_tpCondRet ARV_InserirEsquerda( 'E' ) ;
+
+	ARV_tpCondRet ARV_InserirDireita( 'r' ) ;
+
+	ARV_tpCondRet ARV_InserirEsquerda( 'i' ) ;
+
+	ARV_tpCondRet ARV_InserirDireita( 'c' ) ;
+
+	ARV_tpCondRet ARV_CosturaFolhas( ) ; 
+
+	ARV_tpCondRet ARV_ImprimeCostura( );
+
+	ARV_DestruirArvore( );
+
+	return 0;
+}

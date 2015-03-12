@@ -59,6 +59,14 @@
                *$EED Assertivas estruturais
                *   se pNoDir do nó X != NULL então pNoPai de pNoDir aponta para o nó X */
 
+         struct tgNoArvore * pFolhaDir ;
+        	   /* Ponteiro para folha à direita
+        	   *
+        	   *$EED Assertivas estruturais
+        	   *   se pFolhaDir do nó X == NULL ou X não é folha, ou função costura não foi utilizada
+        	       ou X é a folha mais a direita    */
+
+
          char Valor ;
                /* Valor do nó */
 
@@ -99,6 +107,12 @@
    static ARV_tpCondRet CriarNoRaiz( char ValorParm ) ;
 
    static void DestroiArvore( tpNoArvore * pNo ) ;
+
+   static tpNoArvore * FolhaMaisEsquerda( tpNoArvore * pNo );
+
+   static tpNoArvore * CosturaParaEsquerda( tpNoArvore * pNo, tpNoArvore * valor );
+
+   static int EhFolha( tpNoArvore * pNo );
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -351,6 +365,65 @@
 
    } /* Fim função: ARV Obter valor corrente */
 
+/***************************************************************************
+*
+*  Função: ARV Costura Folhas
+*  ****/
+
+   ARV_tpCondRet ARV_CosturaFolhas( void )
+   {
+   	  tpNoArvore * pNo;
+
+      if ( pArvore == NULL )
+      {
+         return ARV_CondRetArvoreNaoExiste ;
+      } /* if */
+      if ( pArvore->pNoCorr == NULL )
+      {
+         return ARV_CondRetArvoreVazia ;
+      } /* if */
+
+      pNo = CosturaParaEsquerda( pArvore->pNoRaiz, NULL );
+
+      return ARV_CondRetOK;
+      
+
+   } /* Fim função: ARV Costura Folhas */
+
+
+/***************************************************************************
+*
+*  Função: ARV Imprime Costura
+*  ****/
+
+   ARV_tpCondRet ARV_ImprimeCostura( void )
+   {
+   	  tpNoArvore * pNo;
+
+      if ( pArvore == NULL )
+      {
+         return ARV_CondRetArvoreNaoExiste ;
+      } /* if */
+      if ( pArvore->pNoCorr == NULL )
+      {
+         return ARV_CondRetArvoreVazia ;
+      } /* if */
+
+      pNo = pArvore->pNoRaiz;
+
+      pNo = FolhaMaisEsquerda( pNo );
+      
+     
+      while ( pNo != NULL )
+      {
+      	 printf("%c\n", pNo->Valor );
+      	 pNo = pNo->pFolhaDir;
+      }
+
+      return ARV_CondRetOK;
+      
+
+   } /* Fim função: ARV Costura Folhas */
 
 /*****  Código das funções encapsuladas no módulo  *****/
 
@@ -382,6 +455,7 @@
       pNo->pNoEsq = NULL ;
       pNo->pNoDir = NULL ;
       pNo->Valor  = ValorParm ;
+      pNo->pFolhaDir = NULL;
       return pNo ;
 
    } /* Fim função: ARV Criar nó da árvore */
@@ -457,6 +531,82 @@
       free( pNo ) ;
 
    } /* Fim função: ARV Destruir a estrutura da árvore */
+
+/***********************************************************************
+*
+*  $FC Função: ARV CosturaParaEsquerda
+*
+*
+***********************************************************************/
+
+   tpNoArvore * CosturaParaEsquerda( tpNoArvore * pNo, tpNoArvore * valor )
+   {
+
+   		if ( pNo == NULL )
+   		{
+   			return valor;
+   		}
+
+   		if ( EhFolha( pNo ) )
+   		{
+   			pNo->pFolhaDir = valor;
+   			return pNo;
+   		}
+   		else
+   		{
+   			valor = CosturaParaEsquerda( pNo->pNoDir , valor );
+   			valor = CosturaParaEsquerda( pNo->pNoEsq , valor );
+   		}
+
+   } /* Fim função: ARV Costurar árvore da direita para a esquerda*/
+
+/***********************************************************************
+*
+*  $FC Função: ARV CosturaParaEsquerda
+*
+*
+***********************************************************************/
+
+   tpNoArvore * FolhaMaisEsquerda( tpNoArvore * pNo )
+   {
+   		tpNoArvore * valor = NULL;
+
+   		if ( pNo == NULL )
+   		{
+   			return NULL;
+   		}
+
+   		if ( EhFolha( pNo ) )
+   		{
+   			return pNo;
+   		}
+   		else
+   		{
+   			valor = FolhaMaisEsquerda( pNo->pNoEsq );
+   			if ( valor == NULL )
+   			{
+   				valor = FolhaMaisEsquerda( pNo->pNoDir);
+   			}	
+   		}
+
+   		return valor;
+
+   } /* Fim função: ARV Acha Folha mais à esquerda */
+
+
+/***********************************************************************
+*
+*  $FC Função: ARV No é folha
+*
+*  $EAE Assertivas de entradas esperadas
+*     pNoArvore != NULL
+*
+***********************************************************************/
+
+   int EhFolha( tpNoArvore * pNo )
+   {
+   	   return ( pNo->pNoDir == NULL && pNo->pNoEsq == NULL);
+   } /* Fim função: ARV Nó é folha */
 
 /********** Fim do módulo de implementação: Módulo árvore **********/
 
