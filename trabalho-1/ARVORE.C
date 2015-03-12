@@ -20,7 +20,7 @@
 *
 ***************************************************************************/
 
-#include   <malloc.h>
+#include   <stdlib.h>
 #include   <stdio.h>
 
 #define ARVORE_OWN
@@ -59,11 +59,11 @@
                *$EED Assertivas estruturais
                *   se pNoDir do nó X != NULL então pNoPai de pNoDir aponta para o nó X */
 
-         struct tgNoArvore * pFolhaDir ;
-        	   /* Ponteiro para folha à direita
+         struct tgNoArvore * pProxFolha ;
+        	   /* Ponteiro para próxima folha
         	   *
         	   *$EED Assertivas estruturais
-        	   *   se pFolhaDir do nó X == NULL ou X não é folha, ou função costura não foi utilizada
+        	   *   se pProxFolha do nó X == NULL ou X não é folha, ou função costura não foi utilizada
         	       ou X é a folha mais a direita    */
 
 
@@ -92,6 +92,7 @@
 
          tpNoArvore * pNoCorr ;
                /* Ponteiro para o nó corrente da árvore */
+         tpNoArvore * pPrimFolha ;
 
    } tpArvore ;
 
@@ -108,11 +109,13 @@
 
    static void DestroiArvore( tpNoArvore * pNo ) ;
 
-   static tpNoArvore * FolhaMaisEsquerda( tpNoArvore * pNo );
-
    static tpNoArvore * CosturaParaEsquerda( tpNoArvore * pNo, tpNoArvore * valor );
 
    static int EhFolha( tpNoArvore * pNo );
+
+   static int ContaCostura( void );
+
+   static int ComparaFolhasAlfab( const void * vNo1, const void * vNo2);
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -137,7 +140,8 @@
 
       pArvore->pNoRaiz = NULL ;
       pArvore->pNoCorr = NULL ;
-
+      pArvore->pPrimFolha = NULL ;
+      
       return ARV_CondRetOK ;
 
    } /* Fim função: ARV Criar árvore */
@@ -372,7 +376,9 @@
 
    ARV_tpCondRet ARV_CosturaFolhas( void )
    {
-   	  tpNoArvore * pNo;
+   	  int numFolhas,i;
+   	  tpNoArvore * pFolha;
+   	  tpNoArvore ** pVetFolhas;
 
       if ( pArvore == NULL )
       {
@@ -383,8 +389,34 @@
          return ARV_CondRetArvoreVazia ;
       } /* if */
 
-      pNo = CosturaParaEsquerda( pArvore->pNoRaiz, NULL );
+      pArvore->pPrimFolha = CosturaParaEsquerda( pArvore->pNoRaiz, NULL );
+      
+      numFolhas = ContaCostura( );
+      
 
+      pVetFolhas = (tpNoArvore **) malloc(numFolhas*sizeof(tpNoArvore *));
+
+      pFolha = pArvore->pPrimFolha;
+      i = 0;
+      while (pFolha != NULL && i < numFolhas)
+      {
+      	pVetFolhas[i] = pFolha;
+      	pFolha = pFolha->pProxFolha;
+      	i++;
+      }
+
+      qsort(pVetFolhas,numFolhas,sizeof(tpNoArvore *), ComparaFolhasAlfab);
+      
+
+      pFolha = pArvore->pPrimFolha;
+      for (i = 0; i < numFolhas-1; i++)
+      {
+      	  pVetFolhas[i]->pProxFolha = pVetFolhas[i+1];
+      }
+      
+      pVetFolhas[i]->pProxFolha = NULL;
+
+      free( pVetFolhas );
       return ARV_CondRetOK;
       
 
@@ -411,13 +443,13 @@
 
       pNo = pArvore->pNoRaiz;
 
-      pNo = FolhaMaisEsquerda( pNo );
+      pNo = pArvore->pPrimFolha;
       
      
       while ( pNo != NULL )
       {
       	 printf("%c\n", pNo->Valor );
-      	 pNo = pNo->pFolhaDir;
+      	 pNo = pNo->pProxFolha;
       }
 
       return ARV_CondRetOK;
@@ -455,7 +487,7 @@
       pNo->pNoEsq = NULL ;
       pNo->pNoDir = NULL ;
       pNo->Valor  = ValorParm ;
-      pNo->pFolhaDir = NULL;
+      pNo->pProxFolha = NULL;
       return pNo ;
 
    } /* Fim função: ARV Criar nó da árvore */
@@ -549,7 +581,7 @@
 
    		if ( EhFolha( pNo ) )
    		{
-   			pNo->pFolhaDir = valor;
+   			pNo->pProxFolha = valor;
    			return pNo;
    		}
    		else
@@ -560,39 +592,34 @@
 
    } /* Fim função: ARV Costurar árvore da direita para a esquerda*/
 
+
 /***********************************************************************
 *
-*  $FC Função: ARV CosturaParaEsquerda
+*  $FC Função: ARV ComparaFolhasAlfab
 *
 *
 ***********************************************************************/
 
-   tpNoArvore * FolhaMaisEsquerda( tpNoArvore * pNo )
+   int ComparaFolhasAlfab( const void * vNo1, const void * vNo2)
    {
-   		tpNoArvore * valor = NULL;
+   		
+   		tpNoArvore ** pNo1 = ( tpNoArvore ** ) vNo1;
+   		tpNoArvore ** pNo2 = ( tpNoArvore ** ) vNo2;
 
-   		if ( pNo == NULL )
+   		if ( (*pNo1)->Valor < (*pNo2)->Valor )
    		{
-   			return NULL;
+   			return -1;
    		}
-
-   		if ( EhFolha( pNo ) )
+   		else if ((*pNo1)->Valor > (*pNo2)->Valor)
    		{
-   			return pNo;
+   			return 1;
    		}
    		else
    		{
-   			valor = FolhaMaisEsquerda( pNo->pNoEsq );
-   			if ( valor == NULL )
-   			{
-   				valor = FolhaMaisEsquerda( pNo->pNoDir);
-   			}	
-   		}
+   			return 0;
+   		}		
 
-   		return valor;
-
-   } /* Fim função: ARV Acha Folha mais à esquerda */
-
+   } /* Fim função: ARV Conta Número de Folhas na Árvore */
 
 /***********************************************************************
 *
@@ -607,6 +634,29 @@
    {
    	   return ( pNo->pNoDir == NULL && pNo->pNoEsq == NULL);
    } /* Fim função: ARV Nó é folha */
+
+/***********************************************************************
+*
+*  $FC Função: ARV Conta folhas da costura
+*
+*  $EAE Assertivas de entradas esperadas
+*     pNoArvore != NULL
+*
+***********************************************************************/
+
+   int ContaCostura( void )
+   {
+   	   int i = 0;
+   	   tpNoArvore * pFolha;
+   	   pFolha = pArvore->pPrimFolha;
+   	   while (pFolha != NULL)
+   	   {
+   	   		i++;
+   	   		pFolha = pFolha->pProxFolha;
+   	   }
+   	   return i;
+
+   } /* Fim função: ARV Conta folhas da costura */
 
 /********** Fim do módulo de implementação: Módulo árvore **********/
 
