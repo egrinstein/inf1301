@@ -402,6 +402,8 @@
 
 	   pVetFolhas[i]->pProxFolha = NULL ;
 	   pVetFolhas[i]->Chave = (char) (i + '1') ;
+	   
+	   free(pVetFolhas) ;
 
 	   return ARV_CondRetOK ;
 
