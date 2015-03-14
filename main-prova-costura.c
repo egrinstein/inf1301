@@ -6,6 +6,8 @@ int main( void )
 	char corr = '\0';
 	int condRet;
 
+// o eric é gay, mas é meu amigo
+
 	ARV_CriarArvore( ) ;
 
 	ARV_InserirEsquerda( 'L' ) ;
