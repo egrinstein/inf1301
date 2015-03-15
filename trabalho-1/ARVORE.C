@@ -372,6 +372,7 @@
 	   tpNoArvore ** pVetFolhas ;
 	   int tamVetFolhas ;
 	   int i ;
+	   char chaveBase;
 
 	  if ( pArvore == NULL )
       {
@@ -394,14 +395,16 @@
 
 	   qsort(pVetFolhas, tamVetFolhas, sizeof(tpNoArvore *), ComparaFolhasAlf) ;
 
-	   for(i=0 ; i < tamVetFolhas-1 ; i++)
+	   chaveBase = '1';
+	   
+	   for(i=0 ; i < tamVetFolhas-1 ; i++,chaveBase++)
 	   {
 		   pVetFolhas[i]->pProxFolha = pVetFolhas[i+1] ;
-		   pVetFolhas[i]->Chave = (char) (i + '1') ;
+		   pVetFolhas[i]->Chave = chaveBase ;
 	   }
 
 	   pVetFolhas[i]->pProxFolha = NULL ;
-	   pVetFolhas[i]->Chave = (char) (i + '1') ;
+	   pVetFolhas[i]->Chave = chaveBase ; //é chaveBase + 1? não sei
 	   
 	   free(pVetFolhas) ;
 
