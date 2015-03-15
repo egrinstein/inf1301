@@ -6,7 +6,7 @@ undergrads at PUC-Rio, Brazil.
 
 ## Members of the Team
 The tasks should be solved in groups of 3. [Jordana Mecler](https://github.com/jordanamecler),[Me](https://github.com/egrinstein)
-and [Leonardo Wajnsztok](https://github.com/leotok) compose our group.
+and [Leonardo Wajnsztok](https://github.com/leotok) composes our group.
 
 ## Projects:
 ### First project
