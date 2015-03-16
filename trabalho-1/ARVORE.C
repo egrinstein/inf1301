@@ -111,6 +111,10 @@
 
    static void DestroiArvore( tpNoArvore * pNo ) ;
 
+   static int ComparaFolhasAlf( const void * vNo1, const void * vNo2) ;
+
+   static int ContaFolhas( tpNoArvore * pNo ) ; 
+
 /*****  Código das funções exportadas pelo módulo  *****/
 
 /***************************************************************************
@@ -526,8 +530,6 @@
 *
 *  $FC Função: ARV Verifica se é folha
 *
-*  $EAE Assertivas de entradas esperadas
-*     pNoArvore != NULL
 *
 ***********************************************************************/
 
@@ -540,6 +542,57 @@
 
 	   return 0; /* Não é folha */
 
-   } /* Fim função: ARV Destruir a estrutura da árvore */
+   } /* Fim função: ARV Verifica se é folha */
 
-/********** Fim do módulo de implementação: ARV Verifica se é folha **********/
+/***********************************************************************
+*
+*  $FC Função: ARV Compara valor de duas folhas alfabeticamente
+*
+*
+***********************************************************************/
+ 
+   int ComparaFolhasAlf( const void * vNo1, const void * vNo2)
+   {
+               
+                tpNoArvore ** pNo1 = ( tpNoArvore ** ) vNo1;
+                tpNoArvore ** pNo2 = ( tpNoArvore ** ) vNo2;
+ 
+                if ( (*pNo1)->Valor < (*pNo2)->Valor )
+                {
+                        return -1;
+                }
+                else if ((*pNo1)->Valor > (*pNo2)->Valor)
+                {
+                        return 1;
+                }
+                else
+                {
+                        return 0;
+                }              
+ 
+   } /* Fim função: ARV Compara valor de duas folhas alfabeticamente */
+
+/***********************************************************************
+*
+*  $FC Função: ARV Conta Folhas 
+*
+*
+***********************************************************************/
+
+ 	int ContaFolhas( tpNoArvore * pNo )
+	{
+        if ( pNo == NULL )
+        {
+                return 0 ;
+        }
+        if ( EhFolha( pNo ) )
+        {
+                return 1 ;
+        }
+ 
+        return ContaFolhas( pNo->pNoDir )
+                + ContaFolhas( pNo->pNoEsq ) ;
+
+	} /* Fim função: ARV Conta Folhas */
+                
+/********** Fim do módulo de implementação: ARV **********/

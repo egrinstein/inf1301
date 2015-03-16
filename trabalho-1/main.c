@@ -10,7 +10,7 @@ int main( void )
 	
 	ARV_InserirEsquerda('J');
 
-	ARV_InserirEsquerda('E');
+	ARV_InserirEsquerda('a');
 
 	ARV_IrPai( );
 
@@ -25,7 +25,7 @@ int main( void )
 
 	ARV_IrPai( );
 
-	ARV_InserirDireita( 'c' );
+	ARV_InserirDireita( 'A' );
 
 	ARV_CosturaFolhas( ) ; 
 
