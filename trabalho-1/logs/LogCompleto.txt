@@ -1,50 +1,55 @@
 
 !!! Inicio dos testes
-!!!      Construto sob teste: TRAB1-2
-!!!      Script de teste:     scripts\TesteCompleto.script
+!!!      Construto sob teste: C:\Users\e1311354\Documents\Visual Studio 2010\Projects\ProgModularTrab1\Debug\ProgModularTrab1.exe
+!!!      Script de teste:     C:\Users\e1311354\Documents\Modular\arcabouco\simples\TesteArvoreCompleto.script
 
 !!!    0  Linha:     1  // Script:    TesteCompleto.script 
 !!!    0  Linha:     2  // Autores:   Eric Grinstein, Jordana Mecler, Leonardo Wajnsztok 
 !!!    0  Linha:     3  // Data:      18/03/2015 
-!!!    0  Linha:     4  // Propósito: Testar Completamente o módulo árvore. 
-   10  == Ir para nó pai em árvore inexistente
-   14  == Ir para nó esquerdo em árvore inexistente
-   18  == Ir para nó direito em árvore inexistente
-   22  == Obter valor corrente em árvore inexistente
-   26  == Costurar folhas em árvore inexistente
-   37  == Criar árvore
-   47  == Ir para nó pai em árvore vazia
-   50  == Ir para nó esquerdo em árvore vazia
-   53  == Ir para nó direito em árvore vazia
-   56  == Obter valor corrente em árvore vazia
-   59  == Costurar folhas em árvore vazia
-   67  == Inserir nó a esquerda
-   70  == Ir para nó pai em nó raiz
-   73  == Ir para nó esquerdo em folha
-   76  == Ir para nó direito em folha
-   85  == Inserir nó a esquerda
-   88  == Ir para nó pai
-   91  == Inserir nó a esquerda com nó esquerdo ocupado
-   94  == Inserir nó a direita
+!!!    0  Linha:     4  // PropÃ³sito: Testar Completamente o mÃ³dulo Ã¡rvore. 
+   10  == Ir para nÃ³ pai em Ã¡rvore inexistente
+   14  == Ir para nÃ³ esquerdo em Ã¡rvore inexistente
+   18  == Ir para nÃ³ direito em Ã¡rvore inexistente
+   22  == Obter valor corrente em Ã¡rvore inexistente
+   26  == Costurar folhas em Ã¡rvore inexistente
+   37  == Criar Ã¡rvore
+   47  == Ir para nÃ³ pai em Ã¡rvore vazia
+   50  == Ir para nÃ³ esquerdo em Ã¡rvore vazia
+   53  == Ir para nÃ³ direito em Ã¡rvore vazia
+   56  == Obter valor corrente em Ã¡rvore vazia
+   59  == Costurar folhas em Ã¡rvore vazia
+   67  == Inserir nÃ³ a esquerda
+   70  == Ir para nÃ³ pai em nÃ³ raiz
+   73  == Ir para nÃ³ esquerdo em folha
+   76  == Ir para nÃ³ direito em folha
+   85  == Inserir nÃ³ a esquerda
+   88  == Ir para nÃ³ pai
+   91  == Inserir nÃ³ a esquerda com nÃ³ esquerdo ocupado
+   94  == Inserir nÃ³ a direita
    97  == Ir para pai
-  100  == Inserir nó a direita com corrente não folha
+  100  == Inserir nÃ³ a direita com corrente nÃ£o folha
   103  == Obter valor
   106  == Ir para esquerda
-  109  == Inserir nó a esquerda
+  109  == Inserir nÃ³ a esquerda
   112  == Ir para pai
-  115  == Inserir nó a direita
-  119  == Ir para raiz e depois para a direita
-  124  == Inserir nó a direita e depois a esquerda
-  129  == Costurar folhas
-  132  == Destruir Árvore
-!!!    0  Linha:   135  // fim 
+  115  == Inserir nÃ³ a direita
+  121  == Ir para raiz e depois para a direita
+  127  == Inserir nÃ³ a direita e depois a esquerda
+  132  == Inserir nÃ³ a direita e depois a esquerda
+  137  == Ir para pai
+  140  == Ir para pai
+  143  == Ir para direita
+  146  == Inserir nÃ³ a direita e depois a esquerda
+  151  == Costurar folhas
+  154  == Destruir Ãrvore
+!!!    0  Linha:   157  // fim 
 
-!!! Número de linhas lidas:         136
-!!! Número de casos de teste:        30
-!!! Número comandos corretos:        34
-!!! Número de falhas encontradas:     0
+!!! NÃºmero de linhas lidas:         158
+!!! NÃºmero de casos de teste:        35
+!!! NÃºmero comandos corretos:        43
+!!! NÃºmero de falhas encontradas:     0
 
-!!! Não foram encontrados problemas
+!!! NÃ£o foram encontrados problemas
 
 
 !!! Numero de espacos ainda alocados: 0
