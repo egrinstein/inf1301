@@ -4,22 +4,18 @@
 *
 *  $MCD Módulo de definição: Módulo árvore
 *
+*
+*  Autores: avs - Arndt von Staa
+*			eg - Eric Grinstein
+*			jm - Jordana Mecler
+*			lw - Leonardo Wajnsztok
+*
 *  Arquivo gerado:              ARVORE.H
 *  Letras identificadoras:      ARV
 *
 *  Nome da base de software:    Exemplo de teste automatizado
 *  Arquivo da base de software: D:\AUTOTEST\PROJETOS\SIMPLES.BSW
 *
-*  Projeto: Disciplinas INF 1628 / 1301
-*  Gestor:  DI/PUC-Rio
-*  Autores: avs - Arndt von Staa
-*
-*  $HA Histórico de evolução:
-*     Versão  Autor    Data     Observações
-*       3.00   avs   28/02/2003 Uniformização da interface das funções e
-*                               de todas as condições de retorno.
-*       2.00   avs   03/08/2002 Eliminação de código duplicado, reestruturação
-*       1.00   avs   15/08/2001 Início do desenvolvimento
 *
 *  $ED Descrição do módulo
 *     Este módulo implementa um conjunto simples de funções para criar e
@@ -207,6 +203,22 @@
 ***********************************************************************/
 
    ARV_tpCondRet ARV_ObterValorCorr( char * ValorParm ) ;
+
+/***********************************************************************
+*
+*  $FC Função: ARV Costura folhas em Ordem Alfabética
+*
+*
+*  $FV Valor retornado
+*     ARV_CondRetOK
+*     ARV_CondRetArvoreNaoExiste
+*     ARV_CondRetArvoreVazia
+*     ARV_CondRetFaltouMemoria
+*
+***********************************************************************/
+
+
+   ARV_tpCondRet ARV_CosturaFolhasOrdemAlf( void ) ; 
 
 #undef ARVORE_EXT
 

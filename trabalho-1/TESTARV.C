@@ -1,5 +1,5 @@
 /***************************************************************************
-*  $MCI Módulo de implementação: Módulo de teste específico
+*  $MCI MÃ³dulo de implementaÃ§Ã£o: MÃ³dulo de teste especÃ­fico
 *
 *  Arquivo gerado:              TESTARV.C
 *  Letras identificadoras:      TARV
@@ -9,38 +9,42 @@
 *
 *  Projeto: Disciplinas INF 1628 / 1301
 *  Gestor:  DI/PUC-Rio
+*
 *  Autores: avs - Arndt von Staa
+*			eg - Eric Grinstein
+*			jm - Jordana Mecler
+*			lw - Leonardo Wajnsztok
 *
-*  $HA Histórico de evolução:
-*     Versão  Autor    Data     Observações
-*       3.00   avs   28/02/2003 Uniformização da interface das funções e
-*                               de todas as condições de retorno.
-*       2.00   avs   03/08/2002 Eliminação de código duplicado, reestruturação
-*       1.00   avs   15/08/2001 Início do desenvolvimento
+*  $HA HistÃ³rico de evoluÃ§Ã£o:
+*     VersÃ£o  Autor    Data     ObservaÃ§Ãµes
+*       3.00   avs   28/02/2003 UniformizaÃ§Ã£o da interface das funÃ§Ãµes e
+*                               de todas as condiÃ§Ãµes de retorno.
+*       2.00   avs   03/08/2002 EliminaÃ§Ã£o de cÃ³digo duplicado, reestruturaÃ§Ã£o
+*       1.00   avs   15/08/2001 InÃ­cio do desenvolvimento
 *
-*  $ED Descrição do módulo
-*     Este mÇodulo contém as funções específicas para o teste do
-*     módulo árvore. Ilustra como redigir um interpretador de comandos
-*     de teste específicos utilizando o arcabouço de teste para C.
+*  $ED DescriÃ§Ã£o do mÃ³dulo
+*     Este mÃ‡odulo contÃ©m as funÃ§Ãµes especÃ­ficas para o teste do
+*     mÃ³dulo Ã¡rvore. Ilustra como redigir um interpretador de comandos
+*     de teste especÃ­ficos utilizando o arcabouÃ§o de teste para C.
 *
-*  $EIU Interface com o usuário pessoa
-*     Comandos de teste específicos para testar o módulo árvore:
+*  $EIU Interface com o usuÃ¡rio pessoa
+*     Comandos de teste especÃ­ficos para testar o mÃ³dulo Ã¡rvore:
 *
-*     =criar        - chama a função ARV_CriarArvore( )
+*     =criar        - chama a funÃ§Ã£o ARV_CriarArvore( )
 *     =insdir <Char>
-*                   - chama a função ARV_InserirDireita( <Char> )
-*                     Obs. notação: <Char>  é o valor do parâmetro
+*                   - chama a funÃ§Ã£o ARV_InserirDireita( <Char> )
+*                     Obs. notaÃ§Ã£o: <Char>  Ã© o valor do parÃ¢metro
 *                     que se encontra no comando de teste.
 *
 *     "=insesq" <Char>
-*                   - chama a função ARV_InserirEsquerda( <Char> )
-*     "=irpai"      - chama a função ARV_IrPai( )
-*     "=iresq"      - chama a função ARV_IrEsquerda( )
-*     "=irdir"      - chama a função ARV_IrDireita( )
+*                   - chama a funÃ§Ã£o ARV_InserirEsquerda( <Char> )
+*     "=irpai"      - chama a funÃ§Ã£o ARV_IrPai( )
+*     "=iresq"      - chama a funÃ§Ã£o ARV_IrEsquerda( )
+*     "=irdir"      - chama a funÃ§Ã£o ARV_IrDireita( )
 *     "=obter" <Char>
-*                   - chama a função ARV_ObterValorCorr( ) e compara
+*                   - chama a funÃ§Ã£o ARV_ObterValorCorr( ) e compara
 *                     o valor retornado com o valor <Char>
-*     "=destroi"    - chama a função ARV_DestruirArvore( )
+*     "=destroi"    - chama a funÃ§Ã£o ARV_DestruirArvore( )
 *
 ***************************************************************************/
 
@@ -54,7 +58,7 @@
 
 #include    "arvore.h"
 
-/* Tabela dos nomes dos comandos de teste específicos */
+/* Tabela dos nomes dos comandos de teste especÃ­ficos */
 
 #define     CRIAR_ARV_CMD       "=criar"
 #define     INS_DIR_CMD         "=insdir"
@@ -64,19 +68,20 @@
 #define     IR_DIR_CMD          "=irdir"
 #define     OBTER_VAL_CMD       "=obter"
 #define     DESTROI_CMD         "=destruir"
+#define     COSTURA_CMD			"=costurar"
 
-/*****  Código das funções exportadas pelo módulo  *****/
+/*****  CÃ³digo das funÃ§Ãµes exportadas pelo mÃ³dulo  *****/
 
 
 /***********************************************************************
 *
-*  $FC Função: TARV Efetuar operações de teste específicas para árvore
+*  $FC FunÃ§Ã£o: TARV Efetuar operaÃ§Ãµes de teste especÃ­ficas para Ã¡rvore
 *
-*  $ED Descrição da função
-*     Efetua os diversos comandos de teste específicos para o módulo
-*     árvore sendo testado.
+*  $ED DescriÃ§Ã£o da funÃ§Ã£o
+*     Efetua os diversos comandos de teste especÃ­ficos para o mÃ³dulo
+*     Ã¡rvore sendo testado.
 *
-*  $EP Parâmetros
+*  $EP ParÃ¢metros
 *     $P ComandoTeste - String contendo o comando
 *
 *  $FV Valor retornado
@@ -94,12 +99,13 @@
       char ValorEsperado = '?'  ;
       char ValorObtido   = '!'  ;
       char ValorDado     = '\0' ;
+	  char ChaveDada	 = '\0' ;
 
       int  NumLidos = -1 ;
 
       TST_tpCondRet Ret ;
 
-      /* Testar ARV Criar árvore */
+      /* Testar ARV Criar Ã¡rvore */
 
          if ( strcmp( ComandoTeste , CRIAR_ARV_CMD ) == 0 )
          {
@@ -114,49 +120,49 @@
             CondRetObtido = ARV_CriarArvore( ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao criar árvore." );
+                                    "Retorno errado ao criar Ã¡rvore." );
 
-         } /* fim ativa: Testar ARV Criar árvore */
+         } /* fim ativa: Testar ARV Criar Ã¡rvore */
 
-      /* Testar ARV Adicionar filho à direita */
+      /* Testar ARV Adicionar filho Ã  direita */
 
          else if ( strcmp( ComandoTeste , INS_DIR_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "ci" ,
-                               &ValorDado , &CondRetEsperada ) ;
-            if ( NumLidos != 2 )
+            NumLidos = LER_LerParametros( "cci" ,
+                               &ValorDado , &ChaveDada , &CondRetEsperada ) ;
+            if ( NumLidos != 3 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = ARV_InserirDireita( ValorDado ) ;
+            CondRetObtido = ARV_InserirDireita( ValorDado , ChaveDada ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado inserir àa direita." );
+                                    "Retorno errado inserir Ã  direita." );
 
-         } /* fim ativa: Testar ARV Adicionar filho à direita */
+         } /* fim ativa: Testar ARV Adicionar filho Ã  direita */
 
-      /* Testar ARV Adicionar filho à esquerda */
+      /* Testar ARV Adicionar filho Ã  esquerda */
 
          else if ( strcmp( ComandoTeste , INS_ESQ_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "ci" ,
-                               &ValorDado , &CondRetEsperada ) ;
-            if ( NumLidos != 2 )
+            NumLidos = LER_LerParametros( "cci" ,
+                               &ValorDado , &ChaveDada , &CondRetEsperada ) ;
+            if ( NumLidos != 3 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = ARV_InserirEsquerda( ValorDado ) ;
+            CondRetObtido = ARV_InserirEsquerda( ValorDado , ChaveDada ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao inserir à esquerda." );
+                                    "Retorno errado ao inserir Ã  esquerda." );
 
-         } /* fim ativa: Testar ARV Adicionar filho à esquerda */
+         } /* fim ativa: Testar ARV Adicionar filho Ã  esquerda */
 
-      /* Testar ARV Ir para nó pai */
+      /* Testar ARV Ir para nÃ³ pai */
 
          else if ( strcmp( ComandoTeste , IR_PAI_CMD ) == 0 )
          {
@@ -173,9 +179,9 @@
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao ir para pai." );
 
-         } /* fim ativa: Testar ARV Ir para nó pai */
+         } /* fim ativa: Testar ARV Ir para nÃ³ pai */
 
-      /* Testar ARV Ir para nó à esquerda */
+      /* Testar ARV Ir para nÃ³ Ã  esquerda */
 
          else if ( strcmp( ComandoTeste , IR_ESQ_CMD ) == 0 )
          {
@@ -192,9 +198,9 @@
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao ir para esquerda." );
 
-         } /* fim ativa: Testar ARV Ir para nó à esquerda */
+         } /* fim ativa: Testar ARV Ir para nÃ³ Ã  esquerda */
 
-      /* Testar ARV Ir para nó à direita */
+      /* Testar ARV Ir para nÃ³ Ã  direita */
 
          else if ( strcmp( ComandoTeste , IR_DIR_CMD ) == 0 )
          {
@@ -211,7 +217,7 @@
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao ir para direita." );
 
-         } /* fim ativa: Testar ARV Ir para nó à direita */
+         } /* fim ativa: Testar ARV Ir para nÃ³ Ã  direita */
 
       /* Testar ARV Obter valor corrente */
 
@@ -236,11 +242,11 @@
             } /* if */
 
             return TST_CompararChar( ValorEsperado , ValorObtido ,
-                                     "Conteúdo do nó está errado." ) ;
+                                     "ConteÃºdo do nÃ³ estÃ¡ errado." ) ;
 
          } /* fim ativa: Testar ARV Obter valor corrente */
 
-      /* Testar ARV Destruir árvore */
+      /* Testar ARV Destruir Ã¡rvore */
 
          else if ( strcmp( ComandoTeste , DESTROI_CMD ) == 0 )
          {
@@ -249,11 +255,31 @@
 
             return TST_CondRetOK ;
 
-         } /* fim ativa: Testar ARV Destruir árvore */
+         } /* fim ativa: Testar ARV Destruir Ã¡rvore */
+
+	 /* Testar ARV Costura Folhas da Ã¡rvore alfabeticamente */
+
+		 else if ( strcmp( ComandoTeste , COSTURA_CMD ) == 0 )
+         {
+
+            NumLidos = LER_LerParametros( "i" ,
+                               &CondRetEsperada ) ;
+            if ( NumLidos != 1 )
+            {
+               return TST_CondRetParm ;
+            } /* if */
+
+            CondRetObtido = ARV_CosturaFolhasOrdemAlf( ) ;
+
+            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                                    "Retorno errado ao costurar folhas" ) ;
+
+         } /* fim ativa: Testar ARV Costura Folhas da Ã¡rvore alfabeticamente */
+		
 
       return TST_CondRetNaoConhec ;
 
-   } /* Fim função: TARV Efetuar operações de teste específicas para árvore */
+   } /* Fim funÃ§Ã£o: TARV Efetuar operaÃ§Ãµes de teste especÃ­ficas para Ã¡rvore */
 
-/********** Fim do módulo de implementação: Módulo de teste específico **********/
+/********** Fim do mÃ³dulo de implementaÃ§Ã£o: MÃ³dulo de teste especÃ­fico **********/
 
