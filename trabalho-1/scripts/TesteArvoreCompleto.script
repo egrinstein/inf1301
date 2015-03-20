@@ -65,7 +65,7 @@
 
 
 == Inserir nó a esquerda
-=insesq		'a'		'5'		0
+=insesq		'a'		'g'		0
 
 == Ir para nó pai em nó raiz
 =irpai		6
@@ -83,7 +83,7 @@
 
 
 == Inserir nó a esquerda
-=insesq    	'0'		'b'		0
+=insesq    	'0'		'e'		0
 
 == Ir para nó pai
 =irpai		0
@@ -92,7 +92,7 @@
 =insesq		'c'		'9'		3
 
 == Inserir nó a direita
-=insdir		'c'		'4'		0
+=insdir		'c'		'f'		0
 
 == Ir para pai 
 =irpai		0
@@ -107,13 +107,15 @@
 =iresq		0
 
 == Inserir nó a esquerda
-=insesq		'L'		'1'		0
+=insesq		'L'		'm'		0
 
 == Ir para pai
 =irpai		0	
 
 == Inserir nó a direita
-=insdir		'A'		'2'		0
+=insdir		'A'		'n'		0
+
+
 
 
 == Ir para raiz e depois para a direita
@@ -121,10 +123,30 @@
 =irpai		0
 =irdir		0
 
+
 == Inserir nó a direita e depois a esquerda
-=insdir		'V'		'3'		0
+=insdir		'V'		'd'		0
 =irpai		0
-=insesq		'F'		'0'		0
+=insesq		'F'		'a'		0
+
+== Inserir nó a direita e depois a esquerda
+=insdir         'F'             'l'             0
+=irpai		0
+=insesq         'O'		'q'             0
+
+== Ir para pai
+=irpai          0
+
+== Ir para pai
+=irpai          0
+
+== Ir para direita
+=irdir          0
+
+== Inserir nó a direita e depois a esquerda
+=insdir         'V'             'o'             0
+=irpai          0
+=insesq         'I'             'p'             0
 
 == Costurar folhas
 =costurar		0
@@ -133,4 +155,3 @@
 =destruir
 
 // fim
-
