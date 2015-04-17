@@ -35,12 +35,10 @@
 typedef struct CAR_carta {
     
     char naipe ;
-        /* Naipe da carta
-         */
+        /* Naipe da carta */
     
     int valor ;
-        /* Valor da carta
-         */
+        /* Valor da carta */
     
 } CAR_tpCarta ;
 
