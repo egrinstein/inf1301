@@ -1,7 +1,7 @@
 
 /***************************************************************************
 *
-*  $MCD Módulo de Implementação: PIL  Pilha de Cartas
+*  $MCD MÃ³dulo de ImplementaÃ§Ã£o: PIL  Pilha de Cartas
 *
 *  Arquivo gerado:              PIL.C
 *  Letras identificadoras:      PIL
@@ -18,13 +18,12 @@
 #include "PILHA_DE_CARTAS.H"
 #undef PILHA_DE_CARTAS_OWN
 
-
-
-/*****  Código das funções exportadas pelo módulo  *****/
+typedef LIS_tppLista PIL_tppPilha ; // OS CASTS NAO SAO MAIS NECESSARIOS?
+/*****  CÃ³digo das funÃ§Ãµes exportadas pelo mÃ³dulo  *****/
 
 /***************************************************************************
 *
-*  Função: PIL Criar Pilha Vazia 
+*  FunÃ§Ã£o: PIL Criar Pilha Vazia 
 *****/
 
    PIL_tpCondRet PIL_CriarPilhaVazia( PIL_tppPilha * pPilha )
@@ -45,11 +44,11 @@
 
       return PIL_CondRetOK ;
 
-   } /* Fim função: PIL  &Criar Pilha Vazia */
+   } /* Fim funÃ§Ã£o: PIL  &Criar Pilha Vazia */
 
 /***************************************************************************
 *
-*  Função: PIL Destruir Pilha de Cartas 
+*  FunÃ§Ã£o: PIL Destruir Pilha de Cartas 
 *****/
 
    PIL_tpCondRet PIL_DestruirPilha( PIL_tppPilha pPilha )
@@ -60,12 +59,12 @@
 
 	return PIL_CondRetOK ; 	
 
-   }/* Fim função: PIL Destruir Pilha de Cartas */
+   }/* Fim funÃ§Ã£o: PIL Destruir Pilha de Cartas */
 
 
 /***************************************************************************
 *
-*  Função: PIL Push Carta 
+*  FunÃ§Ã£o: PIL Push Carta 
 *****/
 
    PIL_tpCondRet PIL_PushCarta( PIL_tppPilha pPilha , CAR_tppCarta pCarta )
@@ -78,11 +77,11 @@
 
 	return PIL_CondRetOK ; 	
 
-   }/* Fim função: PIL Push Carta */
+   }/* Fim funÃ§Ã£o: PIL Push Carta */
 
 /***************************************************************************
 *
-*  Função: PIL VerCarta 
+*  FunÃ§Ã£o: PIL VerCarta 
 *****/
 
    PIL_tpCondRet PIL_VerCarta( PIL_tppPilha pPilha , CAR_tppCarta * pCarta , int posicao )
@@ -110,11 +109,11 @@
 
 	return PIL_CondRetOK ; 	
 
-   }/* Fim função: PIL VerCarta */
+   }/* Fim funÃ§Ã£o: PIL VerCarta */
 
 /***************************************************************************
 *
-*  Função: PIL PopCarta 
+*  FunÃ§Ã£o: PIL PopCarta 
 *****/
 
    PIL_tpCondRet PIL_PopCarta( PIL_tppPilha pPilha , CAR_tppCarta * pCarta )
@@ -126,15 +125,15 @@
 		return condRet ;
 	}
 
-	LIS_ExcluirElemento( pLista ); // Provavelmente vai ferrar o troço todo,pois vai excluir a carta.
-                                      // talvez seja necessário um método da lista que não libere o conteúdo do
-				     // nó, só o nó.
+	LIS_ExcluirElemento( pLista ); // Provavelmente vai ferrar o troÃ§o todo,pois vai excluir a carta.
+                                      // talvez seja necessÃ¡rio um mÃ©todo da lista que nÃ£o libere o conteÃºdo do
+				     // nÃ³, sÃ³ o nÃ³.
 	return PIL_CondRetOK ; 	
 
-   }/* Fim função: PIL Pop Carta */
+   }/* Fim funÃ§Ã£o: PIL Pop Carta */
 
 
 
-/********** Fim do módulo de implementação: PIL  Pilha de cartas  **********/
+/********** Fim do mÃ³dulo de implementaÃ§Ã£o: PIL  Pilha de cartas  **********/
 
 
