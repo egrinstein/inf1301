@@ -2,7 +2,7 @@
 #define PILHA_DE_CARTAS_
 /***************************************************************************
 *
-*  $MCD MÛdulo de definiÁ„o: PIL  Pilha de Cartas
+*  $MCD M√≥dulo de defini√ß√£o: PIL  Pilha de Cartas
 *
 *  Arquivo gerado:              PIL.H
 *  Letras identificadoras:      PIL
@@ -12,9 +12,9 @@
 *	    Leonardo Wajnsztok
 *
 *
-*  $ED DescriÁ„o do mÛdulo
-*     Cria pilha homogÍnea armazenadora de tipo cartas de baralho.
-*     O mÛdulo permite a criaÁ„o de m˙ltiplas pilhas.
+*  $ED Descri√ß√£o do m√≥dulo
+*     Cria pilha homog√™nea armazenadora de tipo cartas de baralho.
+*     O m√≥dulo permite a cria√ß√£o de m√∫ltiplas pilhas.
 *   
 ***************************************************************************/
  
@@ -24,20 +24,20 @@
    #define PILHA_DE_CARTAS_EXT extern
 #endif
 
-/***** DeclaraÁıes exportadas pelo mÛdulo *****/
+/***** Declara√ß√µes exportadas pelo m√≥dulo *****/
 
-/* Tipo referÍncia para uma lista */
+/* Tipo refer√™ncia para uma lista */
 
-typedef struct PIL_tagPilha * PIL_tppPilha ;
+typedef PIL_tppPilha ;
 
 
 /***********************************************************************
 *
-*  $TC Tipo de dados: PIL CondiÁıes de retorno
+*  $TC Tipo de dados: PIL Condi√ß√µes de retorno
 *
 *
-*  $ED DescriÁ„o do tipo
-*     CondiÁıes de retorno das funÁıes da lista
+*  $ED Descri√ß√£o do tipo
+*     Condi√ß√µes de retorno das fun√ß√µes da lista
 *
 ***********************************************************************/
 
@@ -47,30 +47,30 @@ typedef struct PIL_tagPilha * PIL_tppPilha ;
                /* Concluiu corretamente */
 
          PIL_CondRetPilhaVazia ,
-               /* A pilha n„o contÈm elementos */
+               /* A pilha n√£o cont√©m elementos */
 
 	 PIL_CondRetParamIncorreto ,
-               /* Par‚metro incorreto ao tentar ver carta na pilha */
+               /* Par√¢metro incorreto ao tentar ver carta na pilha */
 
          PIL_CondRetFaltouMemoria
-               /* Faltou memÛria ao tentar inserir na pilha */
+               /* Faltou mem√≥ria ao tentar inserir na pilha */
 
    } PIL_tpCondRet ;
 
 
 /***********************************************************************
 *
-*  $FC FunÁ„o: PIL Criar Pilha de Cartas Vazia
+*  $FC Fun√ß√£o: PIL Criar Pilha de Cartas Vazia
 *
-*  $ED DescriÁ„o da funÁ„o
+*  $ED Descri√ß√£o da fun√ß√£o
 *     Cria uma pilha de cartas de baralho vazia
 *
-*  $EP Par‚metros
-*	pPilha - EndereÁo que receber· um ponteiro para a pilha criada. 
+*  $EP Par√¢metros
+*	pPilha - Endere√ßo que receber√° um ponteiro para a pilha criada. 
 *	
 *  $FV Valor retornado
 *	PIL_CondRetOK - Criou sem problemas
-*	PIL_CondRetFaltouMemoria - Faltou memÛria na criaÁ„o da pilha
+*	PIL_CondRetFaltouMemoria - Faltou mem√≥ria na cria√ß√£o da pilha
 *
 ***********************************************************************/
 
@@ -78,17 +78,17 @@ typedef struct PIL_tagPilha * PIL_tppPilha ;
 
 /***********************************************************************
 *
-*  $FC FunÁ„o: PIL Destruir pilha
+*  $FC Fun√ß√£o: PIL Destruir pilha
 *
-*  $ED DescriÁ„o da funÁ„o
-*     DestrÛi a lista fornecida.
-*     O par‚metro ponteiro para a lista n„o È modificado.
-*     Se ocorrer algum erro durante a destruiÁ„o, a pilha resultar·
+*  $ED Descri√ß√£o da fun√ß√£o
+*     Destr√≥i a lista fornecida.
+*     O par√¢metro ponteiro para a lista n√£o √© modificado.
+*     Se ocorrer algum erro durante a destrui√ß√£o, a pilha resultar√°
 *     estruturalmente incorreta.
-*     OBS. n„o existe previs„o para possÌveis falhas de execuÁ„o.
+*     OBS. n√£o existe previs√£o para poss√≠veis falhas de execu√ß√£o.
 *
-*  $EP Par‚metros
-*     pPilha de Cartas - ponteiro para a pilha a ser destruÌda
+*  $EP Par√¢metros
+*     pPilha de Cartas - ponteiro para a pilha a ser destru√≠da
 *
 *  $FV Valor retornado
 *     PIL_CondRetOK    - destruiu sem problemas
@@ -100,13 +100,13 @@ typedef struct PIL_tagPilha * PIL_tppPilha ;
 
 /***********************************************************************
 *
-*  $FC FunÁ„o: PIL Push Carta
+*  $FC Fun√ß√£o: PIL Push Carta
 *
-*  $ED DescriÁ„o da funÁ„o
+*  $ED Descri√ß√£o da fun√ß√£o
 *      Insere carta no topo da pilha de cartas
 *
-*  $EP Par‚metros
-*     pPilha de Cartas - ponteiro para a pilha onde a carta ser· inserida
+*  $EP Par√¢metros
+*     pPilha de Cartas - ponteiro para a pilha onde a carta ser√° inserida
 *     pCarta - Carta a ser inserida no topo da pilha
 *
 ***********************************************************************/
@@ -116,15 +116,15 @@ typedef struct PIL_tagPilha * PIL_tppPilha ;
 
 /***********************************************************************
 *
-*  $FC FunÁ„o: PIL Pop Carta
+*  $FC Fun√ß√£o: PIL Pop Carta
 *
-*  $ED DescriÁ„o da funÁ„o
+*  $ED Descri√ß√£o da fun√ß√£o
 *     Remove carta do topo da pilha
 *     
 *
-*  $EP Par‚metros
+*  $EP Par√¢metros
 *     pPilha de Cartas - ponteiro para a pilha onde o topo deve ser removido
-*     pCarta - endereÁo que receber· a carta removida.
+*     pCarta - endere√ßo que receber√° a carta removida.
 *              
 *
 *  $FV Valor retornado
@@ -137,15 +137,15 @@ typedef struct PIL_tagPilha * PIL_tppPilha ;
 
 /***********************************************************************
 *
-*  $FC FunÁ„o: PIL  VerCarta
+*  $FC Fun√ß√£o: PIL  VerCarta
 *
-*  $ED DescriÁ„o da funÁ„o
-*      Permite ver uma carta da pilha, mesmo que n„o o topo;
-*      Essa funÁ„o n„o destrÛi a carta vista.
+*  $ED Descri√ß√£o da fun√ß√£o
+*      Permite ver uma carta da pilha, mesmo que n√£o o topo;
+*      Essa fun√ß√£o n√£o destr√≥i a carta vista.
 *
-*  $EP Par‚metros
-*     pPilha de Cartas - ponteiro para a pilha onde ser· vista a carta
-*     pCarta - ponteiro que guardar· o endereÁo da carta a ser vista.
+*  $EP Par√¢metros
+*     pPilha de Cartas - ponteiro para a pilha onde ser√° vista a carta
+*     pCarta - ponteiro que guardar√° o endere√ßo da carta a ser vista.
 *
 *  $FV Valor retornado
 *     PIL_CondRetOK
@@ -158,7 +158,7 @@ typedef struct PIL_tagPilha * PIL_tppPilha ;
 
 #undef PILHA_DE_CARTAS_EXT
 
-/********** Fim do mÛdulo de definiÁ„o: PIL Pilha de Cartas  **********/
+/********** Fim do m√≥dulo de defini√ß√£o: PIL Pilha de Cartas  **********/
 
 #else
 #endif
