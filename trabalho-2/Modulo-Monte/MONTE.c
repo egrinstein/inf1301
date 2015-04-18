@@ -1,5 +1,5 @@
 /***************************************************************************
- *  $MCI Módulo de implementação: MON Monte de cartas
+ *  $MCI Módulo de implementação: MON Monte
  *
  *  Arquivo gerado:              MONTE.c
  *  Letras identificadoras:      MON
@@ -94,18 +94,20 @@
 
    MON_tpCondRet MON_PopCartaMonte ( MON_tppMonte pMonte, CAR_tppCarta * pCarta ) 
    {
+      PIL_tpCondRet condRet;
+
       PIL_tppPilha pPilha = ( PIL_tppPilha ) pMonte ;
 
-      PIL_PopCarta( pPilha, pCarta );
+      condRet = PIL_PopCarta( pPilha, pCarta );
+
+      if (condRet != PIL_CondRetOK)
+      {
+        return MON_CondRetMonteVazio;
+      }
 
       return MON_CondRetOK ; 
    }
   
    /* Fim função: MON  &Pop carta do monte */
 
-/***************************************************************************
-*
-*  Função: LIS  &Inserir elemento antes
-*  ****/
-
-/********** Fim do módulo de implementação: MON Monte de cartas **********/
+/*************** Fim do módulo de implementação: MON Monte *****************/
