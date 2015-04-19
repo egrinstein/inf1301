@@ -17,8 +17,6 @@
  *
  ***************************************************************************/
 
-#include <stdio.h>
-#include <malloc.h>
 
 #include "PILHA_DE_CARTAS.h"
 #include "CARTA.h"
