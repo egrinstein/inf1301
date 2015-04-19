@@ -24,12 +24,13 @@
    #define PILHA_DE_CARTAS_EXT extern
 #endif
 
+
+
 /***** Declarações exportadas pelo módulo *****/
 
-/* Tipo referência para uma lista */
+/* Tipo referência para uma pilha de cartas */
 
-typedef PIL_tppPilha ;
-
+typedef PIL_tagPilha PIL_tppPilha ;
 
 /***********************************************************************
 *
@@ -51,6 +52,9 @@ typedef PIL_tppPilha ;
 
 	 PIL_CondRetParamIncorreto ,
                /* Parâmetro incorreto ao tentar ver carta na pilha */
+	
+         PIL_CondRetFimPilha ,
+	       /* Fim da pilha atingido ao tentar ver carta */
 
          PIL_CondRetFaltouMemoria
                /* Faltou memória ao tentar inserir na pilha */
@@ -74,7 +78,7 @@ typedef PIL_tppPilha ;
 *
 ***********************************************************************/
 
-    PIL_tpCondRet PIL_CriarPilhaVazia( PIL_tppPilha * pPilha )
+    PIL_tpCondRet PIL_CriarPilhaVazia( PIL_tppPilha * pPilha ) ;
 
 /***********************************************************************
 *
@@ -95,7 +99,7 @@ typedef PIL_tppPilha ;
 *
 ***********************************************************************/
 
-   PIL_tpCondRet PIL_DestruirPilha( PIL_tppPilha pPilha )
+   PIL_tpCondRet PIL_DestruirPilha( PIL_tppPilha pPilha );
 
 
 /***********************************************************************
@@ -109,9 +113,13 @@ typedef PIL_tppPilha ;
 *     pPilha de Cartas - ponteiro para a pilha onde a carta será inserida
 *     pCarta - Carta a ser inserida no topo da pilha
 *
+*  $FV Valor retornado
+*     PIL_CondRetOK    - inseriu sem problemas
+*     
+*
 ***********************************************************************/
 
-      PIL_tpCondRet PIL_PushCarta( PIL_tppPilha pPilha , CAR_tppCarta pCarta )
+      PIL_tpCondRet PIL_PushCarta( PIL_tppPilha pPilha , CAR_tppCarta pCarta );
 
 
 /***********************************************************************
@@ -133,7 +141,7 @@ typedef PIL_tppPilha ;
 *
 ***********************************************************************/
 
-      PIL_tpCondRet PIL_PopCarta( PIL_tppPilha pPilha , * CAR_tppCarta pCarta )
+      PIL_tpCondRet PIL_PopCarta( PIL_tppPilha pPilha , CAR_tppCarta * pCarta );
 
 /***********************************************************************
 *
@@ -146,15 +154,17 @@ typedef PIL_tppPilha ;
 *  $EP Parâmetros
 *     pPilha de Cartas - ponteiro para a pilha onde será vista a carta
 *     pCarta - ponteiro que guardará o endereço da carta a ser vista.
+*     posicao - distância do topo da pilha à carta a ser vista.
 *
 *  $FV Valor retornado
 *     PIL_CondRetOK
 *     PIL_CondRetPilhaVazia
-*     PIL_CondRetParamIncorreto
+*     PIL_CondRetParamIncorreto - posicao é um valor negativo
+*     PIL_CondRetFimPilha - a carta a ser vista está além do tamanho da pilha
 *
 ***********************************************************************/
 
-     PIL_tpCondRet PIL_VerCarta( PIL_tppPilha pPilha , CAR_tppCarta * pCarta , int posicao )
+     PIL_tpCondRet PIL_VerCarta( PIL_tppPilha pPilha , CAR_tppCarta * pCarta , int posicao );
 
 #undef PILHA_DE_CARTAS_EXT
 

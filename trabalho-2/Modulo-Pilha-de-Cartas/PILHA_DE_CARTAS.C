@@ -12,13 +12,23 @@
 *  
 ***************************************************************************/
  
-#include "LISTA.H"
+#include "lista.h"
+#include "CARTA.H"
 
 #define PILHA_DE_CARTAS_OWN
 #include "PILHA_DE_CARTAS.H"
 #undef PILHA_DE_CARTAS_OWN
 
-typedef LIS_tppLista PIL_tppPilha ; // OS CASTS NAO SAO MAIS NECESSARIOS?
+#define NULL 0
+
+/* Tipo referência para uma pilha de cartas */
+
+typedef LIS_tppLista PIL_tagPilha ;
+
+/***** Protótipos das funções encapuladas no módulo *****/
+
+void ExcluirCarta( void * pValor ) ;
+
 /*****  Código das funções exportadas pelo módulo  *****/
 
 /***************************************************************************
@@ -33,7 +43,7 @@ typedef LIS_tppLista PIL_tppPilha ; // OS CASTS NAO SAO MAIS NECESSARIOS?
 
       *pPilha = NULL ;
 	
-      condRet = LIS_CriarLista( &pLista , CAR_ExcluirCarta ) ; 
+      condRet = LIS_CriarLista( &pLista , ExcluirCarta ) ; 
 
       if ( condRet == LIS_CondRetFaltouMemoria )
       {
@@ -55,6 +65,8 @@ typedef LIS_tppLista PIL_tppPilha ; // OS CASTS NAO SAO MAIS NECESSARIOS?
    {
 	LIS_tppLista pLista = ( LIS_tppLista ) pPilha ;
 
+	if ( pLista == NULL ) return PIL_CondRetOK ;
+ 
 	LIS_DestruirLista( pLista ) ;
 
 	return PIL_CondRetOK ; 	
@@ -71,7 +83,7 @@ typedef LIS_tppLista PIL_tppPilha ; // OS CASTS NAO SAO MAIS NECESSARIOS?
    {
 	LIS_tppLista pLista = ( LIS_tppLista ) pPilha ;
 
-	LIS_IrFinal_Lista( pLista ) ; 
+	LIS_IrFinalLista( pLista ) ;
 
 	LIS_InserirElementoApos( pLista , pCarta ) ; 
 
@@ -86,6 +98,7 @@ typedef LIS_tppLista PIL_tppPilha ; // OS CASTS NAO SAO MAIS NECESSARIOS?
 
    PIL_tpCondRet PIL_VerCarta( PIL_tppPilha pPilha , CAR_tppCarta * pCarta , int posicao )
    {
+	LIS_tpCondRet Ret ;
 	LIS_tppLista pLista = ( LIS_tppLista ) pPilha ;
 
 	if ( pLista == NULL )
@@ -97,14 +110,15 @@ typedef LIS_tppLista PIL_tppPilha ; // OS CASTS NAO SAO MAIS NECESSARIOS?
 		return PIL_CondRetParamIncorreto ;	
 	}
 
-	LIS_IrFinal_Lista( pLista ) ; 
+	LIS_IrFinalLista( pLista ) ; 
 
-	while ( posicao )
+	Ret = LIS_AvancarElementoCorrente( pLista , - posicao ) ;
+
+	if ( Ret = LIS_CondRetFimLista )
 	{
-		LIS_AvancarElementoCorrente( pLista , -1 ) ;
-		posicao-- ;
+		return PIL_CondRetFimPilha ;
 	}
-
+	
         * pCarta = ( CAR_tppCarta ) LIS_ObterValor( pLista ) ;
 
 	return PIL_CondRetOK ; 	
@@ -118,20 +132,35 @@ typedef LIS_tppLista PIL_tppPilha ; // OS CASTS NAO SAO MAIS NECESSARIOS?
 
    PIL_tpCondRet PIL_PopCarta( PIL_tppPilha pPilha , CAR_tppCarta * pCarta )
    {
-        PIL_tpCondRet condRet = PIL_VerCarta( pPilha , pCarta , 0 ) ;
-                
-	if ( condRet != PIL_CondRetOK )
-	{
-		return condRet ;
-	}
+	    int valor ;
+		char naipe ;
+		LIS_tppLista pLista = ( LIS_tppLista ) pPilha ;
+		PIL_tpCondRet condRet = PIL_VerCarta( pPilha , pCarta , 0 ) ;
+        
+		if ( condRet != PIL_CondRetOK )
+		{
+			return condRet ;
+		}
 
-	LIS_ExcluirElemento( pLista ); // Provavelmente vai ferrar o troço todo,pois vai excluir a carta.
-                                      // talvez seja necessário um método da lista que não libere o conteúdo do
-				     // nó, só o nó.
-	return PIL_CondRetOK ; 	
+		CAR_ObterNaipe( *pCarta, &naipe ); //será que tem que tratar condret daqui?
+		CAR_ObterValor( *pCarta, &valor );
+
+		LIS_ExcluirElemento( pLista ); 
+
+		/*LIS_ExcluirElemento irá destruir a carta junto do nó.
+			 É necessário que ela seja criada novamente*/
+		CAR_CriarCarta( pCarta ) ;
+		CAR_PreencheCarta( *pCarta , naipe, valor ) ;
+
+		return PIL_CondRetOK ; 	
 
    }/* Fim função: PIL Pop Carta */
+/*****  Código das funções encapsuladas no módulo  *****/
 
+void ExcluirCarta( void * pValor ) 
+{
+	CAR_ExcluirCarta( (CAR_tppCarta) pValor ) ;
+}
 
 
 /********** Fim do módulo de implementação: PIL  Pilha de cartas  **********/
