@@ -36,7 +36,7 @@
 
 /* Tipo referência para uma carta */
 
-typedef struct CAR_carta * CAR_tppCarta ;
+typedef struct CAR_tagCarta * CAR_tppCarta ;
 
 /***********************************************************************
  *
@@ -56,9 +56,15 @@ typedef struct CAR_carta * CAR_tppCarta ;
         CAR_CondRetCartaNaoExiste = 1,
         /* A carta não existe */
     
-        CAR_CondRetFaltouMemoria = 2
+        CAR_CondRetFaltouMemoria = 2,
         /* Faltou memória ao tentar criar uma carta */
-    
+        
+        CAR_CondRetNaipeNaoExiste = 3,
+        /* Naipe não existe */
+        
+        CAR_CondRetValorNaoExiste = 4
+        /* Valor não existe */
+
     } CEL_tpCondRet ;
 
 
