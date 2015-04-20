@@ -32,15 +32,23 @@
  *
  ***********************************************************************/
 
-typedef struct CAR_carta {
+typedef struct CAR_tagCarta {
     
     char naipe ;
-        /* Naipe da carta */
+        /* Naipe da carta
+         */
     
     int valor ;
-        /* Valor da carta */
+        /* Valor da carta
+         */
     
 } CAR_tpCarta ;
+
+/***** Protótipos das funções encapuladas no módulo *****/
+
+int VerificarNaipe( char naipe ) ;
+
+int VerificarValor( char valor ) ;
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -78,6 +86,16 @@ CAR_tpCondRet CAR_PreencheCarta ( CAR_tppCarta pCarta , char naipe , int valor )
     if( pCarta == NULL )
     {
         return CAR_CondRetCartaNaoExiste ;
+    } /* if */
+    
+    if( !VerificarNaipe )
+    {
+        return CAR_CondRetNaipeNaoExiste ;
+    } /* if */
+    
+    if( !VerificarValor )
+    {
+        return CAR_CondRetValorNaoExiste ;
     } /* if */
     
     pCarta->naipe = naipe ;
@@ -161,5 +179,49 @@ CAR_tpCondRet CAR_ImprimeCarta( CAR_tppCarta pCarta )
     return CAR_CondRetOK ;
     
 } /* Fim função: CAR  Imprimir carta */
+
+
+/*****  Código das funções encapsuladas no módulo  *****/
+
+
+/***********************************************************************
+ *
+ *  $FC Função: CAR  -Verificar naipe da carta
+ *
+ *  $ED Descrição da função
+ *    Verifica se o naipe está de acordo
+ *
+ ***********************************************************************/
+
+int VerificarNaipe( char naipe )
+{
+    
+    if( naipe == 'o' || naipe == 'e' || naipe == 'p' || naipe == 'c' )
+    {
+        return 1;
+    } /* if */
+    
+    return 0;
+}
+
+/***********************************************************************
+ *
+ *  $FC Função: CAR  -Verificar valor da carta
+ *
+ *  $ED Descrição da função
+ *    Verifica se o valor está de acordo
+ *
+ ***********************************************************************/
+
+int VerificarValor( char valor )
+{
+    
+    if( valor >= 1 && valor <= 13 )
+    {
+        return 1;
+    } /* if */
+    
+    return 0;
+}
 
 /********** Fim do módulo de implementação: CAR  Carta **********/
