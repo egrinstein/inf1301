@@ -24,7 +24,7 @@
    #define BARALHO_DE_CARTAS_EXT extern
 #endif
 
-
+#include "CARTA.h"
 
 /***** Declarações exportadas pelo módulo *****/
 
@@ -106,6 +106,7 @@ typedef struct BAR_tagBaralho * BAR_tppBaralho ;
 *
 *  $EP Parâmetros
 *     pBaralho - ponteiro para o baralho a ser preenchido
+*     numNaipes - número de naipes que terá o baralho
 *
 *  $FV Valor retornado
 *     BAR_CondRetOK    - preencheu sem problemas

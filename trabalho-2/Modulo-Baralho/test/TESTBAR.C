@@ -53,19 +53,21 @@
 #include    "lerparm.h"
 
 #include    "CARTA.H"
-#include    "BARALHO_DE_CARTAS.H"
+#include    "BARALHO.H"
 
 /* Tabela dos nomes dos comandos de teste específicos */
 
 #define     CRIAR_BAR_CMD       "=criar"
 #define     PREENCHER_CMD       "=preencher"
-#define     POP_CMD		"=pop"
-#define     EMBARALHAR_CMD	"=embaralhar"
+#define     POP_CMD				"=pop"
+#define     EMBARALHAR_CMD		"=embaralhar"
 #define     DESTROI_CMD         "=destruir"
 
 /* Máximo de baralhos a serem testadas simultâneamente */
 
 #define     MAX_BARS            10
+
+BAR_tppBaralho vBaralhos[10];
 
 /*****  Código das funcões exportadas pelo módulo  *****/
 
@@ -93,7 +95,7 @@
          BAR_tpCondRet CondRetEsperada = BAR_CondRetFaltouMemoria ;
                                       /* inicializa para qualquer coisa */
 
-         BAR_tppBaralho vBaralhos[10];
+         
 
          char NaipeEsperado = '?'  ;
          char NaipeObtido   = '!'  ;  
@@ -117,7 +119,7 @@
          if ( strcmp( ComandoTeste , CRIAR_BAR_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "ii" , &NumBaralho ,
+            NumLidos = LER_LerParametros( "ii" , &NumBaralho  , 
                                &CondRetEsperada ) ;
             if ( NumLidos != 2 || NumBaralho >= MAX_BARS || NumBaralho < 0 )
             {
@@ -137,13 +139,13 @@
          {
 			
             NumLidos = LER_LerParametros( "iii" ,
-                               &NumBaralho, , &ValorDado, &CondRetEsperada ) ;
+                               &NumBaralho , &ValorDado ,  &CondRetEsperada ) ;
             if ( NumLidos != 3 || NumBaralho >= MAX_BARS || NumBaralho < 0 )
             {
                return TST_CondRetParm ;
             } /* if */
 		
-	    CondRetObtido = BAR_PreencherBaralho( vBaralhos[NumBaralho] , ValorDado );
+			CondRetObtido = BAR_PreencherBaralho( vBaralhos[NumBaralho] , ValorDado );
 			
    
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
@@ -168,21 +170,26 @@
             Ret = TST_CompararInt( CondRetEsperada , CondRetObtido ,
                             "Retorno errado ao operar 'pop' no baralho") ;
 
-	    if ( Ret != TST_CondRetOK )
+			if ( Ret != TST_CondRetOK )
             {
                return Ret ;
             } /* if */
 
-	    CAR_ObterNaipe( CartaObtida , &NaipeObtido );
+			if ( CondRetObtido != BAR_CondRetOK )
+            {
+               return CondRetObtido ;
+            } /* if */
+
+			CAR_ObterNaipe( CartaObtida , &NaipeObtido );
             Ret = TST_CompararInt( NaipeEsperado , NaipeObtido ,
                                     "Carta obtida está errada." );
 
-	    if ( Ret != TST_CondRetOK )
+			if ( Ret != TST_CondRetOK )
             {
                return Ret ;
             } /* if */
 
-	    CAR_ObterValor( CartaObtida , &ValorObtido );
+			CAR_ObterValor( CartaObtida , &ValorObtido );
             return TST_CompararInt( ValorEsperado , ValorObtido ,
                                     "Carta obtida está errada." );
 
@@ -212,9 +219,9 @@
          else if ( strcmp( ComandoTeste , DESTROI_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "i" ,
+            NumLidos = LER_LerParametros( "ii" , &NumBaralho , 
                                &CondRetEsperada ) ;
-            if ( NumLidos != 1 || NumBaralho >= MAX_BARS || NumBaralho < 0 )
+            if ( NumLidos != 2 || NumBaralho >= MAX_BARS || NumBaralho < 0 )
             {
                return TST_CondRetParm ;
             } /* if */

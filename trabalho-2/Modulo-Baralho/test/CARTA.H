@@ -65,7 +65,7 @@ typedef struct CAR_tagCarta * CAR_tppCarta ;
         CAR_CondRetValorNaoExiste = 4
         /* Valor não existe */
 
-    } CEL_tpCondRet ;
+    } CAR_tpCondRet ;
 
 
 /***********************************************************************
@@ -103,7 +103,7 @@ CAR_tpCondRet CAR_CriarCarta( CAR_tppCarta * pCarta ) ;
  *
  ***********************************************************************/
 
-CAR_tpCondRet CAR_PreencheCarta ( CAR_tppCarta pCarta , char naipe , int valor )
+CAR_tpCondRet CAR_PreencheCarta ( CAR_tppCarta pCarta , char naipe , int valor ) ;
 
 
 /***********************************************************************

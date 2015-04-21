@@ -13,9 +13,9 @@
 ***************************************************************************/
  
 #include "PILHA_DE_CARTAS.H"
-#include "CARTA.H"
+
 #include <time.h>
-#include <malloc.h>
+#include <stdlib.h>
 
 #define BARALHO_DE_CARTAS_OWN
 #include "BARALHO.H"
@@ -36,7 +36,7 @@
 
   typedef struct BAR_tagBaralho {
 
-         char numNaipes ;
+         int numNaipes ;
                /* Número de naipes do baralho */
 
          BAR_tppBaralho pPilCartas ;
@@ -52,7 +52,7 @@
 *  Função: BAR Criar Baralho
 *****/
 
-   BAR_tpCondRet BAR_CriarBaralho( BAR_tppBaralho * pBaralho  )
+   BAR_tpCondRet BAR_CriarBaralho( BAR_tppBaralho * pBaralho )
    {
       
  
@@ -101,13 +101,17 @@
 	
 	char auxNaipes,
 		 naipeDaVez;
-	int valorAux;
+
+	int auxValor ;
+
 	int cartasFaltando = TAM_BARALHO ;
 
 	if ( numNaipes > 4 || numNaipes < 1 )
 	{
 		return BAR_CondRetParamIncorreto ;
 	}
+
+	pBaralho->numNaipes = numNaipes ;
 
 	PilRet = PIL_CriarPilhaVazia( &( pBaralho->pPilCartas ) ) ;
 
@@ -119,7 +123,7 @@
 	auxNaipes = 0;
 	while ( cartasFaltando )
 	{
-		naipeDaVez = ( auxNaipes % numNaipes ) + 1
+		naipeDaVez = ( auxNaipes % numNaipes ) + 1 ;
 				/* garante que 1 <= naipeDaVez <= numNaipes */
 
 		for (auxValor=1 ; auxValor <= VALORES_POSSIVEIS ; auxValor++ )
@@ -131,7 +135,7 @@
 				return BAR_CondRetFaltouMemoria ;
 			}
 
-			CAR_PreencheCarta( cartaCriada , naipeDaVez , valor ) ;
+			CAR_PreencheCarta( cartaCriada , naipeDaVez , auxValor ) ;
 			cartasFaltando-- ;
 		}
 		auxNaipes++ ;
@@ -149,9 +153,10 @@
 
    BAR_tpCondRet BAR_Embaralhar( BAR_tppBaralho pBaralho )
    {
-	PIL_tppPilha pilhaAux[PILHAS_AUX_EMBARALHAMENTO] ;
-	PIL_tpCondRet ret ;
-	int contPilha;
+	PIL_tppPilha pilhaAux[ PILHAS_AUX_EMBARALHAMENTO ] ;
+	PIL_tpCondRet Ret ;
+	int contPilha ;
+		
 
 	CAR_tppCarta cartaAux ;
 
@@ -166,7 +171,7 @@
 	/* Inicialização das pilhas auxiliares */
 	for (contPilha = 0 ; contPilha < PILHAS_AUX_EMBARALHAMENTO ; contPilha++ )
 	{
-		Ret = PIL_CriarPilha( &pilhaAux[contPilha] ) ;
+		Ret = PIL_CriarPilhaVazia( &pilhaAux[contPilha] ) ;
 		if ( Ret == PIL_CondRetFaltouMemoria )
 		{
 			return BAR_CondRetFaltouMemoria ;
@@ -205,7 +210,7 @@
 
 	/* Reinserção das cartas no baralho */
 
-	return BAR_CondRetOk ;
+	return BAR_CondRetOK ;
 
    }/* Fim função: BAR Embaralhar Baralho de Cartas */
 

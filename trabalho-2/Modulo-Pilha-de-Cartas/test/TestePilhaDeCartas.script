@@ -37,10 +37,13 @@
 =criar 2 0
 
 == Destruir pilha 2
-=destruir 2 0
+=destrui 2 0
 
 == Inserir K de ouros na pilha 1
 =push 1 'o' 13 0
+
+== Ver K de Ouros na pilha 1 além do inicio
+=ver	1	1	'o'	13	3
 
 == Destruir pilha 1
 =destruir 1 0

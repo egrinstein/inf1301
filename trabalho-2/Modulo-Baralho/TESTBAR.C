@@ -119,14 +119,14 @@ BAR_tppBaralho vBaralhos[10];
          if ( strcmp( ComandoTeste , CRIAR_BAR_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "iii" , &NumBaralho , &ValorDado , 
+            NumLidos = LER_LerParametros( "ii" , &NumBaralho  , 
                                &CondRetEsperada ) ;
-            if ( NumLidos != 3 || NumBaralho >= MAX_BARS || NumBaralho < 0 )
+            if ( NumLidos != 2 || NumBaralho >= MAX_BARS || NumBaralho < 0 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = BAR_CriarBaralho( &vBaralhos[NumBaralho] , ValorDado ) ;
+            CondRetObtido = BAR_CriarBaralho( &vBaralhos[NumBaralho] ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao criar baralho." );
@@ -138,14 +138,14 @@ BAR_tppBaralho vBaralhos[10];
          else if ( strcmp( ComandoTeste , PREENCHER_CMD ) == 0 )
          {
 			
-            NumLidos = LER_LerParametros( "ii" ,
-                               &NumBaralho , &CondRetEsperada ) ;
-            if ( NumLidos != 2 || NumBaralho >= MAX_BARS || NumBaralho < 0 )
+            NumLidos = LER_LerParametros( "iii" ,
+                               &NumBaralho , &ValorDado ,  &CondRetEsperada ) ;
+            if ( NumLidos != 3 || NumBaralho >= MAX_BARS || NumBaralho < 0 )
             {
                return TST_CondRetParm ;
             } /* if */
 		
-			CondRetObtido = BAR_PreencherBaralho( vBaralhos[NumBaralho] );
+			CondRetObtido = BAR_PreencherBaralho( vBaralhos[NumBaralho] , ValorDado );
 			
    
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
@@ -221,7 +221,7 @@ BAR_tppBaralho vBaralhos[10];
 
             NumLidos = LER_LerParametros( "ii" , &NumBaralho , 
                                &CondRetEsperada ) ;
-            if ( NumLidos != 1 || NumBaralho >= MAX_BARS || NumBaralho < 0 )
+            if ( NumLidos != 2 || NumBaralho >= MAX_BARS || NumBaralho < 0 )
             {
                return TST_CondRetParm ;
             } /* if */

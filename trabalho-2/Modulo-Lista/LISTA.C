@@ -334,7 +334,7 @@
 *  Função: LIS  &Ir para o elemento inicial
 *  ****/
 
-   void IrInicioLista( LIS_tppLista pLista )
+   void LIS_IrInicioLista( LIS_tppLista pLista )
    {
 
       #ifdef _DEBUG
@@ -389,7 +389,7 @@
 
       /* Tratar avançar para frente */
 
-         if ( numElem >= 0 )
+         if ( numElem > 0 )
          {
 
             pElem = pLista->pElemCorr ;
