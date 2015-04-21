@@ -107,7 +107,7 @@
 
       LimparCabeca( *pLista ) ;
 
-      *pLista->ExcluirValor = ExcluirValor ;
+      (*pLista)->ExcluirValor = ExcluirValor ;
 
       return LIS_CondRetOK ;
 
@@ -350,7 +350,7 @@
 *  Função: LIS  &Ir para o elemento final
 *  ****/
 
-   void IrFinalLista( LIS_tppLista pLista )
+   void LIS_IrFinalLista( LIS_tppLista pLista )
    {
 
       #ifdef _DEBUG
@@ -389,7 +389,7 @@
 
       /* Tratar avançar para frente */
 
-         if ( numElem > 0 )
+         if ( numElem >= 0 )
          {
 
             pElem = pLista->pElemCorr ;

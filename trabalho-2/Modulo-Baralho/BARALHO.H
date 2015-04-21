@@ -13,7 +13,7 @@
 *
 *
 *  $ED Descrição do módulo
-*     Cria um baralho de 52 cartas com número de naipes 
+*     Cria um baralho de 104 cartas com número de naipes 
 *     podendo variar de 1 a 4.
 *     
 ***************************************************************************/
@@ -30,7 +30,7 @@
 
 /* Tipo referência para um baralho de cartas */
 
-typedef BAR_tagBaralho BAR_tppBaralho ;
+typedef struct BAR_tagBaralho * BAR_tppBaralho ;
 
 /***********************************************************************
 *
@@ -50,7 +50,7 @@ typedef BAR_tagBaralho BAR_tppBaralho ;
          BAR_CondRetBaralhoVazio ,
                /* O baralho não foi preenchido */
 
-	 BAR_CondRetParamIncorreto ,
+		 BAR_CondRetParamIncorreto ,
                /* Número de naipes incorretos  */
 
          BAR_CondRetFaltouMemoria
@@ -76,7 +76,7 @@ typedef BAR_tagBaralho BAR_tppBaralho ;
 *
 ***********************************************************************/
 
-    BAR_tpCondRet BAR_CriarBaralho( BAR_tppBaralho * pBaralho , int numNaipes ) ;
+    BAR_tpCondRet BAR_CriarBaralho( BAR_tppBaralho * pBaralho ) ;
 
 /***********************************************************************
 *
@@ -114,7 +114,7 @@ typedef BAR_tagBaralho BAR_tppBaralho ;
 *
 ***********************************************************************/
 
-      BAR_tpCondRet BAR_PreencherBaralho( BAR_tppBaralho pBaralho ) ;
+      BAR_tpCondRet BAR_PreencherBaralho( BAR_tppBaralho pBaralho , int numNaipes ) ;
 
 
 /***********************************************************************
