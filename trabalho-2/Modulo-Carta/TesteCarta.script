@@ -34,7 +34,7 @@
 =imprime	1
 
 == Preencher carta com naipe Copas e valor A
-=preencher	‘c' 1 0
+=preencher	'c' 1 0
 
 ==Obter naipe da carta
 =obternaipe	0
