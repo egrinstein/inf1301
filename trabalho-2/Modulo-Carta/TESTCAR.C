@@ -57,7 +57,7 @@
 #define     CRIAR_CAR_CMD       "=criar"
 #define     PREENCHE_CMD        "=preenche"
 #define     EXCLUIR_CMD         "=excluir"
-#define     OBTERNAIPE_CMD	  	"=obternaipe"
+#define     OBTERNAIPE_CMD		"=obternaipe"
 #define     OBTERVALOR_CMD      "=obtervalor"
 #define     IMPRIME_CMD         "=imprime"
 
@@ -176,6 +176,11 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
             return TST_CondRetErro ;
         } /* if */
         
+        if ( NaipeDado == '\0' || ValorDado ==  0 )
+        {
+            return TST_CondRetErro ;
+        } /* if */
+        
         NumLidos = LER_LerParametros( "i" ,
                                      &CondRetEsperada ) ;
         if ( NumLidos != 1 )
@@ -199,6 +204,11 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
             return TST_CondRetErro ;
         } /* if */
         
+        if ( NaipeDado == '\0' || ValorDado ==  0 )
+        {
+            return TST_CondRetErro ;
+        } /* if */
+        
         NumLidos = LER_LerParametros( "i" ,
                                      &CondRetEsperada ) ;
         if ( NumLidos != 1 )
@@ -217,6 +227,11 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     else if ( strcmp( ComandoTeste , IMPRIME_CMD ) == 0 )
     {
         if ( CartaDada == NULL )
+        {
+            return TST_CondRetErro ;
+        } /* if */
+        
+        if ( NaipeDado == '\0' || ValorDado ==  0 )
         {
             return TST_CondRetErro ;
         } /* if */
