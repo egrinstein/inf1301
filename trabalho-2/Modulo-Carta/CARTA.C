@@ -88,12 +88,12 @@ CAR_tpCondRet CAR_PreencheCarta ( CAR_tppCarta pCarta , char naipe , int valor )
         return CAR_CondRetCartaNaoExiste ;
     } /* if */
     
-    if( !VerificarNaipe )
+    if( !VerificarNaipe( naipe ) )
     {
         return CAR_CondRetNaipeNaoExiste ;
     } /* if */
     
-    if( !VerificarValor )
+    if( !VerificarValor( valor ) )
     {
         return CAR_CondRetValorNaoExiste ;
     } /* if */
@@ -136,6 +136,11 @@ CAR_tpCondRet CAR_ObterNaipe( CAR_tppCarta pCarta , char * pNaipe )
         return CAR_CondRetCartaNaoExiste ;
     } /* if */
     
+    if( !VerificarNaipe( pCarta->naipe ) )
+    {
+        return CAR_CondRetNaipeNaoExiste ;
+    } /* if */
+    
     *pNaipe = pCarta->naipe ;
     
     return CAR_CondRetOK ;
@@ -153,6 +158,11 @@ CAR_tpCondRet CAR_ObterValor( CAR_tppCarta pCarta , int * pValor )
     if( pCarta == NULL )
     {
         return CAR_CondRetCartaNaoExiste ;
+    } /* if */
+
+    if( !VerificarValor( pCarta->valor ) )
+    {
+        return CAR_CondRetValorNaoExiste ;
     } /* if */
     
     *pValor = pCarta->valor ;
@@ -174,12 +184,12 @@ CAR_tpCondRet CAR_ImprimeCarta( CAR_tppCarta pCarta )
         return CAR_CondRetCartaNaoExiste ;
     } /* if */
     
-    if( !VerificarNaipe )
+    if( !VerificarNaipe( pCarta->naipe ) )
     {
         return CAR_CondRetNaipeNaoExiste ;
     } /* if */
     
-    if( !VerificarValor )
+    if( !VerificarValor( pCarta->valor ) )
     {
         return CAR_CondRetValorNaoExiste ;
     } /* if */
