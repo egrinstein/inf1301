@@ -61,9 +61,9 @@
 #define     OBTERVALOR_CMD      "=obtervalor"
 #define     IMPRIME_CMD         "=imprime"
 
+/* Ponteiro para carta auxiliar utilizada no teste */
 
-/*****  Código das funcões exportadas pelo módulo  *****/
-
+CAR_tppCarta CartaDada = NULL ;
 
 /***********************************************************************
  *
@@ -98,7 +98,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
     int  NumLidos = -1 ;
     
-    CAR_tppCarta CartaDada = NULL ;
+    
     
     /* Testar CAR Criar carta */
     
@@ -124,11 +124,6 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     else if ( strcmp( ComandoTeste , PREENCHE_CMD ) == 0 )
     {
         
-        if ( CartaDada == NULL )
-        {
-            return TST_CondRetErro ;
-        } /* if */
-        
         NumLidos = LER_LerParametros( "cii" ,
                                      &NaipeDado , &ValorDado , &CondRetEsperada ) ;
         if ( NumLidos != 3 )
@@ -148,11 +143,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     
     else if ( strcmp( ComandoTeste , EXCLUIR_CMD ) == 0 )
     {
-        
-        if ( CartaDada == NULL )
-        {
-            return TST_CondRetErro ;
-        } /* if */
+    
         
         NumLidos = LER_LerParametros( "i" ,
                                      &CondRetEsperada ) ;
@@ -170,11 +161,6 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     
     else if ( strcmp( ComandoTeste , OBTERNAIPE_CMD ) == 0 )
     {
-        
-        if ( CartaDada == NULL )
-        {
-            return TST_CondRetErro ;
-        } /* if */
         
         if ( NaipeDado == '\0' || ValorDado ==  0 )
         {
@@ -199,11 +185,6 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     else if ( strcmp( ComandoTeste , OBTERVALOR_CMD ) == 0 )
     {
         
-        if ( CartaDada == NULL )
-        {
-            return TST_CondRetErro ;
-        } /* if */
-        
         if ( NaipeDado == '\0' || ValorDado ==  0 )
         {
             return TST_CondRetErro ;
@@ -226,10 +207,6 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     /* Testar CAR Imprime Carta */
     else if ( strcmp( ComandoTeste , IMPRIME_CMD ) == 0 )
     {
-        if ( CartaDada == NULL )
-        {
-            return TST_CondRetErro ;
-        } /* if */
         
         if ( NaipeDado == '\0' || ValorDado ==  0 )
         {

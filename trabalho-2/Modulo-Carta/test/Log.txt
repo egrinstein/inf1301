@@ -9,28 +9,31 @@
 !!!    0  Linha:     4  //	     Leonardo Wajnsztok 
 !!!    0  Linha:     5  // PropÃ³sito: Testar o mÃ³dulo Carta. 
 !!!    0  Linha:     6  // 
-    9  == Preencher carta inexistente
-   12  == Obter naipe da carta inexistente
-   15  == Obter valor da carta inexistente
-   18  == Imprimir carta inexistente
-   21  == Excluir carta inexistente
-   24  ==  Criar carta
-   27  ==  Obter naipe da carta vazia
-   30  ==  Obter valor da carta vazia
-   33  == Imprimir carta vazia
+    9  ==Preencher carta inexistente
+ll>    1  Linha:    10  Faltou aspas antes de literal char. 
+>>>    2  Linha:    10  Erro nos parâmetros do comando:  =preenche	1
+   12  ==Obter naipe da carta inexistente
+   15  ==Obter valor da carta inexistente
+   18  ==Imprimir carta inexistente
+   21  ==Excluir carta inexistente
+>>>    3  Linha:    22  Retorno errado ao tentar excluir carta Deveria ser: 1  É: 0
+   24  == Criar carta
+   27  == Obter naipe da carta vazia
+   30  == Obter valor da carta vazia
+   33  ==Imprimir carta vazia
    36  == Preencher carta com naipe Copas e valor A
-   39  == Obter naipe da carta
-   42  == Obter valor da carta
-   45  == Imprimir carta
-   48  == Excluir carta
-!!!    0  Linha:    51  // fim 
+   39  ==Obter naipe da carta
+   42  ==Obter valor da carta
+   45  ==Imprimir carta
+   48  ==Excluir carta
+!!!    3  Linha:    51  // fim 
 
 !!! Número de linhas lidas:          51
 !!! Número de casos de teste:        14
-!!! Número comandos corretos:         1
-!!! Número de falhas encontradas:     0
+!!! Número comandos corretos:         3
+!!! Número de falhas encontradas:     3
 
-!!! Não foram encontrados problemas
+!!! Foram encontrados problemas
 
 
 !!! Numero de espacos ainda alocados: 0

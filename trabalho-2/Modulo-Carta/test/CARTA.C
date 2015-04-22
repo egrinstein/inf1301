@@ -174,6 +174,16 @@ CAR_tpCondRet CAR_ImprimeCarta( CAR_tppCarta pCarta )
         return CAR_CondRetCartaNaoExiste ;
     } /* if */
     
+    if( !VerificarNaipe )
+    {
+        return CAR_CondRetNaipeNaoExiste ;
+    } /* if */
+    
+    if( !VerificarValor )
+    {
+        return CAR_CondRetValorNaoExiste ;
+    } /* if */
+    
     printf("%d %c" , pCarta->valor , pCarta->naipe ) ;
     
     return CAR_CondRetOK ;
