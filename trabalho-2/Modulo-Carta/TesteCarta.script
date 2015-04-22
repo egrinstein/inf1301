@@ -7,7 +7,7 @@
 
 
 ==Preencher carta inexistente
-=preenche	1
+=preenche 'o' 3 1
 
 ==Obter naipe da carta inexistente
 =obternaipe	1
