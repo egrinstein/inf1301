@@ -18,9 +18,6 @@
 ==Imprimir carta inexistente
 =imprime	1
 
-==Excluir carta inexistente
-=excluir	1
-
 == Criar carta
 =criar   	0
 
