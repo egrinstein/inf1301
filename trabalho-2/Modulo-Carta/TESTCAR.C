@@ -162,11 +162,6 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     else if ( strcmp( ComandoTeste , OBTERNAIPE_CMD ) == 0 )
     {
         
-        if ( NaipeDado == '\0' || ValorDado ==  0 )
-        {
-            return TST_CondRetErro ;
-        } /* if */
-        
         NumLidos = LER_LerParametros( "i" ,
                                      &CondRetEsperada ) ;
         if ( NumLidos != 1 )
@@ -185,11 +180,6 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     else if ( strcmp( ComandoTeste , OBTERVALOR_CMD ) == 0 )
     {
         
-        if ( NaipeDado == '\0' || ValorDado ==  0 )
-        {
-            return TST_CondRetErro ;
-        } /* if */
-        
         NumLidos = LER_LerParametros( "i" ,
                                      &CondRetEsperada ) ;
         if ( NumLidos != 1 )
@@ -207,11 +197,6 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     /* Testar CAR Imprime Carta */
     else if ( strcmp( ComandoTeste , IMPRIME_CMD ) == 0 )
     {
-        
-        if ( NaipeDado == '\0' || ValorDado ==  0 )
-        {
-            return TST_CondRetErro ;
-        } /* if */
         
         NumLidos = LER_LerParametros( "i" ,
                                      &CondRetEsperada ) ;
