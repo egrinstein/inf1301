@@ -33,7 +33,13 @@
 *
 ***********************************************************************/
 
-   typedef PIL_tppPilha MON_tppMonte ;
+   typedef MON_tagMonte
+   {
+     PIL_tppPilha pPilha; 
+     /*Pontei para pilha de cartas*/
+
+   }MON_tpMonte ;
+   
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -45,12 +51,15 @@
    MON_tpCondRet MON_CriarMonte ( MON_tppMonte * pMonte , PIL_tppPilha pPilha)
    {
       PIL_tpCondRet condRet;
-      PIL_tppPilha pPilhaAux;
       CAR_tppCarta pCartaAux;
 
-      *pMonte = NULL;
+      *pMonte = (MON_tppMonte *) malloc(sizeof(MON_tppMonte));
+      if( *pMonte == NULL)
+      {
+        return MON_CondRetFaltouMemoria;
+      }
 
-      condRet = PIL_CriarPilhaVazia( &pPilhaAux );
+      condRet = PIL_CriarPilhaVazia( &((*pMonte)->pPilha) );
        
       if ( condRet == PIL_CondRetFaltouMemoria )
       {
@@ -59,10 +68,8 @@
 
       while( PIL_PopCarta( pPilha, &pCartaAux )  == PIL_CondRetOK )
       {
-        PIL_PushCarta( pPilhaAux , pCartaAux );
+        PIL_PushCarta( (*pMonte)->pPilha, pCartaAux );
       }
-      
-      * pMonte = ( MON_tppMonte ) pPilhaAux ;
 
       return MON_CondRetOK ;
    }
@@ -76,9 +83,14 @@
    MON_tpCondRet MON_DestruirMonte ( MON_tppMonte pMonte )
    {
 
-      PIL_tppPilha pPilha = ( PIL_tppPilha ) pMonte ;
+      if(pMonte->pLista == NULL)
+      {
+        free(pMonte);
+        return MON_CondRetOK;
+      }
 
-      PIL_DestroiPilha( pPilha );
+      PIL_DestroiPilha( pMonte->pPilha );
+      free(pMonte);
 
       return MON_CondRetOK ; 
    }
@@ -94,9 +106,7 @@
    {
       PIL_tpCondRet condRet;
 
-      PIL_tppPilha pPilha = ( PIL_tppPilha ) pMonte ;
-
-      condRet = PIL_PopCarta( pPilha, pCarta );
+      condRet = PIL_PopCarta( pMonte->pPilha, pCarta );
 
       if (condRet != PIL_CondRetOK)
       {
