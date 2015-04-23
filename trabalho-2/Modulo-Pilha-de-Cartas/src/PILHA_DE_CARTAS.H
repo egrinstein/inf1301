@@ -24,7 +24,7 @@
    #define PILHA_DE_CARTAS_EXT extern
 #endif
 
-
+#include "CARTA.h"
 
 /***** Declarações exportadas pelo módulo *****/
 

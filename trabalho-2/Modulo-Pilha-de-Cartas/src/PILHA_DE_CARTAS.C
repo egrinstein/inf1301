@@ -13,7 +13,7 @@
 ***************************************************************************/
  
 #include "lista.h"
-#include "CARTA.H"
+
 #include <malloc.h>
 
 #define PILHA_DE_CARTAS_OWN
