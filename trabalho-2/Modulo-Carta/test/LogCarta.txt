@@ -1,6 +1,6 @@
 
 !!! Inicio dos testes
-!!!      Construto sob teste: c:\users\ian\documents\visual studio 2010\Projects\carta\Debug\carta.exe
+!!!      Construto sob teste: C:\Users\Ian\Documents\Visual Studio 2010\Projects\carta\Debug\carta.exe
 !!!      Script de teste:     TesteCarta.script
 
 !!!    0  Linha:     1  // Script: TesteCarta.script 
@@ -17,16 +17,18 @@
    17  == Obter naipe da carta vazia
    19  == Obter valor da carta vazia
    21  ==Imprimir carta vazia
-   23  == Preencher carta com naipe Copas e valor A
-   25  ==Obter naipe da carta
-   27  ==Obter valor da carta
-   29  ==Imprimir carta
-   31  ==Excluir carta
-!!!    0  Linha:    33  // fim 
+   23  == Preencher carta com naipe invalido
+   25  == Preencher carta com valor invalido
+   27  == Preencher carta com naipe Copas e valor A
+   29  ==Obter naipe da carta
+   31  ==Obter valor da carta
+   33  ==Imprimir carta
+   35  ==Excluir carta
+!!!    0  Linha:    37  // fim 
 
-!!! Número de linhas lidas:          33
-!!! Número de casos de teste:        13
-!!! Número comandos corretos:        13
+!!! Número de linhas lidas:          37
+!!! Número de casos de teste:        15
+!!! Número comandos corretos:        15
 !!! Número de falhas encontradas:     0
 
 !!! Não foram encontrados problemas
