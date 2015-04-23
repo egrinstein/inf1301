@@ -33,7 +33,7 @@
 *
 ***********************************************************************/
 
-   typedef MON_tagMonte
+   typedef struct MON_tagMonte
    {
      PIL_tppPilha pPilha; 
      /*Pontei para pilha de cartas*/
