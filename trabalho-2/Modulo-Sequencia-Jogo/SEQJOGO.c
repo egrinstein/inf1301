@@ -181,6 +181,14 @@
     // 2 ver se podem se colocadas na seq2
     // 3 move-las
 
+    //faltou verificar se cartas estao viradas
+    // e dps virar carta, se for o caso
+
+    if( numCartas > pSeqJ1->numCartasViradas)   // verifica caso de pedir mais cartas do que o numero de cartas viradas
+    {
+      return SEQJ_CondRetNumCartasIncorreto;
+    }
+
     while( PIL_VerCarta( pSeqJ1->pPilha, &cartaAux, numCartasSeq1 ) == PIL_CondRetOK )
     {
       numCartasSeq1++;
@@ -229,6 +237,16 @@
     {
       PIL_PopCarta( pilhaAux, &cartaAux );
       PIL_PushCarta( pSeqJ2, cartaAux );
+    }
+
+    pSeqJ1->numCartasViradas -= numCartas;
+    numCartasSeq1 -= numCartas;
+
+    pSeqJ2->numCartasViradas += numCartas;
+
+    if( pSeqJ1->numCartasViradas == 0  && numCartasSeq1 > 0)
+    {
+      SEQJ_ViraPrimeiraCarta( pSeqJ1 );
     }
 
     PIL_DestroiPilha( pilhaAux );
