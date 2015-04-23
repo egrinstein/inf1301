@@ -37,7 +37,7 @@
 
 /* Tipo referência para uma sequencia final */
 
-typedef PIL_tppPilha SEQFIM_tppSeqFim ;
+typedef struct SEQFIM_tagSeqFim * SEQFIM_tppSeqFim ;
 
 /***********************************************************************
  *

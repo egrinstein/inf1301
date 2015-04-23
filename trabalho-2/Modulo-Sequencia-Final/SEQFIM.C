@@ -17,6 +17,19 @@
 #include "SEQFIM.H"
 #undef SEQUENCIA_FINAL_OWN
 
+/***********************************************************************
+ *
+ *  $TC Tipo de dados: SEQFIM Sequencia final
+ *
+ *
+ ***********************************************************************/
+
+typedef struct CAR_tagSeqFim {
+    
+    PIL_tppPilha pPilha ;
+    
+} SEQFIM_tpSeqFim ;
+
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -33,6 +46,12 @@ SEQFIM_tpCondRet SEQFIM_CriarSeqFim ( SEQFIM_tppSeqFim * pSeqFim , PIL_tppPilha 
     
     *pSeqFim = NULL ;
     
+    *pSeqFim = ( SEQFIM_tpSeqFim * ) malloc( sizeof( SEQFIM_tpSeqFim ) ) ;
+    if ( pSeqFim == NULL )
+    {
+        return SEQFIM_CondRetFaltouMemoria ;
+    }
+    
     PilRet = PIL_CriarPilhaVazia( &pPilhaAux );
     
     if ( PilRet == PIL_CondRetFaltouMemoria )
@@ -40,7 +59,7 @@ SEQFIM_tpCondRet SEQFIM_CriarSeqFim ( SEQFIM_tppSeqFim * pSeqFim , PIL_tppPilha 
         return SEQFIM_CondRetFaltouMemoria ;
     }
     
-    *pSeqFim = ( SEQFIM_tppSeqFim ) pPilhaAux ;
+    ( *pSeqFim )->pPilha = pPilhaAux ;
     
     return SEQFIM_CondRetOK ;
     
@@ -53,7 +72,7 @@ SEQFIM_tpCondRet SEQFIM_CriarSeqFim ( SEQFIM_tppSeqFim * pSeqFim , PIL_tppPilha 
 
 SEQFIM_tpCondRet SEQFIM_DestroiSeqFim ( SEQFIM_tppSeqFim pSeqFim )
 {
-    PIL_DestruirPilha( pSeqFim->pPilCartas ) ;
+    PIL_DestruirPilha( pSeqFim->pPilha ) ;
     
     free( pSeqFim ) ;
     
@@ -70,7 +89,7 @@ SEQFIM_tpCondRet SEQFIM_DestroiSeqFim ( SEQFIM_tppSeqFim pSeqFim )
 SEQFIM_tpCondRet SEQFIM_PreencheSeqFim ( SEQFIM_tppSeqFim pSeqFim , PIL_tppPilha pPilha )
 {
     
-    pSeqFim = ( SEQFIM_tppSeqFim ) pPilha ;
+    pSeqFim->pPilha = pPilha ;
     
     return SEQFIM_CondRetOK ;
     
