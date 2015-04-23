@@ -22,7 +22,7 @@
 =pop 'p' 2 1
 
 == Destruir monte
-==destruir 0
+=destruir 0
 
 
 // fim
