@@ -51,13 +51,13 @@ typedef PIL_tppPilha MON_tppMonte ;
 
     typedef enum {
 
-        MON_CondRetOK ,
+        MON_CondRetOK = 0,
                /* Concluiu corretamente */
 
-        MON_CondRetMonteVazio ,
+        MON_CondRetMonteVazio = 1,
                /* O monte não contém elementos */
 
-        MON_CondRetFaltouMemoria
+        MON_CondRetFaltouMemoria = 2
                /* Faltou memória ao tentar criar o monte */
 
    } MON_tpCondRet ;
