@@ -20,6 +20,10 @@
 =obtervalor 4
 ==Imprimir carta vazia
 =imprime 3
+== Preencher carta com naipe invalido
+=preenche 'r' 2 3
+== Preencher carta com valor invalido
+=preenche 'c' 14 4
 == Preencher carta com naipe Copas e valor A
 =preenche 'c' 1 0
 ==Obter naipe da carta
