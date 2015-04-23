@@ -20,6 +20,8 @@
 
 #include "PILHA_DE_CARTAS.h"
 #include "CARTA.h"
+#include <malloc.h>
+#include <stdio.h>
 
 #define MONTE_OWN
 #include "MONTE.h"
@@ -53,7 +55,7 @@
       PIL_tpCondRet condRet;
       CAR_tppCarta pCartaAux;
 
-      *pMonte = (MON_tppMonte *) malloc(sizeof(MON_tppMonte));
+      *pMonte = (MON_tpMonte *) malloc(sizeof(MON_tppMonte));
       if( *pMonte == NULL)
       {
         return MON_CondRetFaltouMemoria;
@@ -83,13 +85,13 @@
    MON_tpCondRet MON_DestruirMonte ( MON_tppMonte pMonte )
    {
 
-      if(pMonte->pLista == NULL)
+      if(pMonte->pPilha == NULL)
       {
         free(pMonte);
         return MON_CondRetOK;
       }
 
-      PIL_DestroiPilha( pMonte->pPilha );
+      PIL_DestruirPilha( pMonte->pPilha );
       free(pMonte);
 
       return MON_CondRetOK ; 
