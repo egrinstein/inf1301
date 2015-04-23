@@ -61,9 +61,9 @@
         return SEQJ_CondRetFaltouMemoria;
       }
 
-      *(pSeqJ)->numCartasViradas = 1;
+      (*pSeqJ)->numCartasViradas = 1;
 
-      condRet = PIL_CriarPilhaVazia( &((*pSeqJ)-pPilha) );
+      condRet = PIL_CriarPilhaVazia( &((*pSeqJ)->pPilha) );
 
       if( condRet == PIL_CondRetFaltouMemoria )
       {
@@ -85,9 +85,9 @@
 *  Função: SEQJ  &Destruir sequência de jogo
 *  ****/
 
-  SEQJ_tpCondRet SEQJ_DestroiSequencia ( SEQJ_tppSeqJ pSeqJ  )
+  SEQJ_tpCondRet SEQJ_DestroiSequencia ( SEQJ_tppSeqJ pSeqJ )
   {
-    if(pSeqJ->pLista == NULL)
+    if(pSeqJ->pPilha == NULL)
     {
       free(pSeqJ);
       return SEQJ_CondRetOK;
@@ -114,7 +114,7 @@
 
       if(condRet != PIL_CondRetOK)
       {
-        return SEQJ_CondRetPilhaVazia;
+        return SEQJ_CondRetSequenciaVazia;
       }
 
       pSeqJ->numCartasViradas++;
@@ -147,7 +147,7 @@
    {
       if(pSeqJ->pPilha == NULL)
       {
-        return SEQJ_CondRetPilhaVazia;
+        return SEQJ_CondRetSequenciaVazia;
       }
 
       *(pPilha) = pSeqJ->pPilha;
@@ -229,6 +229,7 @@
     {
       PIL_PopCarta( pSeqJ1, &cartaAux );
       PIL_PushCarta( pilhaAux, cartaAux );
+      i++;
     }
 
     i = 0;
@@ -237,6 +238,7 @@
     {
       PIL_PopCarta( pilhaAux, &cartaAux );
       PIL_PushCarta( pSeqJ2, cartaAux );
+      i++;
     }
 
     pSeqJ1->numCartasViradas -= numCartas;

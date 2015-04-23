@@ -1,11 +1,11 @@
-#if ! defined( MON_ )
-#define MON_
+#if ! defined( SEQJ_ )
+#define SEQJ_
 /***************************************************************************
  *
- *  $MCD Módulo de definição: MON Monte
+ *  $MCD Módulo de definição: SEQJ Sequência de jogo
  *
- *  Arquivo gerado:              MONTE.h
- *  Letras identificadoras:      MON
+ *  Arquivo gerado:              SEQJOGO.h
+ *  Letras identificadoras:      SEQJ
  *
  *  Nome da base de software:    Arcabouço para a automação de testes de programas redigidos em C
  *
@@ -16,7 +16,7 @@
  *
  *  $HA Histórico de evolução:
  *     Versão      Autor            Data                Observações
- *     1.0       EG,JM,LW        18/abr/2015       Início do desenvolvimento
+ *     1.0       EG,JM,LW        23/abr/2015       Início do desenvolvimento
  *     
  *  $ED Descrição do módulo
  *     Este módulo implementa funções para criar e manipular um Monte.
@@ -27,17 +27,17 @@
  *
  ***************************************************************************/
 
-#if defined( MON_OWN )
-    #define MON_EXT
+#if defined( SEQJ_OWN )
+    #define SEQJ_EXT
 #else
-    #define MON_EXT extern
+    #define SEQJ_EXT extern
 #endif
 
 /***** Declarações exportadas pelo módulo *****/
 
 /* Tipo referência para um monte */
 
-typedef PIL_tppPilha MON_tppMonte ;
+typedef SEQJ_tagSeqJogo * SEQJ_tppSeqJogo ;
 
 /***********************************************************************
  *
@@ -51,14 +51,20 @@ typedef PIL_tppPilha MON_tppMonte ;
 
     typedef enum {
 
-        MON_CondRetOK = 0,
+        SEQJ_CondRetOK = 0,
                /* Concluiu corretamente */
 
-        MON_CondRetMonteVazio = 1,
-               /* O monte não contém elementos */
+        SEQJ_CondRetSequenciaVazia = 1,
+               /* Sequência não contém elementos */
 
-        MON_CondRetFaltouMemoria = 2
-               /* Faltou memória ao tentar criar o monte */
+        SEQJ_CondRetFaltouMemoria = 2,
+               /* Faltou memória ao tentar criar o sequência */
+
+        SEQJ_CondRetNumCartasIncorreto = 3,
+               /* Número de cartas a serem movidas está incorreto */
+
+        SEQJ_CondRetCartasForaDaSequencia = 4
+               /* Cartas escolhidas estão fora da sequência */
 
    } MON_tpCondRet ;
 
@@ -80,7 +86,7 @@ typedef PIL_tppPilha MON_tppMonte ;
  *
  ***********************************************************************/
 
-MON_tpCondRet MON_CriarMonte ( MON_tppMonte * pMonte , PIL_tppPilha pPilha) ;
+SEQJ_tpCondRet SEQJ_CriarSeqJogo ( SEQJ_tppSeqJ * pSeqJ, PIL_tppPilha pPilha ) ;
 
 
 /***********************************************************************
@@ -98,7 +104,7 @@ MON_tpCondRet MON_CriarMonte ( MON_tppMonte * pMonte , PIL_tppPilha pPilha) ;
  *
  ***********************************************************************/
 
-MON_tpCondRet MON_DestruirMonte ( MON_tppMonte pMonte ) ;
+SEQJ_tpCondRet SEQJ_DestroiSequencia ( SEQJ_tppSeqJ pSeqJ ) ;
 
 
 /***********************************************************************
@@ -120,11 +126,75 @@ MON_tpCondRet MON_DestruirMonte ( MON_tppMonte pMonte ) ;
 *
 ***********************************************************************/
 
-MON_tpCondRet MON_PopCartaMonte ( MON_tppMonte pMonte, CAR_tppCarta * pCarta ) ;
+SEQJ_tpCondRet SEQJ_ViraPrimeiraCarta( SEQJ_tppSeqJ pSeqJ ) ;
 
-#undef MON_EXT
+/***********************************************************************
+*
+*  $FC Função: MON Pop Carta
+*
+*  $ED Descrição da função
+*     Remove carta do topo do monte
+*     
+*
+*  $EP Parâmetros
+*     pMonte - ponteiro para o monte.
+*     pCarta - endereço que receberá a carta removida.
+*              
+*
+*  $FV Valor retornado
+*     MON_CondRetOk     -   pop com sucesso.
+*     MON_CondRetMonteVazio     - monte vazio.
+*
+***********************************************************************/
 
-/********** Fim do módulo de definição: MON Monte **********/
+SEQJ_tpCondRet SEQJ_PushCartaSequencia( SEQJ_tppSeqJ pSeqJ, CAR_tppCarta pCarta ) ;
+
+/***********************************************************************
+*
+*  $FC Função: MON Pop Carta
+*
+*  $ED Descrição da função
+*     Remove carta do topo do monte
+*     
+*
+*  $EP Parâmetros
+*     pMonte - ponteiro para o monte.
+*     pCarta - endereço que receberá a carta removida.
+*              
+*
+*  $FV Valor retornado
+*     MON_CondRetOk     -   pop com sucesso.
+*     MON_CondRetMonteVazio     - monte vazio.
+*
+***********************************************************************/
+
+SEQJ_tpCondRet SEQJ_ObtemPilhaSeqJ( SEQJ _tppSeqJ pSeqJ, PIL_tppPilha *pPilha ) ;
+
+/***********************************************************************
+*
+*  $FC Função: MON Pop Carta
+*
+*  $ED Descrição da função
+*     Remove carta do topo do monte
+*     
+*
+*  $EP Parâmetros
+*     pMonte - ponteiro para o monte.
+*     pCarta - endereço que receberá a carta removida.
+*              
+*
+*  $FV Valor retornado
+*     MON_CondRetOk     -   pop com sucesso.
+*     MON_CondRetMonteVazio     - monte vazio.
+*
+***********************************************************************/
+
+SEQJ_tpCondRet SEQJ_MovePilhaCarta(SEQJ_tppSeqJ pSeqJ1, SEQJ_tppSeqJ pSeqJ2, int numCartas) ;
+
+
+#undef SEQJ_EXT
+
+/********** Fim do módulo de definição: SEQJ Sequência de jogo **********/
 
 #else
 #endif
