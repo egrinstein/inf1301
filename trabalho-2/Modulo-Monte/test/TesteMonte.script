@@ -10,13 +10,13 @@
 =criar 0
 
 == Pop na carta correta (está no topo da pilha)
-=pop 'c' 11 0
+=pop 'o' 12 0
 
 == Pop na carta correta
 =pop 'e' 5 0
 
 == Pop na carta correta
-=pop 'o' 12 0
+=pop 'c' 11 0
 
 == Pop na carta (pilha vazia)
 =pop 'p' 2 1
