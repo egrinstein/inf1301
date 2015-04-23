@@ -37,7 +37,7 @@
 
 /* Tipo referência para um monte */
 
-typedef PIL_tppPilha MON_tppMonte ;
+typedef struct MON_tagMonte * MON_tppMonte ;
 
 /***********************************************************************
  *
