@@ -167,6 +167,50 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 
 /***************************************************************************
 * 
+*  Função: SEQJ &Verifica sequência completa            // CONTINUAR AQUI!
+*****/
+
+   SEQJ_tpCondRet SEQJ_VerificaSeqCompleta( SEQJ_tppSeqJ pSeqJ, int *completa);
+   {
+      int i ;
+      int seqComecou ;
+      int valor ;
+      CAR_tppCarta cartaAux;
+      CAR_tppCarta cartaAnterior;
+
+      seqComecou = 0;
+      valor = 0;
+
+      for (i = 0 ; i < 13 ; i++)
+      {
+        PIL_VerCarta( pSeqJ1->pPilha, &cartaAux, i );
+        CAR_ObterValor(cartaAux, &valor);
+        if( valor != i+1 )
+        {
+          *completa = 0;
+          return SEQJ_CondRetCartasForaDaSequencia;
+        }
+
+        if( seqComecou )
+        {
+          if( !ehSequenciaValor(cartaAux, cartaAnterior) || !ehMesmoNaipe(cartaAux, cartaAnterior))
+          {
+            *completa = 0;
+             return SEQJ_CondRetCartasForaDaSequencia;
+          }
+        }
+        cartaAnterior = cartaAux;
+        if( !seqComecou ) seqComecou = 1;
+      }
+
+      *completa = 1;
+      return SEQJ_CondRetOK;
+   }
+
+/* Fim função: SEQJ &Verifica sequência completa */
+
+/***************************************************************************
+* 
 *  Função: SEQJ &Move Pilha de sequência1 para sequência2
 *****/
   SEQJ_tpCondRet SEQJ_MovePilhaCarta(SEQJ_tppSeqJ pSeqJ1, SEQJ_tppSeqJ pSeqJ2, int numCartas)
@@ -208,7 +252,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 
     // ver se pode colocar na seq2
     // ultima carta testada fica em cartaAux, entao comparar cartaAux com a primeira da pseqj2
-    //cartaAnterior deve ser maior do q cartaAux
+    //cartaAnterior deve ser maior do q cartaAux, nao importa o naipe
 
     PIL_VerCarta( pSeqJ2->pPilha, &cartaAnterior, 0 ); 
 
