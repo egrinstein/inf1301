@@ -38,10 +38,8 @@ typedef struct CAR_tagSeqFim {
  *  Função: SEQFIM Criar Sequencia final
  *****/
 
-SEQFIM_tpCondRet SEQFIM_CriarSeqFim ( SEQFIM_tppSeqFim * pSeqFim , PIL_tppPilha pPilha )
+SEQFIM_tpCondRet SEQFIM_CriarSeqFim ( SEQFIM_tppSeqFim * pSeqFim )
 {
-    
-    PIL_tppPilha pPilhaAux ;
     PIL_tpCondRet PilRet ;
     
     *pSeqFim = NULL ;
@@ -52,14 +50,12 @@ SEQFIM_tpCondRet SEQFIM_CriarSeqFim ( SEQFIM_tppSeqFim * pSeqFim , PIL_tppPilha 
         return SEQFIM_CondRetFaltouMemoria ;
     }
     
-    PilRet = PIL_CriarPilhaVazia( &pPilhaAux );
+    PilRet = PIL_CriarPilhaVazia( &(( *pSeqFim )->pPilha ) );
     
     if ( PilRet == PIL_CondRetFaltouMemoria )
     {
         return SEQFIM_CondRetFaltouMemoria ;
     }
-    
-    ( *pSeqFim )->pPilha = pPilhaAux ;
     
     return SEQFIM_CondRetOK ;
     
@@ -88,8 +84,13 @@ SEQFIM_tpCondRet SEQFIM_DestroiSeqFim ( SEQFIM_tppSeqFim pSeqFim )
 
 SEQFIM_tpCondRet SEQFIM_PreencheSeqFim ( SEQFIM_tppSeqFim pSeqFim , PIL_tppPilha pPilha )
 {
+
+    CAR_tppCarta pCartaAux;
     
-    pSeqFim->pPilha = pPilha ;
+    while( PIL_PopCarta( pPilha, &pCartaAux )  == PIL_CondRetOK )
+    {
+        PIL_PushCarta( (*pMonte)->pPilha, pCartaAux );
+    }
     
     return SEQFIM_CondRetOK ;
     
