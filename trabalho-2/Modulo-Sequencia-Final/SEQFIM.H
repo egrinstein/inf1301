@@ -32,6 +32,7 @@
 #endif
 
 #include "PILHA_DE_CARTAS.H"
+#include "CARTA.H"
 
 /***** Declarações exportadas pelo módulo *****/
 
@@ -69,7 +70,6 @@ typedef enum {
  *
  *  $EP Parâmetros
  *     $P pSeqFim - ponteiro para a sequencia final a ser criada.
- *     $P pPilha - pilha a partir da qual a sequencia final será criada.
  *
  *  $FV Valor retornado
  *     SEQFIM_CondRetOk    -   criou ok.
@@ -77,7 +77,7 @@ typedef enum {
  *
  ***********************************************************************/
 
-SEQFIM_tpCondRet SEQFIM_CriarSeqFim ( SEQFIM_tppSeqFim * pSeqFim , PIL_tppPilha pPilha ) ;
+SEQFIM_tpCondRet SEQFIM_CriarSeqFim ( SEQFIM_tppSeqFim * pSeqFim ) ;
 
 
 /***********************************************************************
