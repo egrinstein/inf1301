@@ -96,4 +96,4 @@ SEQFIM_tpCondRet SEQFIM_PreencheSeqFim ( SEQFIM_tppSeqFim pSeqFim , PIL_tppPilha
     
 }/* Fim função: SEQFIM Preencher Sequencia final */
 
-/********** Fim do módulo de implementação: BAR  Baralho de cartas  **********/
+/********** Fim do módulo de implementação: SEQFIM  Sequencia final  **********/
