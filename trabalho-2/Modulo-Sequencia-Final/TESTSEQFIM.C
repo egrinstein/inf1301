@@ -38,8 +38,6 @@
 #include    "generico.h"
 #include    "lerparm.h"
 
-#include    "CARTA.H"
-#include    "PILHA_DE_CARTAS.H"
 #include    "SEQFIM.H"
 
 /* Tabela dos nomes dos comandos de teste específicos */
@@ -82,12 +80,9 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     int ValorObtido   = -2  ;
     
     PIL_tppPilha pilhaAux;
-    CAR_tppCarta CartaObtida;
     CAR_tppCarta CartaAux1;
     CAR_tppCarta CartaAux2;
     CAR_tppCarta CartaAux3;
-    
-    TST_tpCondRet Ret ;
     
     int  NumLidos = -1 ;
     
@@ -103,7 +98,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
             return TST_CondRetParm ;
         } /* if */
         
-        CondRetObtido = SEQFIM_CriarMonte ( &pSeqFimDada );
+        CondRetObtido = SEQFIM_CriarSeqFim ( &pSeqFimDada );
         
         return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                "Retorno errado ao criar a sequencia final." );
