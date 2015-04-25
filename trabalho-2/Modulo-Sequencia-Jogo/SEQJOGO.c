@@ -188,7 +188,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 
 /***************************************************************************
 * 
-*  Função: SEQJ &Verifica sequência completa            // CONTINUAR AQUI!
+*  Função: SEQJ &Verifica sequência completa     
 *****/
 
    SEQJ_tpCondRet SEQJ_VerificaSeqCompleta( SEQJ_tppSeqJ pSeqJ, int *completa);
