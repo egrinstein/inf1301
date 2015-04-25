@@ -165,6 +165,6 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     
     return TST_CondRetNaoConhec ;
     
-} /* Fim função: TSEQFIM Efetuar operações de teste específicas para monte */
+} /* Fim função: TSEQFIM Efetuar operações de teste específicas para sequencia final */
 
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
