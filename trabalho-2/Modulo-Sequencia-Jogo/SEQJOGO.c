@@ -36,11 +36,10 @@
    typedef struct SEQJ_tagSeqJogo {
     
      PIL_tppPilha pPilha; 
-     /*Pontei para pilha de cartas*/
+      /*Pontei para pilha de cartas*/
     
      int numCartasViradas ;
-        /* Número de cartas viradas. Cada sequência irá começar com uma carta virada.
-         */
+      /* Número de cartas viradas. Cada sequência irá começar com uma carta virada. */
     
 } SEQJ_tpSeqJogo ;
 
@@ -153,12 +152,33 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 
    SEQJ_tpCondRet SEQJ_ObtemPilhaSeqJ( SEQJ _tppSeqJ pSeqJ, PIL_tppPilha *pPilha )
    {
+      PIL_tppPilha pilhaAux;
+      CAR_tppCarta cartaAux;
+      int i;
+
       if(pSeqJ->pPilha == NULL)
       {
         return SEQJ_CondRetSequenciaVazia;
       }
 
-      *(pPilha) = pSeqJ->pPilha;
+     /* fazer só para 13 cartas */
+
+      PIL_CriarPilhaVazia( &pilhaAux );
+      for( i = 0 ; i < 13 ; i++ )
+      {
+        PIL_PopCarta( pSeqJ->pPilha, &cartaAux );
+        PIL_PushCarta( pilhaAux, cartaAux );
+      }
+
+      *pPilha = pilhaAux;
+
+      pSeqJ->numCartasViradas -= 13 ;
+
+    
+      if( pSeqJ->numCartasViradas == 0  && totalCartasNaSeq( pSeqJ ) > 0)
+      {
+        SEQJ_ViraPrimeiraCarta( pSeqJ );
+      }
 
       return SEQJ_CondRetOK;
    }
@@ -268,14 +288,14 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 
     for( i = 0 ; i < numCartas ; i++ )
     {
-      PIL_PopCarta( pSeqJ1, &cartaAux );
+      PIL_PopCarta( pSeqJ1->pPilha, &cartaAux );
       PIL_PushCarta( pilhaAux, cartaAux );
     }
 
     for( i = 0 ; i < numCartas ; i++)
     {
       PIL_PopCarta( pilhaAux, &cartaAux );
-      PIL_PushCarta( pSeqJ2, cartaAux );
+      PIL_PushCarta( pSeqJ2->pPilha, cartaAux );
     }
 
     pSeqJ1->numCartasViradas -= numCartas;
