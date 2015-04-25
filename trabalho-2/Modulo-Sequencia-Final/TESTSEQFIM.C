@@ -73,12 +73,6 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     SEQFIM_tpCondRet CondRetEsperada = SEQFIM_CondRetFaltouMemoria ;
     /* inicializa para qualquer coisa */
     
-    char NaipeEsperado = '?'  ;
-    char NaipeObtido   = '!'  ;
-    
-    int ValorEsperado = -1  ;
-    int ValorObtido   = -2  ;
-    
     PIL_tppPilha pilhaAux;
     CAR_tppCarta CartaAux1;
     CAR_tppCarta CartaAux2;
