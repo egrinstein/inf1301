@@ -12,6 +12,7 @@
  ***************************************************************************/
 
 #include <malloc.h>
+#include <stdio.h>
 
 #define SEQUENCIA_FINAL_OWN
 #include "SEQFIM.H"
@@ -24,7 +25,7 @@
  *
  ***********************************************************************/
 
-typedef struct CAR_tagSeqFim {
+typedef struct SEQFIM_tagSeqFim {
     
     PIL_tppPilha pPilha ;
     
@@ -44,13 +45,13 @@ SEQFIM_tpCondRet SEQFIM_CriarSeqFim ( SEQFIM_tppSeqFim * pSeqFim )
     
     *pSeqFim = NULL ;
     
-    *pSeqFim = ( SEQFIM_tpSeqFim * ) malloc( sizeof( SEQFIM_tpSeqFim ) ) ;
+    *pSeqFim = ( SEQFIM_tpSeqFim * ) malloc( sizeof( SEQFIM_tppSeqFim ) ) ;
     if ( pSeqFim == NULL )
     {
         return SEQFIM_CondRetFaltouMemoria ;
     }
     
-    PilRet = PIL_CriarPilhaVazia( &(( *pSeqFim )->pPilha ) );
+    PilRet = PIL_CriarPilhaVazia( &((*pSeqFim)->pPilha ));
     
     if ( PilRet == PIL_CondRetFaltouMemoria )
     {
@@ -89,7 +90,7 @@ SEQFIM_tpCondRet SEQFIM_PreencheSeqFim ( SEQFIM_tppSeqFim pSeqFim , PIL_tppPilha
     
     while( PIL_PopCarta( pPilha, &pCartaAux )  == PIL_CondRetOK )
     {
-        PIL_PushCarta( (*pMonte)->pPilha, pCartaAux );
+        PIL_PushCarta( pSeqFim->pPilha, pCartaAux );
     }
     
     return SEQFIM_CondRetOK ;
