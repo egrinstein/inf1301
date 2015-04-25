@@ -87,6 +87,11 @@ SEQFIM_tpCondRet SEQFIM_PreencheSeqFim ( SEQFIM_tppSeqFim pSeqFim , PIL_tppPilha
 {
 
     CAR_tppCarta pCartaAux;
+
+	if( pSeqFim == NULL )
+	{
+        return SEQFIM_CondRetSeqNaoExiste ;
+    }
     
     while( PIL_PopCarta( pPilha, &pCartaAux )  == PIL_CondRetOK )
     {
