@@ -55,8 +55,11 @@ typedef enum {
     SEQFIM_CondRetOK ,
     /* Concluiu corretamente */
     
-    SEQFIM_CondRetFaltouMemoria
+    SEQFIM_CondRetFaltouMemoria ,
     /* Faltou memória ao tentar criar o monte */
+
+	SEQFIM_CondRetSeqNaoExiste
+	/* Sequencia final nao existe */
     
 } SEQFIM_tpCondRet ;
 
