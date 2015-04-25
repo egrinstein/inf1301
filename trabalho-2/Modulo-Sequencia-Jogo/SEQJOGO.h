@@ -16,14 +16,16 @@
  *
  *  $HA Histórico de evolução:
  *     Versão      Autor            Data                Observações
+ *     2.0       EG,JM,LW        25/abr/2015       Revisão das funções
  *     1.0       EG,JM,LW        23/abr/2015       Início do desenvolvimento
  *     
  *  $ED Descrição do módulo
- *     Este módulo implementa funções para criar e manipular um Monte.
- *     Um Monte é uma pilha de 10 cartas.
- *     O monte é criado a partir de uma pilha de cartas.
- *     É possível retirar uma carta de cada vez do monte
- *     e nao pode colocar nenhuma carta no monte.
+ *      Este módulo implementa funções para criar e manipular uma Sequencia de Jogo.
+ *      Uma sequencia de jogo começa com 5 ou 6 cartas, criada a partir de uma pilha
+ *      distribuída por um baralho completo.
+ *      É possivel mover as cartas entre as sequencias de jogo existentes e quando
+ *      umas delas possuir uma sequencia completa do mesmo naipe, está sequencia 
+ *      será levada a sequencia final.
  *
  ***************************************************************************/
 
@@ -33,19 +35,22 @@
     #define SEQJ_EXT extern
 #endif
 
+#include "CARTA.H"
+#include "PILHA_DE_CARTAS.H"
+
 /***** Declarações exportadas pelo módulo *****/
 
-/* Tipo referência para um monte */
+/* Tipo referência para uma Sequência de jogo */
 
 typedef SEQJ_tagSeqJogo * SEQJ_tppSeqJogo ;
 
 /***********************************************************************
  *
- *  $TC Tipo de dados: MON Condições de retorno
+ *  $TC Tipo de dados: SEQJ Condições de retorno
  *
  *
  *  $ED Descrição do tipo
- *     Condições de retorno das funções de Monte
+ *     Condições de retorno das funções de Sequência de jogo
  *
  ***********************************************************************/
 
@@ -66,7 +71,7 @@ typedef SEQJ_tagSeqJogo * SEQJ_tppSeqJogo ;
         SEQJ_CondRetCartasForaDaSequencia = 4
                /* Cartas escolhidas estão fora da sequência */
 
-   } MON_tpCondRet ;
+   } SEQJ_tpCondRet ;
 
 
 /***********************************************************************
@@ -74,15 +79,15 @@ typedef SEQJ_tagSeqJogo * SEQJ_tppSeqJogo ;
  *  $FC Função: MON  Criar monte
  *
  *  $ED Descrição da função
- *     Cria um novo monte a partir de uma pilha.
+ *     Cria uma nova sequência de jogo a partir de uma pilha.
  *
  *  $EP Parâmetros
- *     $P pMonte - ponteira para o monte a ser criado.
- *     $P pPilha - pilha a partir da qual o monte irá ser criado.
+ *     $P pSeqJ - ponteiro para a sequênca a ser criada.
+ *     $P pPilha - pilha a partir da qual a seqûencia irá ser criada.
  *
  *  $FV Valor retornado
  *     MON_CondRetOk    -   criou ok.
- *     MON_CondRetFaltouMemoria -   faltou memória para alocar espaço para o monte.
+ *     MON_CondRetFaltouMemoria -   faltou memória para alocar espaço para a sequência.
  *
  ***********************************************************************/
 
@@ -191,6 +196,26 @@ SEQJ_tpCondRet SEQJ_ObtemPilhaSeqJ( SEQJ _tppSeqJ pSeqJ, PIL_tppPilha *pPilha ) 
 
 SEQJ_tpCondRet SEQJ_MovePilhaCarta(SEQJ_tppSeqJ pSeqJ1, SEQJ_tppSeqJ pSeqJ2, int numCartas) ;
 
+/***********************************************************************
+*
+*  $FC Função: MON Pop Carta
+*
+*  $ED Descrição da função
+*     Remove carta do topo do monte
+*     
+*
+*  $EP Parâmetros
+*     pMonte - ponteiro para o monte.
+*     pCarta - endereço que receberá a carta removida.
+*              
+*
+*  $FV Valor retornado
+*     MON_CondRetOk     -   pop com sucesso.
+*     MON_CondRetMonteVazio     - monte vazio.
+*
+***********************************************************************/
+
+SEQJ_tpCondRet SEQJ_VerificaSeqCompleta( SEQJ_tppSeqJ pSeqJ, int *completa);
 
 #undef SEQJ_EXT
 

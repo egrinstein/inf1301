@@ -18,9 +18,6 @@
  ***************************************************************************/
 
 
-#include "PILHA_DE_CARTAS.h"
-#include "CARTA.h"
-
 #define SEQJOGO_OWN
 #include "SEQJOGO.h"
 #undef SEQJOGO_OWN
@@ -191,7 +188,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 *  Função: SEQJ &Verifica sequência completa     
 *****/
 
-   SEQJ_tpCondRet SEQJ_VerificaSeqCompleta( SEQJ_tppSeqJ pSeqJ, int *completa);
+   SEQJ_tpCondRet SEQJ_VerificaSeqCompleta( SEQJ_tppSeqJ pSeqJ, int *completa)
    {
       int i ;
       int seqComecou ;
@@ -316,8 +313,8 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 
 /* Fim função: SEQJ &Move Pilha de sequência1 para sequência2 */
 
-  /*****  Código das funções encapsuladas no módulo  *****/
 
+  /*****  Código das funções encapsuladas no módulo  *****/
 
 /***********************************************************************
  *
