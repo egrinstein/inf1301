@@ -109,7 +109,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 
 /***************************************************************************
 *
-*  Função: MON  SEQJ  &Vira a primeira carta da pilha de sequência de jogo
+*  Função:  SEQJ  &Vira a primeira carta da pilha de sequência de jogo
 *  ****/
 
    SEQJ_tpCondRet SEQJ_ViraPrimeiraCarta( SEQJ_tppSeqJ pSeqJ )
@@ -139,6 +139,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
    SEQJ_tpCondRet SEQJ_PushCartaSequencia( SEQJ_tppSeqJ pSeqJ, CAR_tppCarta pCarta )
    {
       PIL_PushCarta( pSeqJ->pPilha, pCarta);
+      pSeqJ->numCartasViradas++;
 
       return SEQJ_CondRetOK;
    }
