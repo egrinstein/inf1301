@@ -1,5 +1,5 @@
 /***************************************************************************
- *  $MCI Módulo de implementação: Módulo de teste específico
+ *  $MCI MÃ³dulo de implementaÃ§Ã£o: MÃ³dulo de teste especÃ­fico
  *
  *  Arquivo gerado:              TESTSEQJ.C
  *  Letras identificadoras:      TSEQJ
@@ -10,42 +10,35 @@
  *       LW - Leonardo Wajnsztok
  *
  *
- *  $ED Descrição do módulo
- *     Este módulo contém as funções específicas para o teste do
- *     módulo sequência de jogo.
+ *  $ED DescriÃ§Ã£o do mÃ³dulo
+ *     Este mÃ³dulo contÃ©m as funÃ§Ãµes especÃ­ficas para o teste do
+ *     mÃ³dulo sequÃªncia de jogo.
  *
- *  $EIU Interface com o usuário pessoa
- *     Comandos de teste específicos para testar o módulo sequência de jogo:
+ *  $EIU Interface com o usuÃ¡rio pessoa
+ *     Comandos de teste especÃ­ficos para testar o mÃ³dulo sequÃªncia de jogo:
  *
  *     =criarIncompleta <int>
- *                   - chama a função  SEQJ_CriarSeqJogo.
- *                   Irá criar uma sequência de jogo com 3 cartas
+ *                   - chama a funÃ§Ã£o  SEQJ_CriarSeqJogo.
+ *                   IrÃ¡ criar uma sequÃªncia de jogo com 3 cartas
  *                   previamente escolhidas a partir de uma pilha 
  *                   criada com tais cartas.
- *                   Como só podemos retirar cartas e não colocá-las
- *                   no monte, não importa quais serão elas.
+ *                   Como sÃ³ podemos retirar cartas e nÃ£o colocÃ¡-las
+ *                   no monte, nÃ£o importa quais serÃ£o elas.
  *
        =criarCompleta <int>
-
        =virarPrimeiraCarta
-
        =pushCarta
-
        =obterPilha
-
        =moverPilha
-
        =verificarCompleta
-
-
  *     =pop <char> <int>
- *                    - chama a função MON_PopCartaMonte.
- *                    Onde o parâmetro se refere ao valor do naipe
- *                    e o valor da carta fornecida pelo usuário.
- *                    Esses valores serão testados.
+ *                    - chama a funÃ§Ã£o MON_PopCartaMonte.
+ *                    Onde o parÃ¢metro se refere ao valor do naipe
+ *                    e o valor da carta fornecida pelo usuÃ¡rio.
+ *                    Esses valores serÃ£o testados.
  *
  *     =destruir
- *             - chama a função MON_DestruirMonte.
+ *             - chama a funÃ§Ã£o MON_DestruirMonte.
  *
  ***************************************************************************/
 
@@ -61,7 +54,7 @@
 #include    "PILHA_DE_CARTAS.H"
 #include    "SEQJOGO.H"
 
-/* Tabela dos nomes dos comandos de teste específicos */
+/* Tabela dos nomes dos comandos de teste especÃ­ficos */
 
 #define     CRIARINCOMPLETA_SEQJ_CMD     "=criarIncompleta"
 #define     CRIARCOMPLETA_SEQJ_CMD  "=criarCompleta"
@@ -75,17 +68,17 @@
 
 /* Ponteiro para monte utilizado no teste */
 
-SEQJ_tppSeqJogo vSeqJ[3] ;
+SEQJ_tppSeqJ vSeqJ[3] ;
 
 /***********************************************************************
  *
- *  $FC Função: TCAR Efetuar operações de teste específicas para Monte
+ *  $FC FunÃ§Ã£o: TCAR Efetuar operaÃ§Ãµes de teste especÃ­ficas para Monte
  *
- *  $ED Descrição da função
- *     Efetua os diversos comandos de teste específicos para o módulo
+ *  $ED DescriÃ§Ã£o da funÃ§Ã£o
+ *     Efetua os diversos comandos de teste especÃ­ficos para o mÃ³dulo
  *     Monte sendo testado.
  *
- *  $EP Parâmetros
+ *  $EP ParÃ¢metros
  *     $P ComandoTeste - String contendo o comando
  *
  *  $FV Valor retornado
@@ -119,7 +112,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
     int  NumLidos = -1 ;
     
-    /* Testar SEQJ Criar Sequência de jogo completa */
+    /* Testar SEQJ Criar SequÃªncia de jogo completa */
     
     if ( strcmp( ComandoTeste , CRIARCOMPLETA_SEQJ_CMD ) == 0 )
     {
@@ -147,14 +140,14 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
         CondRetObtido = SEQJ_CriarSeqJogo ( &(vSeqJ[posVetorSeqJ]) , pilhaAux);
 
-        PIL_DestroiPilha(pilhaAux);
+        PIL_DestruirPilha(pilhaAux);
         
         return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                "Retorno errado ao criar a sequencia de jogo." );
         
-    } /* fim ativa: Testar SEQJ Criar Sequência de jogo completa*/
+    } /* fim ativa: Testar SEQJ Criar SequÃªncia de jogo completa*/
     
-    /* Testar SEQJ Criar Sequência de jogo incompleta */
+    /* Testar SEQJ Criar SequÃªncia de jogo incompleta */
     
     else if ( strcmp( ComandoTeste , CRIARINCOMPLETA_SEQJ_CMD  ) == 0 )
     {
@@ -190,14 +183,14 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
         CondRetObtido = SEQJ_CriarSeqJogo ( &(vSeqJ[posVetorSeqJ]) , pilhaAux);
 
-        PIL_DestroiPilha(pilhaAux);
+        PIL_DestruirPilha(pilhaAux);
         
         return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                "Retorno errado ao criar a sequencia de jogo." );
        
-    } /* fim ativa: Testar SEQJ Criar Sequência de jogo incompleta */
+    } /* fim ativa: Testar SEQJ Criar SequÃªncia de jogo incompleta */
     
-    /* Testar SEQJ Destruir Sequência de jogo */
+    /* Testar SEQJ Destruir SequÃªncia de jogo */
     
     else if ( strcmp( ComandoTeste , DESTRUIR_SEQJ_CMD ) == 0 )
     {
@@ -219,7 +212,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
         return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                               "Retorno errado ao tentar destruir a sequencia.") ;
         
-    } /* fim ativa:  Testar SEQJ Destruir Sequência de jogo*/
+    } /* fim ativa:  Testar SEQJ Destruir SequÃªncia de jogo*/
 
     /* Testar SEQJ Vira a primeira carta*/
     
@@ -272,7 +265,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
         
     } /* fim ativa:  Testar SEQJ Push carta Sequencia*/
 
-     /* Testar SEQJ Obtem pilha da sequência de jogo*/
+     /* Testar SEQJ Obtem pilha da sequÃªncia de jogo*/
 
     else if ( strcmp( ComandoTeste , OBTER_SEQJ_CMD ) == 0 )
     {
@@ -290,15 +283,15 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
         }
 
 
-        CondRetObtido = SEQJ_tpCondRet SEQJ_ObtemPilhaSeqJ(vSeqJ[posVetorSeqJ], &pilhaAux ) ;
-        PIL_DestroiPilha(pilhaAux);
+        CondRetObtido = SEQJ_ObtemPilhaSeqJ(vSeqJ[posVetorSeqJ], &pilhaAux ) ;
+        PIL_DestruirPilha(pilhaAux);
 
         return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                               "Retorno errado ao obter pilha.") ;
         
-    } /* fim ativa:  Testar SEQJ Obtem pilha da sequência de jogo*/
+    } /* fim ativa:  Testar SEQJ Obtem pilha da sequÃªncia de jogo*/
 
-    /* Testar SEQJ Verifica sequência completa */
+    /* Testar SEQJ Verifica sequÃªncia completa */
 
     else if ( strcmp( ComandoTeste ,  VERIFICAR_SEQJ_CMD ) == 0 )
     {
@@ -321,11 +314,11 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
         return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                               "Retorno errado ao verificar se pilha completa.") ;
         
-    } /* fim ativa:  Testar SEQJ Verifica sequência completa */
+    } /* fim ativa:  Testar SEQJ Verifica sequÃªncia completa */
 
-    /* Testar SEQJ Move Pilha de sequência1 para sequência2 */
+    /* Testar SEQJ Move Pilha de sequÃªncia1 para sequÃªncia2 */
 
-    else if ( strcmp( ComandoTeste , MOVER_SEQJ_CM ) == 0 )
+    else if ( strcmp( ComandoTeste , MOVER_SEQJ_CMD ) == 0 )
     {
         
         NumLidos = LER_LerParametros( "iiii" ,&posVetorSeqJ, &posVetorSeqJ2, &numCartasMover,
@@ -346,10 +339,10 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
         return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                               "Retorno errado ao verificar se pilha completa.") ;
         
-    } /* fim ativa:  Testar SEQJ Move Pilha de sequência1 para sequência2 */
+    } /* fim ativa:  Testar SEQJ Move Pilha de sequÃªncia1 para sequÃªncia2 */
 
     return TST_CondRetNaoConhec ;
     
-} /* Fim função: TSEQJ Efetuar operações de teste específicas para sequência de jogo  */
+} /* Fim funÃ§Ã£o: TSEQJ Efetuar operaÃ§Ãµes de teste especÃ­ficas para sequÃªncia de jogo  */
 
-/********** Fim do módulo de implementação: Módulo de teste específico **********/
+/********** Fim do mÃ³dulo de implementaÃ§Ã£o: MÃ³dulo de teste especÃ­fico **********/
