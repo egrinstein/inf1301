@@ -153,11 +153,15 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
       CAR_tppCarta cartaAux;
       int i;
 
-      if(pSeqJ->pPilha == NULL || totalCartasNaSeq( pSeqJ ) == 0)
+      if(pSeqJ->pPilha == NULL || totalCartasNaSeq( pSeqJ ) == 0 )
       {
         return SEQJ_CondRetSequenciaVazia;
       }
 
+      if (  pSeqJ->numCartasViradas < 13)
+      {
+        return SEQJ_CondRetNumCartasIncorreto;
+      }
      /* fazer só para 13 cartas */
 
       PIL_CriarPilhaVazia( &pilhaAux );

@@ -170,7 +170,8 @@ SEQJ_tpCondRet SEQJ_PushCartaSequencia( SEQJ_tppSeqJ pSeqJ, CAR_tppCarta pCarta 
 *
 *  $FV Valor retornado
 *     SEQJ_CondRetOK                 - preencheu pilha com sucesso com sucesso.
-*     SEQJ_CondRetSequenciaVazia;    - sequência vazia.
+*     SEQJ_CondRetSequenciaVazia     - sequência vazia.
+*     SEQJ_CondRetNumCartasIncorreto - não tem 13 cartas viradas.
 *
 ***********************************************************************/
 
