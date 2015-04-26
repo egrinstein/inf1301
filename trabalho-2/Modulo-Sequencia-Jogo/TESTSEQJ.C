@@ -106,10 +106,12 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
    int ValorEsperado = -1  ;
    int ValorObtido   = -2  ;  
    int posVetorSeqJ  = -1  ;
+   int posVetorSeqJ2  = -1  ;
+   int numCartasMover = -1 ;
    int i = 0;
 
     PIL_tppPilha pilhaAux;
-    CAR_tppCarta CartaObtida;
+    CAR_tppCarta cartaDada;
     CAR_tppCarta CartaAux[13];
     CAR_tppCarta CartaAux2[13];
 
@@ -178,13 +180,13 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
         CAR_PreencheCarta( CartaAux2[1], 'c' , 12 );
         PIL_PushCarta( pilhaAux , CartaAux2[1] ) ;
 
-        CAR_CriarCarta( &(CartaAux2[1]) ) ;
-        CAR_PreencheCarta( CartaAux2[1], 'c' , 11 );
-        PIL_PushCarta( pilhaAux , CartaAux2[1] ) ;
+        CAR_CriarCarta( &(CartaAux2[2]) ) ;
+        CAR_PreencheCarta( CartaAux2[2], 'c' , 11 );
+        PIL_PushCarta( pilhaAux , CartaAux2[2] ) ;
 
-        CAR_CriarCarta( &(CartaAux2[1]) ) ;
-        CAR_PreencheCarta( CartaAux2[1], 'c' , 10 );
-        PIL_PushCarta( pilhaAux , CartaAux2[1] ) ;
+        CAR_CriarCarta( &(CartaAux2[3]) ) ;
+        CAR_PreencheCarta( CartaAux2[3], 'c' , 10 );
+        PIL_PushCarta( pilhaAux , CartaAux2[3] ) ;
 
         CondRetObtido = SEQJ_CriarSeqJogo ( &(vSeqJ[posVetorSeqJ]) , pilhaAux);
 
@@ -195,14 +197,14 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
        
     } /* fim ativa: Testar SEQJ Criar Sequência de jogo incompleta */
     
-    /* Testar MON Destruir Monte */
+    /* Testar SEQJ Destruir Sequência de jogo */
     
     else if ( strcmp( ComandoTeste , DESTRUIR_SEQJ_CMD ) == 0 )
     {
         
         NumLidos = LER_LerParametros( "ii" ,&posVetorSeqJ,
                                      &CondRetEsperada ) ;
-        if ( NumLidos != 1 )
+        if ( NumLidos != 2 )
         {
             return TST_CondRetParm ;
         } /* if */
@@ -215,12 +217,139 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
         CondRetObtido = SEQJ_DestroiSequencia(vSeqJ[posVetorSeqJ]) ;
         
         return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                              "Retorno errado ao tentar destruir monte.") ;
+                              "Retorno errado ao tentar destruir a sequencia.") ;
         
-    } /* fim ativa:  Testar MON Destruir monte*/
+    } /* fim ativa:  Testar SEQJ Destruir Sequência de jogo*/
+
+    /* Testar SEQJ Vira a primeira carta*/
     
+    else if ( strcmp( ComandoTeste , VIRAR_SEQJ_CMD ) == 0 )
+    {
+        
+        NumLidos = LER_LerParametros( "ii" ,&posVetorSeqJ,
+                                     &CondRetEsperada ) ;
+        if ( NumLidos != 2 )
+        {
+            return TST_CondRetParm ;
+        } /* if */
+
+        if (posVetorSeqJ > 2 || posVetorSeqJ < 0 )
+        {
+            return TST_CondRetParm ;
+        }
+        
+        CondRetObtido = SEQJ_ViraPrimeiraCarta(vSeqJ[posVetorSeqJ]) ;
+        
+        return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                              "Retorno errado ao tentar virar a carta.") ;
+        
+    } /* fim ativa:  Testar SEQJ Vira a primeira carta*/
+
+    /* Testar SEQJ Push carta Sequencia*/
+
+    else if ( strcmp( ComandoTeste , PUSH_SEQJ_CMD ) == 0 )
+    {
+        
+        NumLidos = LER_LerParametros( "icii" ,&NaipeEsperado, &ValorEsperado,&posVetorSeqJ,
+                                     &CondRetEsperada ) ;
+        if ( NumLidos != 4 )
+        {
+            return TST_CondRetParm ;
+        } /* if */
+
+        if (posVetorSeqJ > 2 || posVetorSeqJ < 0 )
+        {
+            return TST_CondRetParm ;
+        }
+        
+        CAR_CriarCarta( &cartaDada );
+        CAR_PreencheCarta(cartaDada, NaipeEsperado, ValorEsperado) ;
+
+        CondRetObtido = SEQJ_PushCartaSequencia(vSeqJ[posVetorSeqJ], cartaDada ) ;
+        
+        return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                              "Retorno errado ao dar push da carta.") ;
+        
+    } /* fim ativa:  Testar SEQJ Push carta Sequencia*/
+
+     /* Testar SEQJ Obtem pilha da sequência de jogo*/
+
+    else if ( strcmp( ComandoTeste , OBTER_SEQJ_CMD ) == 0 )
+    {
+        
+        NumLidos = LER_LerParametros( "ii" ,&posVetorSeqJ,
+                                     &CondRetEsperada ) ;
+        if ( NumLidos != 2 )
+        {
+            return TST_CondRetParm ;
+        } /* if */
+
+        if (posVetorSeqJ > 2 || posVetorSeqJ < 0 )
+        {
+            return TST_CondRetParm ;
+        }
+
+
+        CondRetObtido = SEQJ_tpCondRet SEQJ_ObtemPilhaSeqJ(vSeqJ[posVetorSeqJ], &pilhaAux ) ;
+        PIL_DestroiPilha(pilhaAux);
+
+        return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                              "Retorno errado ao obter pilha.") ;
+        
+    } /* fim ativa:  Testar SEQJ Obtem pilha da sequência de jogo*/
+
+    /* Testar SEQJ Verifica sequência completa */
+
+    else if ( strcmp( ComandoTeste ,  VERIFICAR_SEQJ_CMD ) == 0 )
+    {
+        
+        NumLidos = LER_LerParametros( "ii" ,&posVetorSeqJ,
+                                     &CondRetEsperada ) ;
+        if ( NumLidos != 2 )
+        {
+            return TST_CondRetParm ;
+        } /* if */
+
+        if (posVetorSeqJ > 2 || posVetorSeqJ < 0 )
+        {
+            return TST_CondRetParm ;
+        }
+
+
+        CondRetObtido = SEQJ_VerificaSeqCompleta( vSeqJ[posVetorSeqJ] ) ;
+        
+        return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                              "Retorno errado ao verificar se pilha completa.") ;
+        
+    } /* fim ativa:  Testar SEQJ Verifica sequência completa */
+
+    /* Testar SEQJ Move Pilha de sequência1 para sequência2 */
+
+    else if ( strcmp( ComandoTeste , MOVER_SEQJ_CM ) == 0 )
+    {
+        
+        NumLidos = LER_LerParametros( "iiii" ,&posVetorSeqJ, &posVetorSeqJ2, &numCartasMover,
+                                     &CondRetEsperada ) ;
+        if ( NumLidos != 4 )
+        {
+            return TST_CondRetParm ;
+        } /* if */
+
+        if (posVetorSeqJ > 2 || posVetorSeqJ < 0 || posVetorSeqJ2 > 2 || posVetorSeqJ2 < 0 )
+        {
+            return TST_CondRetParm ;
+        }
+
+
+        CondRetObtido = SEQJ_MovePilhaCarta(vSeqJ[posVetorSeqJ] ,vSeqJ[posVetorSeqJ2], numCartasMover);
+        
+        return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                              "Retorno errado ao verificar se pilha completa.") ;
+        
+    } /* fim ativa:  Testar SEQJ Move Pilha de sequência1 para sequência2 */
+
     return TST_CondRetNaoConhec ;
     
-} /* Fim função: TMON Efetuar operações de teste específicas para monte */
+} /* Fim função: TSEQJ Efetuar operações de teste específicas para sequência de jogo  */
 
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
