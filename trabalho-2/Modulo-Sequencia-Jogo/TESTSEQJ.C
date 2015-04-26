@@ -17,13 +17,16 @@
  *  $EIU Interface com o usuário pessoa
  *     Comandos de teste específicos para testar o módulo sequência de jogo:
  *
- *     =criar
- *                   - chama a função  MON_CriarMonte.
- *                   Irá criar um monte com 3 cartas previamente escolhidas
- *                    a partir de uma pilha criada com tais cartas.
+ *     =criarIncompleta <int>
+ *                   - chama a função  SEQJ_CriarSeqJogo.
+ *                   Irá criar uma sequência de jogo com 3 cartas
+ *                   previamente escolhidas a partir de uma pilha 
+ *                   criada com tais cartas.
  *                   Como só podemos retirar cartas e não colocá-las
  *                   no monte, não importa quais serão elas.
  *
+       =criarCompleta <int>
+
        =virarPrimeiraCarta
 
        =pushCarta
@@ -60,18 +63,19 @@
 
 /* Tabela dos nomes dos comandos de teste específicos */
 
-#define     CRIAR_SEQJ_CMD       "=criar"
-#define     DESTRUIR_SEQJ_CMD    "=destruir"
-#define     VIRAR_SEQJ_CMD       "=virarPrimeiraCarta"
-#define     PUSH_SEQJ_CMD        "=pushCarta"
-#define     OBTER_SEQJ_CMD       "=obterPilha"
-#define     MOVER_SEQJ_CMD       "=moverPilha"
-#define     VERIFICAR_SEQJ_CMD   "=verificarCompleta"
+#define     CRIARINCOMPLETA_SEQJ_CMD     "=criarIncompleta"
+#define     CRIARCOMPLETA_SEQJ_CMD  "=criarCompleta"
+#define     DESTRUIR_SEQJ_CMD       "=destruir"
+#define     VIRAR_SEQJ_CMD          "=virarPrimeiraCarta"
+#define     PUSH_SEQJ_CMD           "=pushCarta"
+#define     OBTER_SEQJ_CMD          "=obterPilha"
+#define     MOVER_SEQJ_CMD          "=moverPilha"
+#define     VERIFICAR_SEQJ_CMD      "=verificarCompleta"
 
 
 /* Ponteiro para monte utilizado no teste */
 
-MON_tppMonte monteDado = NULL;
+SEQJ_tppSeqJ vSeqJ[3] ;
 
 /***********************************************************************
  *
@@ -92,8 +96,8 @@ MON_tppMonte monteDado = NULL;
 TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 {
     
-    MON_tpCondRet CondRetObtido   = MON_CondRetOK ;
-    MON_tpCondRet CondRetEsperada = MON_CondRetFaltouMemoria ;
+    SEQJ_tpCondRet CondRetObtido   = SEQJ_CondRetOK ;
+    SEQJ_tpCondRet CondRetEsperada = SEQJ_CondRetFaltouMemoria ;
     /* inicializa para qualquer coisa */
     
    char NaipeEsperado = '?'  ;
@@ -101,104 +105,114 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
    int ValorEsperado = -1  ;
    int ValorObtido   = -2  ;  
+   int posVetorSeqJ  = -1  ;
+   int i = 0;
 
     PIL_tppPilha pilhaAux;
     CAR_tppCarta CartaObtida;
-    CAR_tppCarta CartaAux1;
-    CAR_tppCarta CartaAux2;
-    CAR_tppCarta CartaAux3;
+    CAR_tppCarta CartaAux[13];
+    CAR_tppCarta CartaAux2[13];
 
     TST_tpCondRet Ret ;
 
     int  NumLidos = -1 ;
     
-    /* Testar MON Criar Monte */
+    /* Testar SEQJ Criar Sequência de jogo completa */
     
-    if ( strcmp( ComandoTeste , CRIAR_MON_CMD ) == 0 )
+    if ( strcmp( ComandoTeste , CRIARCOMPLETA_SEQJ_CMD ) == 0 )
     {
         
-        NumLidos = LER_LerParametros( "i" ,
+        NumLidos = LER_LerParametros( "ii" , &posVetorSeqJ,
                                      &CondRetEsperada ) ;
-        if ( NumLidos != 1 )
+        if ( NumLidos != 2 )
         {
             return TST_CondRetParm ;
         } /* if */
         
+        if (posVetorSeqJ > 2 || posVetorSeqJ < 0 || vSeqJ[posVetorSeqJ] != NULL)
+        {
+            return TST_CondRetParm ;
+        }
+
         PIL_CriarPilhaVazia( &pilhaAux );
 
-        CAR_CriarCarta( &CartaAux1 ) ;
-        CAR_PreencheCarta( CartaAux1, 'o' , 12 );
-        CAR_CriarCarta( &CartaAux2 ) ;
-        CAR_PreencheCarta( CartaAux2, 'e' , 5 );
-        CAR_CriarCarta( &CartaAux3 ) ;
-        CAR_PreencheCarta( CartaAux3, 'c' , 11 );
+        for(i = 0 ; i < 13 ; i++)
+        {
+            CAR_CriarCarta( &(CartaAux[i]) ) ;
+            CAR_PreencheCarta( CartaAux[i], 'e' , i+1 );
+            PIL_PushCarta( pilhaAux , CartaAux[i] ) ;
+        }
 
-        PIL_PushCarta( pilhaAux , CartaAux1 ) ;
-        PIL_PushCarta( pilhaAux , CartaAux2 ) ;
-        PIL_PushCarta( pilhaAux , CartaAux3 ) ;
+        CondRetObtido = SEQJ_CriarSeqJogo ( &(vSeqJ[posVetorSeqJ]) , pilhaAux);
 
-        CondRetObtido = MON_CriarMonte ( &monteDado , pilhaAux);
+        PIL_DestroiPilha(pilhaAux);
         
         return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                               "Retorno errado ao criar o monte." );
+                               "Retorno errado ao criar a sequencia de jogo." );
         
-    } /* fim ativa: Testar MON Criar Monte*/
+    } /* fim ativa: Testar SEQJ Criar Sequência de jogo completa*/
     
-    /* Testar MON Pop carta */
+    /* Testar SEQJ Criar Sequência de jogo incompleta */
     
-    else if ( strcmp( ComandoTeste , POP_MON_CMD  ) == 0 )
+    else if ( strcmp( ComandoTeste , CRIARINCOMPLETA_SEQJ_CMD  ) == 0 )
     {
         
-        NumLidos = LER_LerParametros( "cii" ,&NaipeEsperado, &ValorEsperado, &CondRetEsperada ) ;
-        if ( NumLidos != 3 )
+        NumLidos = LER_LerParametros( "ii" ,&posVetorSeqJ, &CondRetEsperada ) ;
+        if ( NumLidos != 2 )
         {
             return TST_CondRetParm ;
         } /* if */
         
+        if (posVetorSeqJ > 2 || posVetorSeqJ < 0 || vSeqJ[posVetorSeqJ] != NULL)
+        {
+            return TST_CondRetParm ;
+        }
         
-        CondRetObtido = MON_PopCartaMonte ( monteDado, &CartaObtida ) ;
+        PIL_CriarPilhaVazia( &pilhaAux );
+    
+        CAR_CriarCarta( &(CartaAux2[0]) ) ;
+        CAR_PreencheCarta( CartaAux2[0], 'c' , 13 );
+        PIL_PushCarta( pilhaAux , CartaAux2[0] ) ;
+
+        CAR_CriarCarta( &(CartaAux2[1]) ) ;
+        CAR_PreencheCarta( CartaAux2[1], 'c' , 12 );
+        PIL_PushCarta( pilhaAux , CartaAux2[1] ) ;
+
+        CAR_CriarCarta( &(CartaAux2[1]) ) ;
+        CAR_PreencheCarta( CartaAux2[1], 'c' , 11 );
+        PIL_PushCarta( pilhaAux , CartaAux2[1] ) ;
+
+        CAR_CriarCarta( &(CartaAux2[1]) ) ;
+        CAR_PreencheCarta( CartaAux2[1], 'c' , 10 );
+        PIL_PushCarta( pilhaAux , CartaAux2[1] ) ;
+
+        CondRetObtido = SEQJ_CriarSeqJogo ( &(vSeqJ[posVetorSeqJ]) , pilhaAux);
+
+        PIL_DestroiPilha(pilhaAux);
         
-        ret =  TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                               "Retorno errado ao dar pop no Monte." );
-
-         if ( Ret != TST_CondRetOK )
-            {
-               return Ret ;
-            } /* if */
-
-         if ( CondRetObtido != PIL_CondRetOK )
-            {
-               return CondRetObtido ;
-            } /* if */
-
-         CAR_ObterNaipe( CartaObtida , &NaipeObtido );
-            Ret = TST_CompararInt( NaipeEsperado , NaipeObtido ,
-                                    "Carta obtida está errada." );
-
-         if ( Ret != TST_CondRetOK )
-            {
-               return Ret ;
-            } /* if */
-
-         CAR_ObterValor( CartaObtida , &ValorObtido );
-            return TST_CompararInt( ValorEsperado , ValorObtido ,
-                                    "Carta obtida está errada." );
-    } /* fim ativa: Testar MON Pop carta */
+        return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                               "Retorno errado ao criar a sequencia de jogo." );
+       
+    } /* fim ativa: Testar SEQJ Criar Sequência de jogo incompleta */
     
     /* Testar MON Destruir Monte */
     
-    else if ( strcmp( ComandoTeste , DESTRUIR_MON_CMD ) == 0 )
+    else if ( strcmp( ComandoTeste , DESTRUIR_SEQJ_CMD ) == 0 )
     {
-    
         
-        NumLidos = LER_LerParametros( "i" ,
+        NumLidos = LER_LerParametros( "ii" ,&posVetorSeqJ,
                                      &CondRetEsperada ) ;
         if ( NumLidos != 1 )
         {
             return TST_CondRetParm ;
         } /* if */
+
+        if (posVetorSeqJ > 2 || posVetorSeqJ < 0 )
+        {
+            return TST_CondRetParm ;
+        }
         
-        CondRetObtido = MON_DestruirMonte( monteDado ) ;
+        CondRetObtido = SEQJ_DestroiSequencia(vSeqJ[posVetorSeqJ]) ;
         
         return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                               "Retorno errado ao tentar destruir monte.") ;
