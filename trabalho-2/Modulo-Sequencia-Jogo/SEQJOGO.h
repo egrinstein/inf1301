@@ -76,7 +76,7 @@ typedef SEQJ_tagSeqJogo * SEQJ_tppSeqJogo ;
 
 /***********************************************************************
  *
- *  $FC Função: MON  Criar monte
+ *  $FC Função: SEQJ  Criar Sequência de jogo
  *
  *  $ED Descrição da função
  *     Cria uma nova sequência de jogo a partir de uma pilha.
@@ -86,8 +86,8 @@ typedef SEQJ_tagSeqJogo * SEQJ_tppSeqJogo ;
  *     $P pPilha - pilha a partir da qual a seqûencia irá ser criada.
  *
  *  $FV Valor retornado
- *     MON_CondRetOk    -   criou ok.
- *     MON_CondRetFaltouMemoria -   faltou memória para alocar espaço para a sequência.
+ *     SEQJ_CondRetOk    -   criou ok.
+ *     SEQJ_CondRetFaltouMemoria -   faltou memória para alocar espaço para a sequência.
  *
  ***********************************************************************/
 
@@ -96,16 +96,16 @@ SEQJ_tpCondRet SEQJ_CriarSeqJogo ( SEQJ_tppSeqJ * pSeqJ, PIL_tppPilha pPilha ) ;
 
 /***********************************************************************
  *
- *  $FC Função: CAR  Destruir monte
+ *  $FC Função: SEQJ Destruir Sequência de jogo
  *
  *  $ED Descrição da função
- *     Destroi um monte.
+ *     Destroi uma sequência de jogo.
  *
  *  $EP Parâmetros
- *     $P pMonte - ponteiro para o monte a ser excluída.
+ *     $P pSeqJ - sequência de jogo a ser excluída.
  *
  *  $FV Valor retornado
- *     MON_CondRetOk    -   excluiu ok.
+ *     SEQJ_CondRetOk    -   excluiu ok.
  *
  ***********************************************************************/
 
@@ -114,20 +114,19 @@ SEQJ_tpCondRet SEQJ_DestroiSequencia ( SEQJ_tppSeqJ pSeqJ ) ;
 
 /***********************************************************************
 *
-*  $FC Função: MON Pop Carta
-*
+*  $FC Função: SEQJ Vira a primeira carta 
+
 *  $ED Descrição da função
-*     Remove carta do topo do monte
+*     Vira a primeira carta da sequência de jogo, caso houver.
 *     
 *
 *  $EP Parâmetros
-*     pMonte - ponteiro para o monte.
-*     pCarta - endereço que receberá a carta removida.
+*     pSeqJ - a sequência de jogo.
 *              
 *
 *  $FV Valor retornado
-*     MON_CondRetOk     -   pop com sucesso.
-*     MON_CondRetMonteVazio     - monte vazio.
+*     SEQJ_CondRetSequenciaVazia  -   sequência vazia, nenhuma carta para virar.
+*     SEQJ_CondRetOK              -    virou com sucesso.
 *
 ***********************************************************************/
 
@@ -135,20 +134,21 @@ SEQJ_tpCondRet SEQJ_ViraPrimeiraCarta( SEQJ_tppSeqJ pSeqJ ) ;
 
 /***********************************************************************
 *
-*  $FC Função: MON Pop Carta
+*  $FC Função: SEQJ Push Carta na sequência de jogo
 *
 *  $ED Descrição da função
-*     Remove carta do topo do monte
+*     A função da push em uma carta no inicio da Sequencia.
+*     É usada para trazer uma carta do Monte de cartas para
+*     sequência de jogo.
 *     
 *
 *  $EP Parâmetros
-*     pMonte - ponteiro para o monte.
-*     pCarta - endereço que receberá a carta removida.
+*     pSeqJ   - sequência de jogo.
+*     pCarta  - carta a ser colocada na sequência de jogo.
 *              
 *
 *  $FV Valor retornado
-*     MON_CondRetOk     -   pop com sucesso.
-*     MON_CondRetMonteVazio     - monte vazio.
+*     SEQJ_CondRetOK      - push com sucesso.
 *
 ***********************************************************************/
 
@@ -156,20 +156,21 @@ SEQJ_tpCondRet SEQJ_PushCartaSequencia( SEQJ_tppSeqJ pSeqJ, CAR_tppCarta pCarta 
 
 /***********************************************************************
 *
-*  $FC Função: MON Pop Carta
+*  $FC Função: SEQJ Obtem Pilha da Sequência de jogo
 *
 *  $ED Descrição da função
-*     Remove carta do topo do monte
+*     A função irá preencher uma pilha com uma sequência completa.
+*     É usada para levar a sequência que foi completa para a sequência final.
 *     
 *
 *  $EP Parâmetros
-*     pMonte - ponteiro para o monte.
-*     pCarta - endereço que receberá a carta removida.
+*     pSeqJ   - sequência de jogo.
+*     pPilha -  ponteiro para a pilha a ser preenchida.
 *              
 *
 *  $FV Valor retornado
-*     MON_CondRetOk     -   pop com sucesso.
-*     MON_CondRetMonteVazio     - monte vazio.
+*     SEQJ_CondRetOK                 - preencheu pilha com sucesso com sucesso.
+*     SEQJ_CondRetSequenciaVazia;    - sequência vazia.
 *
 ***********************************************************************/
 
@@ -177,20 +178,31 @@ SEQJ_tpCondRet SEQJ_ObtemPilhaSeqJ( SEQJ _tppSeqJ pSeqJ, PIL_tppPilha *pPilha ) 
 
 /***********************************************************************
 *
-*  $FC Função: MON Pop Carta
+*  $FC Função: SEQJ Move pilha de cartas
 *
 *  $ED Descrição da função
-*     Remove carta do topo do monte
+*     A função irá mover uma pilha de cartas entre duas sequências de jogo.
+*     A quantidade de cartas que serão movidas é dada como parâmetro da função.
+*     A pilha de cartas irá da sequência 1 para a sequência 2.
+*     Só será possivel mover as cartas se elas estiverem na ordem correta e
+*     possuirem o mesmo naipe. A mesma pilha de carta poderá ser colocada em 
+*     qualquer outra sequência de jogo em que a primeira carta esteja de acordo
+*     com a ultima carta da pilha movida, mesmo sendo de naipes diferentes.
+*     Só podem ser movidas as cartas que estiverem viradas.
 *     
 *
 *  $EP Parâmetros
-*     pMonte - ponteiro para o monte.
-*     pCarta - endereço que receberá a carta removida.
+*     pSeqJ1    - sequência 1, de onde sairá a pilha movida.
+*     pSeqJ2    - sequência 2, para onde irá a pilha movida.
+*     numCartas - número de cartas a serem movidas.
 *              
 *
 *  $FV Valor retornado
-*     MON_CondRetOk     -   pop com sucesso.
-*     MON_CondRetMonteVazio     - monte vazio.
+*     SEQJ_CondRetOK                     - preencheu pilha com sucesso com sucesso.
+*     SEQJ_CondRetNumCartasIncorreto     - número de cartas pedido é maior do que
+*                                          o número de cartas viradas na sequência 1.
+*     SEQJ_CondRetCartasForaDaSequencia  - as cartas escolhidas estão fora de ordem
+*                                          ou não compatíveis com a sequência 2.
 *
 ***********************************************************************/
 
@@ -198,24 +210,25 @@ SEQJ_tpCondRet SEQJ_MovePilhaCarta(SEQJ_tppSeqJ pSeqJ1, SEQJ_tppSeqJ pSeqJ2, int
 
 /***********************************************************************
 *
-*  $FC Função: MON Pop Carta
+*  $FC Função: SEQJ Verifica Sequência completa
 *
 *  $ED Descrição da função
-*     Remove carta do topo do monte
+*     A função irá verificar se existe uma sequência de cartas
+*     no início da sequência de jogo, que esteja completa, na 
+*     ordem correta e mesmo naipe.
 *     
 *
 *  $EP Parâmetros
-*     pMonte - ponteiro para o monte.
-*     pCarta - endereço que receberá a carta removida.
+*     pSeqJ - sequência de jogo a ser verificada.
 *              
 *
 *  $FV Valor retornado
-*     MON_CondRetOk     -   pop com sucesso.
-*     MON_CondRetMonteVazio     - monte vazio.
+*     SEQJ_CondRetOk                      -   pop com sucesso.
+*     SEQJ_CondRetCartasForaDaSequencia   - nao existe sequência completa.
 *
 ***********************************************************************/
 
-SEQJ_tpCondRet SEQJ_VerificaSeqCompleta( SEQJ_tppSeqJ pSeqJ, int *completa);
+SEQJ_tpCondRet SEQJ_VerificaSeqCompleta( SEQJ_tppSeqJ pSeqJ );
 
 #undef SEQJ_EXT
 

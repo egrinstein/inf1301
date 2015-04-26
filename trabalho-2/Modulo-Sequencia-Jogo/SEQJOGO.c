@@ -91,12 +91,11 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 
   SEQJ_tpCondRet SEQJ_DestroiSequencia ( SEQJ_tppSeqJ pSeqJ )
   {
-    if(pSeqJ->pPilha == NULL)
+    if(pSeqJ->pPilha != NULL)
     {
-      free(pSeqJ);
-      return SEQJ_CondRetOK;
+      PIL_DestroiPilha(pSeqJ->pPilha);
+      
     }
-    PIL_DestroiPilha(pSeqJ->pPilha);
     free(pSeqJ);
 
     return SEQJ_CondRetOK;
@@ -154,7 +153,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
       CAR_tppCarta cartaAux;
       int i;
 
-      if(pSeqJ->pPilha == NULL)
+      if(pSeqJ->pPilha == NULL || totalCartasNaSeq( pSeqJ ) == 0)
       {
         return SEQJ_CondRetSequenciaVazia;
       }
@@ -188,7 +187,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 *  Função: SEQJ &Verifica sequência completa     
 *****/
 
-   SEQJ_tpCondRet SEQJ_VerificaSeqCompleta( SEQJ_tppSeqJ pSeqJ, int *completa)
+   SEQJ_tpCondRet SEQJ_VerificaSeqCompleta( SEQJ_tppSeqJ pSeqJ )
    {
       int i ;
       int seqComecou ;
@@ -205,7 +204,6 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
         CAR_ObterValor(cartaAux, &valor);
         if( valor != i+1 )
         {
-          *completa = 0;
           return SEQJ_CondRetCartasForaDaSequencia;
         }
 
@@ -213,7 +211,6 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
         {
           if( !ehSequenciaValor(cartaAux, cartaAnterior) || !ehMesmoNaipe(cartaAux, cartaAnterior))
           {
-            *completa = 0;
              return SEQJ_CondRetCartasForaDaSequencia;
           }
         }
@@ -221,7 +218,6 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
         if( !seqComecou ) seqComecou = 1;
       }
 
-      *completa = 1;
       return SEQJ_CondRetOK;
    }
 
