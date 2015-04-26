@@ -1,8 +1,8 @@
 /***************************************************************************
  *  $MCI Módulo de implementação: Módulo de teste específico
  *
- *  Arquivo gerado:              TESTMON.C
- *  Letras identificadoras:      TMON
+ *  Arquivo gerado:              TESTSEQJ.C
+ *  Letras identificadoras:      TSEQJ
  *
  *  Autores:
  *       EG - Eric Grinstein
@@ -12,23 +12,34 @@
  *
  *  $ED Descrição do módulo
  *     Este módulo contém as funções específicas para o teste do
- *     módulo monte.
+ *     módulo sequência de jogo.
  *
  *  $EIU Interface com o usuário pessoa
- *     Comandos de teste específicos para testar o módulo monte:
+ *     Comandos de teste específicos para testar o módulo sequência de jogo:
  *
  *     =criar
  *                   - chama a função  MON_CriarMonte.
  *                   Irá criar um monte com 3 cartas previamente escolhidas
-                     a partir de uma pilha criada com tais cartas.
+ *                    a partir de uma pilha criada com tais cartas.
  *                   Como só podemos retirar cartas e não colocá-las
  *                   no monte, não importa quais serão elas.
  *
+       =virarPrimeiraCarta
+
+       =pushCarta
+
+       =obterPilha
+
+       =moverPilha
+
+       =verificarCompleta
+
+
  *     =pop <char> <int>
-                     - chama a função MON_PopCartaMonte.
-                     Onde o parâmetro se refere ao valor do naipe
-                     e o valor da carta fornecida pelo usuário.
-                     Esses valores serão testados.
+ *                    - chama a função MON_PopCartaMonte.
+ *                    Onde o parâmetro se refere ao valor do naipe
+ *                    e o valor da carta fornecida pelo usuário.
+ *                    Esses valores serão testados.
  *
  *     =destruir
  *             - chama a função MON_DestruirMonte.
@@ -45,13 +56,18 @@
 
 #include    "CARTA.H"
 #include    "PILHA_DE_CARTAS.H"
-#include    "MONTE.H"
+#include    "SEQJOGO.H"
 
 /* Tabela dos nomes dos comandos de teste específicos */
 
-#define     CRIAR_MON_CMD       "=criar"
-#define     POP_MON_CMD         "=pop"
-#define     DESTRUIR_MON_CMD    "=destruir"
+#define     CRIAR_SEQJ_CMD       "=criar"
+#define     DESTRUIR_SEQJ_CMD    "=destruir"
+#define     VIRAR_SEQJ_CMD       "=virarPrimeiraCarta"
+#define     PUSH_SEQJ_CMD        "=pushCarta"
+#define     OBTER_SEQJ_CMD       "=obterPilha"
+#define     MOVER_SEQJ_CMD       "=moverPilha"
+#define     VERIFICAR_SEQJ_CMD   "=verificarCompleta"
+
 
 /* Ponteiro para monte utilizado no teste */
 
