@@ -35,14 +35,11 @@
     #define SEQJ_EXT extern
 #endif
 
-#include "CARTA.H"
-#include "PILHA_DE_CARTAS.H"
-
 /***** Declarações exportadas pelo módulo *****/
 
 /* Tipo referência para uma Sequência de jogo */
 
-typedef SEQJ_tagSeqJogo * SEQJ_tppSeqJogo ;
+typedef struct SEQJ_tagSeqJogo * SEQJ_tppSeqJ ;
 
 /***********************************************************************
  *
@@ -115,7 +112,6 @@ SEQJ_tpCondRet SEQJ_DestroiSequencia ( SEQJ_tppSeqJ pSeqJ ) ;
 /***********************************************************************
 *
 *  $FC Função: SEQJ Vira a primeira carta 
-
 *  $ED Descrição da função
 *     Vira a primeira carta da sequência de jogo, caso houver.
 *     
@@ -175,7 +171,7 @@ SEQJ_tpCondRet SEQJ_PushCartaSequencia( SEQJ_tppSeqJ pSeqJ, CAR_tppCarta pCarta 
 *
 ***********************************************************************/
 
-SEQJ_tpCondRet SEQJ_ObtemPilhaSeqJ( SEQJ _tppSeqJ pSeqJ, PIL_tppPilha *pPilha ) ;
+SEQJ_tpCondRet SEQJ_ObtemPilhaSeqJ( SEQJ_tppSeqJ pSeqJ, PIL_tppPilha *pPilha ) ;
 
 /***********************************************************************
 *
