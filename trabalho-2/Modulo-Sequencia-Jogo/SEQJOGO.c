@@ -42,7 +42,7 @@
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
-int totalCartasNaSeq( SEQJ_tppSeqJ pSeqJ );
+int totalCartasNaSeq( SEQJ_tppSeqJogo pSeqJ );
 
 int ehSequenciaValor( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 
@@ -54,12 +54,12 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 *
 *  Função: SEQJ &Criar sequência de jogo a partir de pilha
 *  ****/
-   SEQJ_tpCondRet SEQJ_CriarSeqJogo ( SEQJ_tppSeqJ * pSeqJ, PIL_tppPilha pPilha ) 
+   SEQJ_tpCondRet SEQJ_CriarSeqJogo ( SEQJ_tppSeqJogo * pSeqJ, PIL_tppPilha pPilha ) 
    {
       PIL_tpCondRet condRet;
       CAR_tppCarta pCartaAux;
 
-      *pSeqJ = (SEQJ_tppSeqJ *)malloc(sizeof(SEQJ_tppSeqJ));
+      *pSeqJ = (SEQJ_tppSeqJogo *)malloc(sizeof(SEQJ_tppSeqJogo));
       if( *pSeqJ == NULL)
       {
         return SEQJ_CondRetFaltouMemoria;
@@ -89,7 +89,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 *  Função: SEQJ  &Destruir sequência de jogo
 *  ****/
 
-  SEQJ_tpCondRet SEQJ_DestroiSequencia ( SEQJ_tppSeqJ pSeqJ )
+  SEQJ_tpCondRet SEQJ_DestroiSequencia ( SEQJ_tppSeqJogo pSeqJ )
   {
     if(pSeqJ->pPilha != NULL)
     {
@@ -108,7 +108,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 *  Função:  SEQJ  &Vira a primeira carta da pilha de sequência de jogo
 *  ****/
 
-   SEQJ_tpCondRet SEQJ_ViraPrimeiraCarta( SEQJ_tppSeqJ pSeqJ )
+   SEQJ_tpCondRet SEQJ_ViraPrimeiraCarta( SEQJ_tppSeqJogo pSeqJ )
    {
       CAR_tppCarta cartaAux;
       PIL_tpCondRet condRet;
@@ -132,7 +132,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
  *  Função: SEQJ &Push carta na sequencia
  *****/
 
-   SEQJ_tpCondRet SEQJ_PushCartaSequencia( SEQJ_tppSeqJ pSeqJ, CAR_tppCarta pCarta )
+   SEQJ_tpCondRet SEQJ_PushCartaSequencia( SEQJ_tppSeqJogo pSeqJ, CAR_tppCarta pCarta )
    {
       PIL_PushCarta( pSeqJ->pPilha, pCarta);
       pSeqJ->numCartasViradas++;
@@ -191,7 +191,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 *  Função: SEQJ &Verifica sequência completa     
 *****/
 
-   SEQJ_tpCondRet SEQJ_VerificaSeqCompleta( SEQJ_tppSeqJ pSeqJ )
+   SEQJ_tpCondRet SEQJ_VerificaSeqCompleta( SEQJ_tppSeqJogo pSeqJ )
    {
       int i ;
       int seqComecou ;
@@ -231,7 +231,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 * 
 *  Função: SEQJ &Move Pilha de sequência1 para sequência2
 *****/
-  SEQJ_tpCondRet SEQJ_MovePilhaCarta(SEQJ_tppSeqJ pSeqJ1, SEQJ_tppSeqJ pSeqJ2, int numCartas)
+  SEQJ_tpCondRet SEQJ_MovePilhaCarta(SEQJ_tppSeqJogo pSeqJ1, SEQJ_tppSeqJogo pSeqJ2, int numCartas)
   {
     PIL_tppPilha pilhaAux;
     CAR_tppCarta cartaAux;
@@ -325,7 +325,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
  *
  ***********************************************************************/
 
-int totalCartasNaSeq( SEQJ_tppSeqJ pSeqJ )
+int totalCartasNaSeq( SEQJ_tppSeqJogo pSeqJ )
 {
   CAR_tppCarta cartaAux ;
   int numCartasSeq = 0 ;

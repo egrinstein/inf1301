@@ -75,7 +75,7 @@
 
 /* Ponteiro para monte utilizado no teste */
 
-SEQJ_tppSeqJ vSeqJ[3] ;
+SEQJ_tppSeqJogo vSeqJ[3] ;
 
 /***********************************************************************
  *
