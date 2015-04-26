@@ -17,6 +17,10 @@
  *
  ***************************************************************************/
 
+#include "PILHA_DE_CARTAS.h"
+#include "CARTA.h"
+#include <malloc.h>
+#include <stdio.h>
 
 #define SEQJOGO_OWN
 #include "SEQJOGO.h"
@@ -38,11 +42,11 @@
      int numCartasViradas ;
       /* Número de cartas viradas. Cada sequência irá começar com uma carta virada. */
     
-} SEQJ_tpSeqJogo ;
+} SEQJ_tpSeqJ ;
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
-int totalCartasNaSeq( SEQJ_tppSeqJogo pSeqJ );
+int totalCartasNaSeq( SEQJ_tppSeqJ pSeqJ );
 
 int ehSequenciaValor( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 
@@ -54,12 +58,12 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 *
 *  Função: SEQJ &Criar sequência de jogo a partir de pilha
 *  ****/
-   SEQJ_tpCondRet SEQJ_CriarSeqJogo ( SEQJ_tppSeqJogo * pSeqJ, PIL_tppPilha pPilha ) 
+   SEQJ_tpCondRet SEQJ_CriarSeqJogo ( SEQJ_tppSeqJ * pSeqJ, PIL_tppPilha pPilha ) 
    {
       PIL_tpCondRet condRet;
       CAR_tppCarta pCartaAux;
 
-      *pSeqJ = (SEQJ_tppSeqJogo *)malloc(sizeof(SEQJ_tppSeqJogo));
+      *pSeqJ = (SEQJ_tpSeqJ *)malloc(sizeof(SEQJ_tpSeqJ));
       if( *pSeqJ == NULL)
       {
         return SEQJ_CondRetFaltouMemoria;
@@ -76,7 +80,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 
       while( PIL_PopCarta( pPilha, &pCartaAux) == PIL_CondRetOK)
       {
-        PIL_PushCarta((*pSeqJ)->pPilha),pCartaAux);
+        PIL_PushCarta((*pSeqJ)->pPilha,pCartaAux);
       }
 
       return SEQJ_CondRetOK;
@@ -89,11 +93,11 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 *  Função: SEQJ  &Destruir sequência de jogo
 *  ****/
 
-  SEQJ_tpCondRet SEQJ_DestroiSequencia ( SEQJ_tppSeqJogo pSeqJ )
+  SEQJ_tpCondRet SEQJ_DestroiSequencia ( SEQJ_tppSeqJ pSeqJ )
   {
     if(pSeqJ->pPilha != NULL)
     {
-      PIL_DestroiPilha(pSeqJ->pPilha);
+      PIL_DestruirPilha(pSeqJ->pPilha);
       
     }
     free(pSeqJ);
@@ -108,7 +112,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 *  Função:  SEQJ  &Vira a primeira carta da pilha de sequência de jogo
 *  ****/
 
-   SEQJ_tpCondRet SEQJ_ViraPrimeiraCarta( SEQJ_tppSeqJogo pSeqJ )
+   SEQJ_tpCondRet SEQJ_ViraPrimeiraCarta( SEQJ_tppSeqJ pSeqJ )
    {
       CAR_tppCarta cartaAux;
       PIL_tpCondRet condRet;
@@ -132,7 +136,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
  *  Função: SEQJ &Push carta na sequencia
  *****/
 
-   SEQJ_tpCondRet SEQJ_PushCartaSequencia( SEQJ_tppSeqJogo pSeqJ, CAR_tppCarta pCarta )
+   SEQJ_tpCondRet SEQJ_PushCartaSequencia( SEQJ_tppSeqJ pSeqJ, CAR_tppCarta pCarta )
    {
       PIL_PushCarta( pSeqJ->pPilha, pCarta);
       pSeqJ->numCartasViradas++;
@@ -147,7 +151,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 *  Função: SEQJ &Obtem pilha da sequência de jogo
 *****/
 
-   SEQJ_tpCondRet SEQJ_ObtemPilhaSeqJ( SEQJ _tppSeqJ pSeqJ, PIL_tppPilha *pPilha )
+   SEQJ_tpCondRet SEQJ_ObtemPilhaSeqJ( SEQJ_tppSeqJ pSeqJ, PIL_tppPilha *pPilha )
    {
       PIL_tppPilha pilhaAux;
       CAR_tppCarta cartaAux;
@@ -191,7 +195,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 *  Função: SEQJ &Verifica sequência completa     
 *****/
 
-   SEQJ_tpCondRet SEQJ_VerificaSeqCompleta( SEQJ_tppSeqJogo pSeqJ )
+   SEQJ_tpCondRet SEQJ_VerificaSeqCompleta( SEQJ_tppSeqJ pSeqJ )
    {
       int i ;
       int seqComecou ;
@@ -204,7 +208,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 
       for (i = 0 ; i < 13 ; i++)
       {
-        PIL_VerCarta( pSeqJ1->pPilha, &cartaAux, i );
+        PIL_VerCarta( pSeqJ->pPilha, &cartaAux, i );
         CAR_ObterValor(cartaAux, &valor);
         if( valor != i+1 )
         {
@@ -231,7 +235,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 * 
 *  Função: SEQJ &Move Pilha de sequência1 para sequência2
 *****/
-  SEQJ_tpCondRet SEQJ_MovePilhaCarta(SEQJ_tppSeqJogo pSeqJ1, SEQJ_tppSeqJogo pSeqJ2, int numCartas)
+  SEQJ_tpCondRet SEQJ_MovePilhaCarta(SEQJ_tppSeqJ pSeqJ1, SEQJ_tppSeqJ pSeqJ2, int numCartas)
   {
     PIL_tppPilha pilhaAux;
     CAR_tppCarta cartaAux;
@@ -306,7 +310,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
       SEQJ_ViraPrimeiraCarta( pSeqJ1 );
     }
 
-    PIL_DestroiPilha( pilhaAux );
+    PIL_DestruirPilha( pilhaAux );
 
     return SEQJ_CondRetOK;
   }
@@ -325,7 +329,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
  *
  ***********************************************************************/
 
-int totalCartasNaSeq( SEQJ_tppSeqJogo pSeqJ )
+int totalCartasNaSeq( SEQJ_tppSeqJ pSeqJ )
 {
   CAR_tppCarta cartaAux ;
   int numCartasSeq = 0 ;
