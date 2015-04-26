@@ -136,6 +136,11 @@ CAR_tpCondRet CAR_ObterNaipe( CAR_tppCarta pCarta , char * pNaipe )
         return CAR_CondRetCartaNaoExiste ;
     } /* if */
     
+    if( !VerificarNaipe( pCarta->naipe ) )
+    {
+        return CAR_CondRetNaipeNaoExiste ;
+    } /* if */
+    
     *pNaipe = pCarta->naipe ;
     
     return CAR_CondRetOK ;
@@ -153,6 +158,11 @@ CAR_tpCondRet CAR_ObterValor( CAR_tppCarta pCarta , int * pValor )
     if( pCarta == NULL )
     {
         return CAR_CondRetCartaNaoExiste ;
+    } /* if */
+
+    if( !VerificarValor( pCarta->valor ) )
+    {
+        return CAR_CondRetValorNaoExiste ;
     } /* if */
     
     *pValor = pCarta->valor ;
@@ -172,6 +182,16 @@ CAR_tpCondRet CAR_ImprimeCarta( CAR_tppCarta pCarta )
     if( pCarta == NULL )
     {
         return CAR_CondRetCartaNaoExiste ;
+    } /* if */
+    
+    if( !VerificarNaipe( pCarta->naipe ) )
+    {
+        return CAR_CondRetNaipeNaoExiste ;
+    } /* if */
+    
+    if( !VerificarValor( pCarta->valor ) )
+    {
+        return CAR_CondRetValorNaoExiste ;
     } /* if */
     
     printf("%d %c" , pCarta->valor , pCarta->naipe ) ;
