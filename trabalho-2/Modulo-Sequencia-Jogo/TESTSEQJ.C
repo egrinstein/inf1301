@@ -284,7 +284,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 
         CondRetObtido = SEQJ_ObtemPilhaSeqJ(vSeqJ[posVetorSeqJ], &pilhaAux ) ;
-        PIL_DestruirPilha(pilhaAux);
+        //PIL_DestruirPilha(pilhaAux);
 
         return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                               "Retorno errado ao obter pilha.") ;
