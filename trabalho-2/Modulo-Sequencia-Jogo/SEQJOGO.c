@@ -138,13 +138,52 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 
    SEQJ_tpCondRet SEQJ_PushCartaSequencia( SEQJ_tppSeqJ pSeqJ, CAR_tppCarta pCarta )
    {
+      CAR_tppCarta cartaAux;
+
+      // se tiverem cartas na seq, verificar se pode colocar
+
+      if( totalCartasNaSeq( pSeqJ ) != 0 )  
+      {
+        PIL_VerCarta( pSeqJ->pPilha, &cartaAux, 0 ); 
+
+        if ( !ehSequenciaValor( cartaAux, pCarta ))
+        {
+            return SEQJ_CondRetCartasForaDaSequencia;
+        }
+      }  
+
+      //senao apenas dar push
+
       PIL_PushCarta( pSeqJ->pPilha, pCarta);
+
       pSeqJ->numCartasViradas++;
 
       return SEQJ_CondRetOK;
    }
 
 /* Fim função: SEQJ &Push carta na sequencia */
+
+/***************************************************************************
+ * 
+ *  Função: SEQJ &Pop carta na sequencia
+ *****/
+
+   SEQJ_tpCondRet SEQJ_PopCartaSequencia( SEQJ_tppSeqJ pSeqJ, CAR_tppCarta * pCarta )
+   {
+      PIL_tpCondRet ret;
+
+      ret = PIL_PopCarta( pSeqJ->pPilha, pCarta);
+      if (ret != PIL_CondRetOK)
+      {
+        return ret;
+      }
+
+      pSeqJ->numCartasViradas--;
+
+      return SEQJ_CondRetOK;
+   }
+
+/* Fim função: SEQJ &Pop carta na sequencia */
 
 /***************************************************************************
 * 
@@ -231,92 +270,6 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 
 /* Fim função: SEQJ &Verifica sequência completa */
 
-/***************************************************************************
-* 
-*  Função: SEQJ &Move Pilha de sequência1 para sequência2
-*****/
-  SEQJ_tpCondRet SEQJ_MovePilhaCarta(SEQJ_tppSeqJ pSeqJ1, SEQJ_tppSeqJ pSeqJ2, int numCartas)
-  {
-    PIL_tppPilha pilhaAux;
-    CAR_tppCarta cartaAux;
-    CAR_tppCarta cartaAnterior;
-
-    int numCartasSeq1 = 0;
-    int seqComecou = 0;
-    int i = 0;
-
-    // 1 ver se pode mover tais cartas
-    // 2 ver se podem se colocadas na seq2
-    // 3 move-las
-
-    if( numCartas > pSeqJ1->numCartasViradas)   // verifica caso de pedir mais cartas do que o numero de cartas viradas
-    {
-      return SEQJ_CondRetNumCartasIncorreto;
-    }
-
-   numCartasSeq1 = totalCartasNaSeq( pSeqJ1 );  //numero de cartas inicial da seq1
-
-
-    for( i=0 ; i < numCartas ; i++)   // verifica se as cartas a serem tiradas estão em sequencia e sao mesmo naipe
-    {
-      PIL_VerCarta( pSeqJ1->pPilha, &cartaAux, i );
-
-      if( seqComecou )
-      {
-        if( !ehSequenciaValor(cartaAux, cartaAnterior) || !ehMesmoNaipe(cartaAux, cartaAnterior))
-        {
-          return SEQJ_CondRetCartasForaDaSequencia;
-        }
-      }
-      cartaAnterior = cartaAux;
-      if( !seqComecou ) seqComecou = 1;
-    }
-
-    // ver se pode colocar na seq2
-    // ultima carta testada fica em cartaAux, entao comparar cartaAux com a primeira da pseqj2
-    //cartaAnterior deve ser maior do q cartaAux, nao importa o naipe
-
-    PIL_VerCarta( pSeqJ2->pPilha, &cartaAnterior, 0 ); 
-
-    if ( !ehSequenciaValor( cartaAnterior, cartaAux ))
-    {
-        return SEQJ_CondRetCartasForaDaSequencia;
-    }
-
-
-  //depois de testadas as condições, mover cartas
-
-    PIL_CriarPilhaVazia( &pilhaAux );
-
-    for( i = 0 ; i < numCartas ; i++ )
-    {
-      PIL_PopCarta( pSeqJ1->pPilha, &cartaAux );
-      PIL_PushCarta( pilhaAux, cartaAux );
-    }
-
-    for( i = 0 ; i < numCartas ; i++)
-    {
-      PIL_PopCarta( pilhaAux, &cartaAux );
-      PIL_PushCarta( pSeqJ2->pPilha, cartaAux );
-    }
-
-    pSeqJ1->numCartasViradas -= numCartas;
-    pSeqJ2->numCartasViradas += numCartas;
-
-    numCartasSeq1 -= numCartas;
-
-    if( pSeqJ1->numCartasViradas == 0  && numCartasSeq1 > 0)
-    {
-      SEQJ_ViraPrimeiraCarta( pSeqJ1 );
-    }
-
-    PIL_DestruirPilha( pilhaAux );
-
-    return SEQJ_CondRetOK;
-  }
-
-/* Fim função: SEQJ &Move Pilha de sequência1 para sequência2 */
-
 
   /*****  Código das funções encapsuladas no módulo  *****/
 
@@ -347,7 +300,7 @@ int totalCartasNaSeq( SEQJ_tppSeqJ pSeqJ )
  *  $FC Função: SEQJ  Verifica cartas sequência relação ao valor
  *
  *  $ED Descrição da função
- *    Dadas duas cartas, a função verifica se a primeira é sequência da segunda.
+ *    Dadas duas cartas, a função verifica se a primeira é maior e  sequência da segunda.
  *    Ex: carta1 = 6 de ouro e carta2 = 5 de ouro é sequencia
  *    Ex: carta1 = 6 de ouro e carta2 = 5 de copas é sequencia
  *    Ex: carta1 = 4 de ouro e carta2 = 6 de ouro não é sequencia

@@ -133,10 +133,7 @@ SEQJ_tpCondRet SEQJ_ViraPrimeiraCarta( SEQJ_tppSeqJ pSeqJ ) ;
 *  $FC Função: SEQJ Push Carta na sequência de jogo
 *
 *  $ED Descrição da função
-*     A função da push em uma carta no inicio da Sequencia.
-*     É usada para trazer uma carta do Monte de cartas para
-*     sequência de jogo.
-*     
+*     A função da push em uma carta no inicio da Sequencia. 
 *
 *  $EP Parâmetros
 *     pSeqJ   - sequência de jogo.
@@ -145,10 +142,33 @@ SEQJ_tpCondRet SEQJ_ViraPrimeiraCarta( SEQJ_tppSeqJ pSeqJ ) ;
 *
 *  $FV Valor retornado
 *     SEQJ_CondRetOK      - push com sucesso.
+*     SEQJ_CondReTCartasForaDaSequencia  - a carta está fora da sequência
+*                                          e não pode ser colocada..
 *
 ***********************************************************************/
 
 SEQJ_tpCondRet SEQJ_PushCartaSequencia( SEQJ_tppSeqJ pSeqJ, CAR_tppCarta pCarta ) ;
+
+
+/***********************************************************************
+*
+*  $FC Função: SEQJ Pop Carta na sequência de jogo
+*
+*  $ED Descrição da função
+*     A função da pop em uma carta no inicio da Sequencia.
+*     
+*
+*  $EP Parâmetros
+*     pSeqJ   - sequência de jogo.
+*     pCarta  - ponteiro carta a ser retirada da sequência de jogo.
+*              
+*
+*  $FV Valor retornado
+*     SEQJ_CondRetOK      - push com sucesso.
+*
+***********************************************************************/
+
+SEQJ_tpCondRet SEQJ_PopCartaSequencia( SEQJ_tppSeqJ pSeqJ, CAR_tppCarta pCarta ) ;
 
 /***********************************************************************
 *
@@ -172,38 +192,6 @@ SEQJ_tpCondRet SEQJ_PushCartaSequencia( SEQJ_tppSeqJ pSeqJ, CAR_tppCarta pCarta 
 ***********************************************************************/
 
 SEQJ_tpCondRet SEQJ_ObtemPilhaSeqJ( SEQJ_tppSeqJ pSeqJ, PIL_tppPilha *pPilha ) ;
-
-/***********************************************************************
-*
-*  $FC Função: SEQJ Move pilha de cartas
-*
-*  $ED Descrição da função
-*     A função irá mover uma pilha de cartas entre duas sequências de jogo.
-*     A quantidade de cartas que serão movidas é dada como parâmetro da função.
-*     A pilha de cartas irá da sequência 1 para a sequência 2.
-*     Só será possivel mover as cartas se elas estiverem na ordem correta e
-*     possuirem o mesmo naipe. A mesma pilha de carta poderá ser colocada em 
-*     qualquer outra sequência de jogo em que a primeira carta esteja de acordo
-*     com a ultima carta da pilha movida, mesmo sendo de naipes diferentes.
-*     Só podem ser movidas as cartas que estiverem viradas.
-*     
-*
-*  $EP Parâmetros
-*     pSeqJ1    - sequência 1, de onde sairá a pilha movida.
-*     pSeqJ2    - sequência 2, para onde irá a pilha movida.
-*     numCartas - número de cartas a serem movidas.
-*              
-*
-*  $FV Valor retornado
-*     SEQJ_CondRetOK                     - preencheu pilha com sucesso com sucesso.
-*     SEQJ_CondRetNumCartasIncorreto     - número de cartas pedido é maior do que
-*                                          o número de cartas viradas na sequência 1.
-*     SEQJ_CondRetCartasForaDaSequencia  - as cartas escolhidas estão fora de ordem
-*                                          ou não compatíveis com a sequência 2.
-*
-***********************************************************************/
-
-SEQJ_tpCondRet SEQJ_MovePilhaCarta(SEQJ_tppSeqJ pSeqJ1, SEQJ_tppSeqJ pSeqJ2, int numCartas) ;
 
 /***********************************************************************
 *
