@@ -1,5 +1,5 @@
-#if ! defined( SEQJ_ )
-#define SEQJ_
+#if ! defined( SEQJOGO_ )
+#define SEQJOGO_
 /***************************************************************************
  *
  *  $MCD Módulo de definição: SEQJ Sequência de jogo
@@ -29,10 +29,10 @@
  *
  ***************************************************************************/
 
-#if defined( SEQJ_OWN )
-    #define SEQJ_EXT
+#if defined( SEQJOGO_OWN )
+    #define SEQJOGO_EXT
 #else
-    #define SEQJ_EXT extern
+    #define SEQJOGO_EXT extern
 #endif
 
 /***** Declarações exportadas pelo módulo *****/

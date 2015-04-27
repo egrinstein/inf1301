@@ -21,8 +21,8 @@
 == Verificar terceira (completa)
 =verificarCompleta 2 0
 
-== Obter completa
-=obterPilha 2 0
+== Obter completa (não pode, pois apenas 1 carta esta virada e precisa de pelo menos 13)
+=obterPilha 2 3
 
 == Obter incompleta
 =obterPilha 1 3
