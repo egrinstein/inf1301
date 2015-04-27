@@ -1,0 +1,33 @@
+
+!!! Inicio dos testes
+!!!      Construto sob teste: c:\users\ian\documents\visual studio 2010\Projects\SequenciaJogo\Debug\SequenciaJogo.exe
+!!!      Script de teste:     TesteSequenciaJogo.script
+
+!!!    0  Linha:     1  // Script:    TesteMonte.script 
+!!!    0  Linha:     2  // Autor:     Eric Grinstein 
+!!!    0  Linha:     3  //			  Jordana Mecler 
+!!!    0  Linha:     4  //			  Leonardo Wajnsztok 
+!!!    0  Linha:     5  // Propósito: Testar o módulo Monte. 
+!!!    0  Linha:     6  // 
+    9  == Criar incompleta
+   12  == Criar incompleta
+   15  == Criar completa
+   18  == Verificar primeira (incompleta)
+   21  == Verificar terceira (completa)
+   24  == Obter completa
+>>>    1  Linha:    25  Retorno errado ao obter pilha. Deveria ser: 0  É: 3
+   27  == Obter incompleta
+   30  == Destruir 0
+   33  == Destruir 1
+   36  == Destruir 2
+!!!    1  Linha:    40  // fim 
+
+!!! Número de linhas lidas:          40
+!!! Número de casos de teste:        10
+!!! Número comandos corretos:         9
+!!! Número de falhas encontradas:     1
+
+!!! Foram encontrados problemas
+
+
+!!! Numero de espacos ainda alocados: 0
