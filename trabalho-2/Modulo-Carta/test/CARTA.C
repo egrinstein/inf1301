@@ -60,10 +60,7 @@ int VerificarValor( char valor ) ;
 CAR_tpCondRet CAR_CriarCarta( CAR_tppCarta * pCarta )
 {
     
-    if( *pCarta != NULL )
-	{
-		CAR_ExcluirCarta( *pCarta ) ;
-	} /* if */
+    *pCarta = NULL ;
     
     *pCarta = ( CAR_tpCarta * ) malloc( sizeof( CAR_tpCarta )) ;
     if( *pCarta == NULL )
