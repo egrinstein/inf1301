@@ -108,7 +108,7 @@
       *pLista = ( LIS_tpLista * ) malloc( sizeof( LIS_tpLista )) ;
       if ( *pLista == NULL )
       {
-         return NULL ;
+         return LIS_CondRetFaltouMemoria ;
       } /* if */
 
        (*pLista)->pOrigemLista = NULL ;
@@ -169,7 +169,7 @@
          assert( pLista == NULL ) ;
       #endif
        
-       if( pLista != NULL )
+       if( pLista == NULL )
        {
            return LIS_CondRetListaNaoExiste ;
        } /* if */
@@ -375,7 +375,7 @@
 *  Função: LIS  &Ir para o elemento inicial
 *  ****/
 
-   LIS_tpCondRet IrInicioLista( LIS_tppLista pLista )
+   LIS_tpCondRet LIS_IrInicioLista( LIS_tppLista pLista )
    {
 
       #ifdef _DEBUG
@@ -403,7 +403,7 @@
 *  Função: LIS  &Ir para o elemento final
 *  ****/
 
-   LIS_tpCondRet IrFinalLista( LIS_tppLista pLista )
+   LIS_tpCondRet LIS_IrFinalLista( LIS_tppLista pLista )
    {
 
       #ifdef _DEBUG
@@ -606,4 +606,3 @@
 
 
 /********** Fim do módulo de implementação: LIS  Lista duplamente encadeada **********/
-
