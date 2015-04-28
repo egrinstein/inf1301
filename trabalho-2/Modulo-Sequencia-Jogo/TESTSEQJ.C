@@ -33,8 +33,6 @@
                      - chama a função SEQJ_DestroiSequencia. O parametro indica a posicao
                      de um vetor, onde cabem 3 sequências de jogo para os testes.
                      
-       =virarPrimeiraCarta <int>
-                     -
                      
        =pushCarta <char> <char> <int>
                      -
@@ -70,7 +68,6 @@
 #define     CRIARINCOMPLETA_SEQJ_CMD  "=criarIncompleta"
 #define     CRIARCOMPLETA_SEQJ_CMD  "=criarCompleta"
 #define     DESTRUIR_SEQJ_CMD       "=destruir"
-#define     VIRAR_SEQJ_CMD          "=virarPrimeiraCarta"
 #define     PUSH_SEQJ_CMD           "=pushCarta"
 #define     POP_SEQJ_CMD           "=popCarta"
 #define     OBTER_SEQJ_CMD          "=obterPilha"
@@ -212,30 +209,6 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
                               "Retorno errado ao tentar destruir a sequencia.") ;
         
     } /* fim ativa:  Testar SEQJ Destruir Sequência de jogo*/
-
-    /* Testar SEQJ Vira a primeira carta*/
-    
-    else if ( strcmp( ComandoTeste , VIRAR_SEQJ_CMD ) == 0 )
-    {
-        
-        NumLidos = LER_LerParametros( "ii" ,&posVetorSeqJ,
-                                     &CondRetEsperada ) ;
-        if ( NumLidos != 2 )
-        {
-            return TST_CondRetParm ;
-        } /* if */
-
-        if (posVetorSeqJ > 2 || posVetorSeqJ < 0 )
-        {
-            return TST_CondRetParm ;
-        }
-        
-        CondRetObtido = SEQJ_ViraPrimeiraCarta(vSeqJ[posVetorSeqJ]) ;
-        
-        return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                              "Retorno errado ao tentar virar a carta.") ;
-        
-    } /* fim ativa:  Testar SEQJ Vira a primeira carta*/
 
     /* Testar SEQJ Push carta Sequencia*/
 
