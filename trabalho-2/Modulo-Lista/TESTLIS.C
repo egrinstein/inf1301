@@ -426,4 +426,3 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
    } /* Fim funÁ„o: TLIS -Validar indice de lista */
 
 /********** Fim do mÛdulo de implementaÁ„o: TLIS Teste lista de sÌmbolos **********/
-
