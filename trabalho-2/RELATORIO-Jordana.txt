@@ -17,3 +17,7 @@ Data   	 Horas Trabalhadas       Tipo Tarefa                     Descrição da 
 22/04	  	 1	              testes	   	     testes de sequência final
 
 24/04		 1	             correções		     correções dos módulos de carta e sequência final
+
+27/04		 0.5		     assertivas		     realização das assertivas de entrada e saída
+
+27/04		 1		     correções		     correções de possíveis erros
