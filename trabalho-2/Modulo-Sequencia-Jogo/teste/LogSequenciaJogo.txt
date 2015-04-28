@@ -9,33 +9,42 @@
 !!!    0  Linha:     4  //			  Leonardo Wajnsztok 
 !!!    0  Linha:     5  // Propósito: Testar o módulo Monte. 
 !!!    0  Linha:     6  // 
-    9  == Criar incompleta na pos 0 (começa apenas com um k de copas)
-   12  == Criar completa na pos 1
-   15  == Verificar primeira (incompleta)
-   18  == Verificar segunda (completa)
-   21  == Obter completa (não pode, pois apenas 1 carta esta virada e precisa de pelo menos 13)
-   24  == Obter incompleta
-   27  == Push carta sequencia pos 1
-   29  == Push carta sequencia pos 1
-   31  == Push carta sequencia pos 1
-   33  == Push carta sequencia pos 1
-   35  == Push carta sequencia pos 1
-   37  == Push carta sequencia pos 1
-   39  == Push carta sequencia pos 1
-   41  == Push carta sequencia pos 1
+    9  == Virar carta da seq 0 (nao existe ainda)
+   12  == Push carta da seq 0 (nao existe ainda)
+   15  == Pop carta da seq 0 (nao existe ainda)
+   18  == Obter pilha da seq 0 (nao existe ainda)
+   21  == Verificar Completa da seq 0 (nao existe ainda)
+   25  == Criar incompleta na pos 0 (começa apenas com um k de copas)
+   28  == Criar completa na pos 1
+   31  == Verificar primeira (incompleta)
+   34  == Verificar segunda (completa)
+   37  == Obter completa (não pode, pois apenas 1 carta esta virada e precisa de pelo menos 13)
+   40  == Obter incompleta
    43  == Push carta sequencia pos 1
    45  == Push carta sequencia pos 1
    47  == Push carta sequencia pos 1
    49  == Push carta sequencia pos 1
-   52  == Verificar primeira (completa)
-   55  == Obter completa (agora pode, pois as cartas estão todas viradas)
-   58  == Destruir 0
-   61  == Destruir 1
-!!!    0  Linha:    65  // fim 
+   51  == Push carta sequencia pos 1
+   53  == Push carta sequencia pos 1
+   55  == Push carta sequencia pos 1
+   57  == Push carta sequencia pos 1
+   59  == Push carta sequencia pos 1
+   61  == Push carta sequencia pos 1
+   63  == Push carta sequencia pos 1
+   65  == Push carta sequencia pos 1
+   68  == Verificar primeira (completa)
+   71  == Virar carta da seq 0 (consegue virar pois tem carta para virar)
+   74  == Obter completa (agora pode, pois as cartas estão todas viradas)
+   77  == Push carta da seq 0
+   80  == Pop carta da seq 0
+   83  == Virar carta da seq 0 (pilha ja foi retirada)
+   86  == Destruir 0
+   89  == Destruir 1
+!!!    0  Linha:    93  // fim 
 
-!!! Número de linhas lidas:          65
-!!! Número de casos de teste:        22
-!!! Número comandos corretos:        22
+!!! Número de linhas lidas:          93
+!!! Número de casos de teste:        31
+!!! Número comandos corretos:        30
 !!! Número de falhas encontradas:     0
 
 !!! Não foram encontrados problemas

@@ -117,7 +117,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
       CAR_tppCarta cartaAux;
       PIL_tpCondRet condRet;
 
-      if (pSeqJ->pPilha == NULL)
+      if (pSeqJ == NULL)
       {
         return SEQJ_CondRetSequenciaVazia;
       }
@@ -145,14 +145,14 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
    {
       CAR_tppCarta cartaAux;
 
-      if (pSeqJ->pPilha == NULL)
+      if (pSeqJ == NULL)
       {
         return SEQJ_CondRetSequenciaVazia;
       }
 
       // se tiverem cartas na seq, verificar se pode colocar
 
-      if( totalCartasNaSeq( pSeqJ ) != 0 )  
+     /* if( totalCartasNaSeq( pSeqJ ) != 0 )  
       {
         PIL_VerCarta( pSeqJ->pPilha, &cartaAux, 0 ); 
 
@@ -161,7 +161,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
             return SEQJ_CondRetCartasForaDaSequencia;
         }
       }  
-
+*/
       //senao apenas dar push
 
       PIL_PushCarta( pSeqJ->pPilha, pCarta);
@@ -182,7 +182,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
    {
       PIL_tpCondRet ret;
 
-      if (pSeqJ->pPilha == NULL)
+      if (pSeqJ == NULL)
       {
         return SEQJ_CondRetSequenciaVazia;
       }
@@ -211,7 +211,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
       CAR_tppCarta cartaAux;
       int i;
 
-      if(pSeqJ->pPilha == NULL || totalCartasNaSeq( pSeqJ ) == 0 )
+      if(pSeqJ == NULL || totalCartasNaSeq( pSeqJ ) == 0 )
       {
         return SEQJ_CondRetSequenciaVazia;
       }
@@ -259,6 +259,11 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 
       seqComecou = 0;
       valor = 0;
+
+      if (pSeqJ == NULL)
+      {
+        return SEQJ_CondRetSequenciaVazia;
+      }
 
       for (i = 0 ; i < 13 ; i++)
       {
