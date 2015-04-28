@@ -33,12 +33,12 @@
  *                    - chama a função SEQJ_DestroiSequencia. O parametro indica a posicao
  *                    de um vetor, onde cabem 3 sequências de jogo para os testes.
  *                    
- *      =pushCarta <char> <char> <int>
+ *      =pushCarta <char> <int> <int>
  *                    - chama a função SEQJ_PushCartaSequencia. O primeiro parametro
  *                    é o naipe da carta, depois seu valor. Por ultimo, a posicao de um vetor, onde cabem 3 
  *                   sequências de jogo para os testes.
  *                    
- *      =popCarta  <char> <char> <int>
+ *      =popCarta  <char> <int> <int>
  *                    - chama a função SEQJ_PopCartaSequencia. O primeiro parametro
  *                    é o naipe da carta, depois seu valor. Por ultimo, a posicao de um vetor, onde cabem 3 
  *                   sequências de jogo para os testes.
