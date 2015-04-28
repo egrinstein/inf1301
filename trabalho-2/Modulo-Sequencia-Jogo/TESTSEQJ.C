@@ -33,21 +33,23 @@
                      - chama a função SEQJ_DestroiSequencia. O parametro indica a posicao
                      de um vetor, onde cabem 3 sequências de jogo para os testes.
                      
-                     
        =pushCarta <char> <char> <int>
-                     -
+                     - chama a função SEQJ_PushCartaSequencia. O primeiro parametro
+                     é o naipe da carta, depois seu valor. Por ultimo, a posicao de um vetor, onde cabem 3 
+ *                   sequências de jogo para os testes.
                      
        =popCarta  <char> <char> <int>
-                     -
+                     - chama a função SEQJ_PopCartaSequencia. O primeiro parametro
+                     é o naipe da carta, depois seu valor. Por ultimo, a posicao de um vetor, onde cabem 3 
+ *                   sequências de jogo para os testes.
                      
        =obterPilha <int>
-                     -
+                     - chama a função SEQJ_ObtemPilhaSeqJ. O parametro indica a posicao de um vetor, onde cabem 3 
+ *                   sequências de jogo para os testes.
                      
        =verificarCompleta <int>
- *                    - chama a função MON_PopCartaMonte.
- *                    Onde o parâmetro se refere ao valor do naipe
- *                    e o valor da carta fornecida pelo usuário.
- *                    Esses valores serão testados.
+ *                    - chama a função  SEQJ_VerificaSeqCompleta. O parametro indica a posicao de um vetor, onde cabem 3 
+ *                   sequências de jogo para os testes.
  *
  ***************************************************************************/
 
