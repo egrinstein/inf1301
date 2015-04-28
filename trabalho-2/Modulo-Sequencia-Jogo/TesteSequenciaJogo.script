@@ -2,12 +2,9 @@
 // Autor:     Eric Grinstein
 //			  Jordana Mecler
 //			  Leonardo Wajnsztok
-// PropÛsito: Testar o mÛdulo Monte.
+// Prop√≥sito: Testar o m√≥dulo Monte.
 //
 
-
-== Virar carta da seq 0 (nao existe ainda)
-=virarPrimeiraCarta 0 1
 
 == Push carta da seq 0 (nao existe ainda)
 =pushCarta 'e' 12 0 1
@@ -22,7 +19,7 @@
 =verificarCompleta 0 1
 
 
-== Criar incompleta na pos 0 (comeÁa apenas com um k de copas)
+== Criar incompleta na pos 0 (come√ßa apenas com um k de copas)
 =criarIncompleta 0 0
 
 == Criar completa na pos 1
@@ -34,7 +31,7 @@
 == Verificar segunda (completa)
 =verificarCompleta 1 0
 
-== Obter completa (n„o pode, pois apenas 1 carta esta virada e precisa de pelo menos 13)
+== Obter completa (n√£o pode, pois apenas 1 carta esta virada e precisa de pelo menos 13)
 =obterPilha 0 3
 
 == Obter incompleta
@@ -68,10 +65,7 @@
 == Verificar primeira (completa)
 =verificarCompleta 0 0
 
-== Virar carta da seq 0 (consegue virar pois tem carta para virar)
-=virarPrimeiraCarta 0 0
-
-== Obter completa (agora pode, pois as cartas est„o todas viradas)
+== Obter completa (agora pode, pois as cartas est√£o todas viradas)
 =obterPilha 0 0
 
 == Push carta da seq 0
@@ -79,9 +73,6 @@
 
 == Pop carta da seq 0 
 =popCarta 'e' 12 0 0
-
-== Virar carta da seq 0 (pilha ja foi retirada)
-=virarPrimeiraCarta 0 1
 
 == Destruir 0
 =destruir 0 0
