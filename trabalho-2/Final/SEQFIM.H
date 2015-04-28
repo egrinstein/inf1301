@@ -56,7 +56,7 @@ typedef enum {
     /* Concluiu corretamente */
     
     SEQFIM_CondRetFaltouMemoria ,
-    /* Faltou memória ao tentar criar o monte */
+    /* Faltou memória ao tentar criar o a sequencia final */
 
 	SEQFIM_CondRetSeqNaoExiste
 	/* Sequencia final nao existe */
