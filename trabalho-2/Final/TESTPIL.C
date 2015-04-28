@@ -182,7 +182,7 @@ PIL_tppPilha vPilhas[ MAX_PILS ];
 
 			if ( CondRetObtido != PIL_CondRetOK )
             {
-               return CondRetObtido ;
+               return TST_CondRetErro ;
             } /* if */
 
 			CAR_ObterNaipe( CartaObtida , &NaipeObtido );
@@ -224,7 +224,7 @@ PIL_tppPilha vPilhas[ MAX_PILS ];
 
 			if ( CondRetObtido != PIL_CondRetOK )
             {
-               return CondRetObtido ;
+               return TST_CondRetErro ;
             } /* if */
 
 		    CAR_ObterNaipe( CartaObtida , &NaipeObtido );
