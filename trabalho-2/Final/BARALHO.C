@@ -99,10 +99,11 @@
 
 	CAR_tppCarta cartaCriada ;	
 	
-	char auxNaipes,
-		 naipeDaVez;
+	char auxNaipes ,
+		naipeUsado[] = {'p','o','c','e'} ;
 
-	int auxValor ;
+	int auxValor ,
+				naipeDaVez;
 
 	int cartasFaltando = TAM_BARALHO ;
 
@@ -123,8 +124,9 @@
 	auxNaipes = 0;
 	while ( cartasFaltando )
 	{
-		naipeDaVez = ( auxNaipes % numNaipes ) + 1 ;
+		naipeDaVez = ( auxNaipes % numNaipes ) ;
 				/* garante que 1 <= naipeDaVez <= numNaipes */
+
 
 		for (auxValor=1 ; auxValor <= VALORES_POSSIVEIS ; auxValor++ )
 		{
@@ -135,7 +137,8 @@
 				return BAR_CondRetFaltouMemoria ;
 			}
 
-			CAR_PreencheCarta( cartaCriada , naipeDaVez , auxValor ) ;
+			CAR_PreencheCarta( cartaCriada , naipeUsado[naipeDaVez] , auxValor ) ;
+			PIL_PushCarta( pBaralho->pPilCartas , cartaCriada ) ;
 			cartasFaltando-- ;
 		}
 		auxNaipes++ ;
@@ -200,12 +203,12 @@
 	for ( contPilha = 0 ; contPilha < PILHAS_AUX_EMBARALHAMENTO ;
 								 contPilha++ )	
 	{
-		while ( PIL_PopCarta( pilhaAux[ numPilhaAleat ] , &cartaAux )
+		while ( PIL_PopCarta( pilhaAux[ contPilha ] , &cartaAux )
 			       != PIL_CondRetPilhaVazia )
 		{
 			PIL_PushCarta( pBaralho->pPilCartas , cartaAux ) ;
 		}
-		PIL_DestruirPilha( pilhaAux[ numPilhaAleat ] ) ;
+		PIL_DestruirPilha( pilhaAux[ contPilha ] ) ;
 	}
 
 	/* ReinserÃ§Ã£o das cartas no baralho */
