@@ -107,34 +107,6 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
 
   /* Fim função: SEQJ  &Destruir sequência de jogo */
 
-/***************************************************************************
-*
-*  Função:  SEQJ  &Vira a primeira carta da pilha de sequência de jogo
-*  ****/
-
-   SEQJ_tpCondRet SEQJ_ViraPrimeiraCarta( SEQJ_tppSeqJ pSeqJ )
-   {
-      CAR_tppCarta cartaAux;
-      PIL_tpCondRet condRet;
-
-      if (pSeqJ == NULL)
-      {
-        return SEQJ_CondRetSequenciaVazia;
-      }
-
-      condRet = PIL_VerCarta(pSeqJ->pPilha, &cartaAux, 0 );
-
-      if(condRet != PIL_CondRetOK)
-      {
-        return SEQJ_CondRetSequenciaVazia;
-      }
-
-      pSeqJ->numCartasViradas++;
-
-      return SEQJ_CondRetOK;
-   }
-  
-   /* Fim função: SEQJ  &Vira a primeira carta da pilha de sequência de jogo*/
 
  /***************************************************************************
  * 
@@ -236,7 +208,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
     
       if( pSeqJ->numCartasViradas == 0  && totalCartasNaSeq( pSeqJ ) > 0)
       {
-        SEQJ_ViraPrimeiraCarta( pSeqJ );
+        pSeqJ->numCartasViradas++;
       }
 
       return SEQJ_CondRetOK;
