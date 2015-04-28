@@ -9,17 +9,17 @@
 == Criar monte com 3 cartas previamente escolhidas
 =criar 0
 
-== Pop na carta correta (está no topo da pilha)
-=pop 'o' 12 0
+== Pop (está no topo da pilha)
+=pop 0
 
-== Pop na carta correta
-=pop 'e' 5 0
+== Pop
+=pop 0
 
-== Pop na carta correta
-=pop 'c' 11 0
+== Pop
+=pop 0
 
-== Pop na carta (pilha vazia)
-=pop 'p' 2 1
+== Pop (pilha vazia)
+=pop 1
 
 == Destruir monte
 =destruir 0
