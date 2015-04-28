@@ -166,7 +166,7 @@
       tpElemLista * pProx ;
 
       #ifdef _DEBUG
-         assert( pLista == NULL ) ;
+         assert( pLista != NULL ) ;
       #endif
        
        if( pLista == NULL )
