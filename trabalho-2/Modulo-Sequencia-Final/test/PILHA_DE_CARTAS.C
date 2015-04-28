@@ -129,7 +129,7 @@ void ExcluirCarta( void * pValor ) ;
 		return PIL_CondRetPilhaVazia ;
 	}
 	
-        * pCarta = ( CAR_tppCarta ) LIS_ObterValor( pPilha->pListaCartas ) ;
+    LIS_ObterValor( pPilha->pListaCartas ,(void**) &(*pCarta)) ;
 
 	return PIL_CondRetOK ; 	
 
