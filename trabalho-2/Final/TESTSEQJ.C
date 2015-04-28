@@ -38,9 +38,8 @@
  *                    Ã© o naipe da carta, depois seu valor. Por ultimo, a posicao de um vetor, onde cabem 3 
  *                   sequÃªncias de jogo para os testes.
  *                    
- *      =popCarta  <char> <char> <int>
- *                    - chama a funÃ§Ã£o SEQJ_PopCartaSequencia. O primeiro parametro
- *                    Ã© o naipe da carta, depois seu valor. Por ultimo, a posicao de um vetor, onde cabem 3 
+ *      =popCarta   <int>
+ *                    - chama a funÃ§Ã£o SEQJ_PopCartaSequencia.O parÃ¢metro Ã© a posicao de um vetor, onde cabem 3 
  *                   sequÃªncias de jogo para os testes.
  *                    
  *      =obterPilha <int>
@@ -244,9 +243,9 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     else if ( strcmp( ComandoTeste , POP_SEQJ_CMD ) == 0 )
     {
         
-        NumLidos = LER_LerParametros( "ciii" ,&NaipeEsperado, &ValorEsperado,&posVetorSeqJ,
-                                     &CondRetEsperada ) ;
-        if ( NumLidos != 4 )
+        NumLidos = LER_LerParametros( "ii" , 
+								&posVetorSeqJ, &CondRetEsperada ) ;
+        if ( NumLidos != 2 )
         {
             return TST_CondRetParm ;
         } /* if */
@@ -255,34 +254,11 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
         {
             return TST_CondRetParm ;
         }
-        CondRetObtido = SEQJ_PopCartaSequencia(vSeqJ[posVetorSeqJ],&cartaDada);
         
-        Ret =  TST_CompararInt( CondRetEsperada , CondRetObtido ,
+		CondRetObtido = SEQJ_PopCartaSequencia( vSeqJ[posVetorSeqJ] , &cartaDada ) ;
+        
+        return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                "Retorno errado ao dar pop na sequencia." );
-
-        if ( Ret != TST_CondRetOK )
-            {
-               return Ret ;
-            } /* if */
-
-         if ( CondRetObtido != PIL_CondRetOK )
-            {
-               return CondRetObtido ;
-            } /* if */
-
-         CAR_ObterNaipe( cartaDada , &NaipeObtido );
-            Ret = TST_CompararInt( NaipeEsperado , NaipeObtido ,
-                                    "Carta obtida estÃ¡ errada." );
-
-         if ( Ret != TST_CondRetOK )
-            {
-               return Ret ;
-            } /* if */
-
-         CAR_ObterValor( cartaDada , &ValorObtido );
-            return TST_CompararInt( ValorEsperado , ValorObtido ,
-                                    "Carta obtida estÃ¡ errada." );
-
         
     } /* fim ativa:  Testar SEQJ Pop carta Sequencia*/
 
