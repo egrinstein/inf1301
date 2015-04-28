@@ -111,25 +111,6 @@ SEQJ_tpCondRet SEQJ_DestroiSequencia ( SEQJ_tppSeqJ pSeqJ ) ;
 
 /***********************************************************************
 *
-*  $FC Função: SEQJ Vira a primeira carta 
-*  $ED Descrição da função
-*     Vira a primeira carta da sequência de jogo, caso houver.
-*     
-*
-*  $EP Parâmetros
-*     pSeqJ - a sequência de jogo.
-*              
-*
-*  $FV Valor retornado
-*     SEQJ_CondRetSequenciaVazia  -   sequência vazia, nenhuma carta para virar.
-*     SEQJ_CondRetOK              -    virou com sucesso.
-*
-***********************************************************************/
-
-SEQJ_tpCondRet SEQJ_ViraPrimeiraCarta( SEQJ_tppSeqJ pSeqJ ) ;
-
-/***********************************************************************
-*
 *  $FC Função: SEQJ Push Carta na sequência de jogo
 *
 *  $ED Descrição da função
