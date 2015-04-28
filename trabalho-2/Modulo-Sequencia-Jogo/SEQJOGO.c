@@ -172,6 +172,11 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
    {
       PIL_tpCondRet ret;
 
+      if (pSeqJ->pPilha == NULL)
+      {
+        return SEQJ_CondRetSequenciaVazia;
+      }
+
       ret = PIL_PopCarta( pSeqJ->pPilha, pCarta);
       if (ret != PIL_CondRetOK)
       {

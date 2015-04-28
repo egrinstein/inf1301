@@ -56,13 +56,13 @@
 
 /* Tabela dos nomes dos comandos de teste específicos */
 
-#define     CRIARINCOMPLETA_SEQJ_CMD     "=criarIncompleta"
+#define     CRIARINCOMPLETA_SEQJ_CMD  "=criarIncompleta"
 #define     CRIARCOMPLETA_SEQJ_CMD  "=criarCompleta"
 #define     DESTRUIR_SEQJ_CMD       "=destruir"
 #define     VIRAR_SEQJ_CMD          "=virarPrimeiraCarta"
 #define     PUSH_SEQJ_CMD           "=pushCarta"
+#define     POP_SEQJ_CMD           "=popCarta"
 #define     OBTER_SEQJ_CMD          "=obterPilha"
-#define     MOVER_SEQJ_CMD          "=moverPilha"
 #define     VERIFICAR_SEQJ_CMD      "=verificarCompleta"
 
 
@@ -169,18 +169,6 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
         CAR_PreencheCarta( CartaAux2[0], 'c' , 13 );
         PIL_PushCarta( pilhaAux , CartaAux2[0] ) ;
 
-        CAR_CriarCarta( &(CartaAux2[1]) ) ;
-        CAR_PreencheCarta( CartaAux2[1], 'c' , 12 );
-        PIL_PushCarta( pilhaAux , CartaAux2[1] ) ;
-
-        CAR_CriarCarta( &(CartaAux2[2]) ) ;
-        CAR_PreencheCarta( CartaAux2[2], 'c' , 11 );
-        PIL_PushCarta( pilhaAux , CartaAux2[2] ) ;
-
-        CAR_CriarCarta( &(CartaAux2[3]) ) ;
-        CAR_PreencheCarta( CartaAux2[3], 'c' , 10 );
-        PIL_PushCarta( pilhaAux , CartaAux2[3] ) ;
-
         CondRetObtido = SEQJ_CriarSeqJogo ( &(vSeqJ[posVetorSeqJ]) , pilhaAux);
 
         PIL_DestruirPilha(pilhaAux);
@@ -261,9 +249,56 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
         CondRetObtido = SEQJ_PushCartaSequencia(vSeqJ[posVetorSeqJ], cartaDada ) ;
         
         return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                              "Retorno errado ao dar push da carta.") ;
+                              "Retorno errado ao dar push na sequencia.") ;
         
     } /* fim ativa:  Testar SEQJ Push carta Sequencia*/
+
+    /* Testar SEQJ Pop carta Sequencia*/
+
+    else if ( strcmp( ComandoTeste , POP_SEQJ_CMD ) == 0 )
+    {
+        
+        NumLidos = LER_LerParametros( "icii" ,&NaipeEsperado, &ValorEsperado,&posVetorSeqJ,
+                                     &CondRetEsperada ) ;
+        if ( NumLidos != 4 )
+        {
+            return TST_CondRetParm ;
+        } /* if */
+
+        if (posVetorSeqJ > 2 || posVetorSeqJ < 0 )
+        {
+            return TST_CondRetParm ;
+        }
+        CondRetObtido = SEQJ_PopCartaSequencia(vSeqJ[posVetorSeqJ],&cartaDada);
+        
+        ret =  TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                               "Retorno errado ao dar pop na sequencia." );
+
+        if ( Ret != TST_CondRetOK )
+            {
+               return Ret ;
+            } /* if */
+
+         if ( CondRetObtido != PIL_CondRetOK )
+            {
+               return CondRetObtido ;
+            } /* if */
+
+         CAR_ObterNaipe( cartaDada , &NaipeObtido );
+            Ret = TST_CompararInt( NaipeEsperado , NaipeObtido ,
+                                    "Carta obtida está errada." );
+
+         if ( Ret != TST_CondRetOK )
+            {
+               return Ret ;
+            } /* if */
+
+         CAR_ObterValor( cartaDada , &ValorObtido );
+            return TST_CompararInt( ValorEsperado , ValorObtido ,
+                                    "Carta obtida está errada." );
+
+        
+    } /* fim ativa:  Testar SEQJ Pop carta Sequencia*/
 
      /* Testar SEQJ Obtem pilha da sequência de jogo*/
 
