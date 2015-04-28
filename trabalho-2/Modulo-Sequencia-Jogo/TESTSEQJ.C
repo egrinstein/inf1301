@@ -19,26 +19,37 @@
  *
  *     =criarIncompleta <int>
  *                   - chama a função  SEQJ_CriarSeqJogo.
- *                   Irá criar uma sequência de jogo com 3 cartas
- *                   previamente escolhidas a partir de uma pilha 
- *                   criada com tais cartas.
- *                   Como só podemos retirar cartas e não colocá-las
- *                   no monte, não importa quais serão elas.
+ *                   Irá criar uma sequência de jogo com uma carta K de copas.
+ *                   O parametro indica a posicao de um vetor, onde cabem 3 
+ *                   sequências de jogo para os testes.
  *
        =criarCompleta <int>
-       =virarPrimeiraCarta
-       =pushCarta
-       =obterPilha
-       =moverPilha
-       =verificarCompleta
- *     =pop <char> <int>
+                     - chama a função SEQJ_CriarSeqJogo.
+                     Irá criar um sequência de jogo com 13 cartas de Ás a K de espadas.
+                     O parametro indica a posicao de um vetor, onde cabem 3 
+ *                   sequências de jogo para os testes.
+ * 
+       =destruir <int>
+                     - chama a função SEQJ_DestroiSequencia. O parametro indica a posicao
+                     de um vetor, onde cabem 3 sequências de jogo para os testes.
+                     
+       =virarPrimeiraCarta <int>
+                     -
+                     
+       =pushCarta <char> <char> <int>
+                     -
+                     
+       =popCarta  <char> <char> <int>
+                     -
+                     
+       =obterPilha <int>
+                     -
+                     
+       =verificarCompleta <int>
  *                    - chama a função MON_PopCartaMonte.
  *                    Onde o parâmetro se refere ao valor do naipe
  *                    e o valor da carta fornecida pelo usuário.
  *                    Esses valores serão testados.
- *
- *     =destruir
- *             - chama a função MON_DestruirMonte.
  *
  ***************************************************************************/
 
