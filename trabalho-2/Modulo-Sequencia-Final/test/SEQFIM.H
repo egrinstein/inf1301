@@ -77,6 +77,11 @@ typedef enum {
  *  $FV Valor retornado
  *     SEQFIM_CondRetOk    -   criou ok.
  *     SEQFIM_CondRetFaltouMemoria -   faltou memória para alocar espaço para a sequencia final.
+ * 
+ *  Assertivas de entrada esperadas - nenhuma.
+ * 
+ *  Assertivas de saída esperadas   - SEQFIM_CondRetOK se *pSeqFim != NULL
+ *                                    SEQFIM_CondRetFaltouMemoria se *pSeqFim == NULL
  *
  ***********************************************************************/
 
@@ -95,6 +100,11 @@ SEQFIM_tpCondRet SEQFIM_CriarSeqFim ( SEQFIM_tppSeqFim * pSeqFim ) ;
  *
  *  $FV Valor retornado
  *     SEQFIM_CondRetOk    -   excluiu ok.
+ * 
+ *  Assertivas de entrada esperadas - pSeqFim != NULL
+ * 
+ *  Assertivas de saída esperadas   - pSeqFim->pPilha == NULL
+ * 				      pSeqFim == NULL
  *
  ***********************************************************************/
 
@@ -116,6 +126,11 @@ SEQFIM_tpCondRet SEQFIM_DestroiSeqFim ( SEQFIM_tppSeqFim pSeqFim ) ;
  *
  *  $FV Valor retornado
  *     SEQFIM_CondRetOk     -   preenchido com sucesso.
+ * 
+ *  Assertivas de entrada esperadas - pSeqFim != NULL
+ * 			              pPilha != NULL
+ * 
+ *  Assertivas de saída esperadas   - SEQFIM_CondRetOK
  *
  ***********************************************************************/
 
