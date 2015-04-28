@@ -10,15 +10,23 @@
 !!!    0  Linha:     5  // Propósito: Testar o módulo 
 !!!    0  Linha:     6  //			  Baralho de Cartas. 
 !!!    0  Linha:     7  // 
-    9  == Criar baralho numero 0
-   12  == Pop Ás de paus, baralho vazio.
-   15  == Preencher baralho com 1 naipe
-   18  == Destruir baralho 0
-!!!    0  Linha:    21  // fim 
+    9  ==Criar baralho numero 0
+   12  ==Criar baralho numero 1
+   15  == Pop Ás de paus, baralho vazio
+   18  ==Preencher baralho com 1 naipe
+   21  ==Preencher baralho com 1 naipe
+   24  ==Pop K de paus baralho 0
+   27  ==Pop Q de paus baralho 0
+   30  ==Embaralha baralho 1
+   33  ==Pop K de paus baralho 1
+   36  ==Pop Q de paus baralho 1
+   39  ==Destruir baralho 0
+   42  ==Destruir baralho 1
+!!!    0  Linha:    45  // fim 
 
-!!! Número de linhas lidas:          21
-!!! Número de casos de teste:         4
-!!! Número comandos corretos:         3
+!!! Número de linhas lidas:          45
+!!! Número de casos de teste:        12
+!!! Número comandos corretos:        12
 !!! Número de falhas encontradas:     0
 
 !!! Não foram encontrados problemas
