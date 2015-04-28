@@ -10,7 +10,7 @@
 =pushCarta 'e' 12 0 1
 
 == Pop carta da seq 0 (nao existe ainda)
-=popCarta 'e' 12 0 1
+=popCarta 0 1
 
 == Obter pilha da seq 0 (nao existe ainda)
 =obterPilha 0 1
@@ -72,7 +72,7 @@
 =pushCarta 'e' 12 0 0
 
 == Pop carta da seq 0 
-=popCarta 'e' 12 0 0
+=popCarta 0 0
 
 == Destruir 0
 =destruir 0 0
