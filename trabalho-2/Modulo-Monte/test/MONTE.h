@@ -77,6 +77,11 @@ typedef struct MON_tagMonte * MON_tppMonte ;
  *  $FV Valor retornado
  *     MON_CondRetOk    -   criou ok.
  *     MON_CondRetFaltouMemoria -   faltou memória para alocar espaço para o monte.
+ * 
+ *  Assertivas de entrada esperadas - pPilha != NULL.
+ * 
+ *  Assertivas de saída esperadas   - MON_CondRetOk
+ *                                     MON_CondRetFaltouMemoria se pMonte == NULL
  *
  ***********************************************************************/
 
@@ -95,6 +100,11 @@ MON_tpCondRet MON_CriarMonte ( MON_tppMonte * pMonte , PIL_tppPilha pPilha) ;
  *
  *  $FV Valor retornado
  *     MON_CondRetOk    -   excluiu ok.
+ * 
+ *  Assertivas de entrada esperadas - pMonte != NULL.
+ * 
+ *  Assertivas de saída esperadas   - pMonte == NULL
+ *                                   
  *
  ***********************************************************************/
 
@@ -117,6 +127,11 @@ MON_tpCondRet MON_DestruirMonte ( MON_tppMonte pMonte ) ;
 *  $FV Valor retornado
 *     MON_CondRetOk     -   pop com sucesso.
 *     MON_CondRetMonteVazio     - monte vazio.
+* 
+*  Assertivas de entrada esperadas - pMonte != NULL.
+*                                      pCarta == NULL
+* 
+*  Assertivas de saída esperadas   - pCarta != NULL
 *
 ***********************************************************************/
 
