@@ -43,7 +43,10 @@ SEQFIM_tpCondRet SEQFIM_CriarSeqFim ( SEQFIM_tppSeqFim * pSeqFim )
 {
     PIL_tpCondRet PilRet ;
     
-    *pSeqFim = NULL ;
+	if( *pSeqFim != NULL )
+	{
+		SEQFIM_DestroiSeqFim( *pSeqFim ) ;
+	} /* if */
     
     *pSeqFim = ( SEQFIM_tpSeqFim * ) malloc( sizeof( SEQFIM_tppSeqFim ) ) ;
     if ( pSeqFim == NULL )
@@ -69,9 +72,17 @@ SEQFIM_tpCondRet SEQFIM_CriarSeqFim ( SEQFIM_tppSeqFim * pSeqFim )
 
 SEQFIM_tpCondRet SEQFIM_DestroiSeqFim ( SEQFIM_tppSeqFim pSeqFim )
 {
-    PIL_DestruirPilha( pSeqFim->pPilha ) ;
+	
+	if( pSeqFim->pPilha != NULL )
+	{
+		PIL_DestruirPilha( pSeqFim->pPilha ) ;
+	} /* if */
     
-    free( pSeqFim ) ;
+	if( pSeqFim != NULL )
+	{
+		free( pSeqFim ) ;
+		pSeqFim = NULL ;
+	} /* if */
     
     return SEQFIM_CondRetOK ;
     
