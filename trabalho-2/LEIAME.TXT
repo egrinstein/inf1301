@@ -8,6 +8,13 @@ Data:		26/04/2015
 
 Descrição do programa:
 
+O programa desenvolvido se trata dos módulos necessários 
+para criar um jogo de Paciência Spider.
+O jogo irá rodar em ambiente Windows e será jogado pelo CMD.
+O trabalho foi feito divido em diversos módulos, como aprendemos
+em INF1301. 
+Paciência Spider é um jogo de cartas que usa 2 baralhos, podendo ser
+jogado com 1, 2, 3 ou 4 naipes (dificuldades).
 
 ----------------------------------------------------------------
 
@@ -15,7 +22,7 @@ COMPOSIÇÃO:
 
 Arquivos Fonte:
 
-1.1: Módulos de implementação:    LISTA.C
+1.1: Módulos de implementação:    	 LISTA.C
 				         TESTLIS.C
    				         CARTA.C
    				         TESTCAR.C
@@ -48,7 +55,7 @@ Arcabouço de Teste:                 ArcaboucoTeste.lib
  
 
 
-Arquivos de Script:                  TesteLista.script
+Arquivos de Script:                    TesteLista.script
    				       TesteCarta.script
    				       TestePilhaDeCartas.script
    				       TesteBaralho.script
@@ -57,20 +64,26 @@ Arquivos de Script:                  TesteLista.script
    				       TesteSequenciaFinal.script
 
 
-Arquivos de Log:                     TesteLista.log
-   				       TesteCarta.log
-   				       TestePilhaDeCartas.log
-   				       TesteBaralho.log
-   				       TesteMonte.log
-   				       TesteSequenciaJogo.log
-   				       TesteSequenciaFinal.log
+Arquivos de Log:                       LogLista.log
+   				       LogCarta.log
+   				       LogPilhaDeCartas.log
+   				       LogBaralho.log
+   				       LogMonte.log
+   				       LogSequenciaJogo.log
+   				       LogSequenciaFinal.log
 
 
-Arquivos Executáveis:
+Arquivos Executáveis:			TRAB2-1.exe
+					TRAB2-2.exe
+					TRAB2-3.exe
+					TRAB2-4.exe
+					TRAB2-5.exe
+					TRAB2-6.exe
+					TRAB2-7.exe
 
 
 
-Arquivos Bat:                          TesteLista.bat
+Arquivos Bat:                         TesteLista.bat
    				      TesteCarta.bat
    				      TestePilhaDeCartas.bat
    				      TesteBaralho.bat
@@ -79,12 +92,15 @@ Arquivos Bat:                          TesteLista.bat
    				      TesteSequenciaFinal.bat
 
 
-Relatórios:                              “RELATORIO-Eric.txt”
+Relatórios:                           “RELATORIO-Eric.txt”
    				      “RELATORIO-Jordana.txt“
    				      “RELATORIO-Leonardo.txt”
 
 
 Arquitetura dos Módulos:       “Arquitetura.pdf"
+
+
+Especificação de Requisitos:	"EspecificaçãoDeRequisitos.pdf"
 
 
 Modelo estrutural e exemplo: "Modelo.pdf"
