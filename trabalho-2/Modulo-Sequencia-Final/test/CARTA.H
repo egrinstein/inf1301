@@ -82,6 +82,13 @@ typedef struct CAR_tagCarta * CAR_tppCarta ;
  *     CAR_CondRetOk    -   criou ok.
  *     CAR_CondRetFaltouMemoria -   faltou memória para alocar espaço para a carta.
  *
+ *  Assertivas de entrada esperadas - nenhuma.
+ * 
+ *  Assertivas de saída esperadas   - CAR_CondRetOK se *pCarta != NULL
+ *                                    CAR_CondRetFaltouMemoria se *pCarta == NULL
+ *                                    (*pCarta)->naipe = '0'
+ *                                    (*pCarta)->valor = 0
+ * 
  ***********************************************************************/
 
 CAR_tpCondRet CAR_CriarCarta( CAR_tppCarta * pCarta ) ;
@@ -101,6 +108,14 @@ CAR_tpCondRet CAR_CriarCarta( CAR_tppCarta * pCarta ) ;
  *     CAR_CondRetOk    -   preencheu ok.
  *     CAR_CondRetCartaNaoExiste -   caso a carta a ser alterada não existir.
  *
+ *  Assertivas de entrada esperadas - pCarta != NULL
+ *                                    naipe válido
+ *                                    valor válido
+ * 
+ *  Assertivas de saída esperadas   - CAR_CondRetOK
+ *                                    pCarta->naipe = naipe
+ *                                    pCarta->valor = valor
+ * 
  ***********************************************************************/
 
 CAR_tpCondRet CAR_PreencheCarta ( CAR_tppCarta pCarta , char naipe , int valor ) ;
@@ -120,6 +135,10 @@ CAR_tpCondRet CAR_PreencheCarta ( CAR_tppCarta pCarta , char naipe , int valor )
  *  $FV Valor retornado
  *     CAR_CondRetOk    -   excluiu ok.
  *
+ * Assertivas de entrada esperadas - pCarta != NULL
+ * 
+ *  Assertivas de saída esperadas   - pCarta == NULL
+ * 
  ***********************************************************************/
 
 CAR_tpCondRet CAR_ExcluirCarta( CAR_tppCarta pCarta ) ;
@@ -139,6 +158,12 @@ CAR_tpCondRet CAR_ExcluirCarta( CAR_tppCarta pCarta ) ;
  *  $FV Valor retornado
  *     CAR_CondRetOk    -   obteve ok.
  *     CAR_CondRetCartaNaoExiste    -   caso a carta analisada não existir.
+ * 
+ * Assertivas de entrada esperadas - pCarta != NULL
+ *                                   pNaipe é valido
+ * 
+ *  Assertivas de saída esperadas   - CAR_CondRetOK
+ *                                    *pNaipe = pCarta->naipe
  *
  ***********************************************************************/
 
@@ -159,6 +184,12 @@ CAR_tpCondRet CAR_ObterNaipe( CAR_tppCarta pCarta , char * pNaipe ) ;
  *  $FV Valor retornado
  *     CAR_CondRetOk    -   obteve ok.
  *     CAR_CondRetCartaNaoExiste    -   caso a carta analisada não existir.
+ * 
+ *  Assertivas de entrada esperadas - pCarta != NULL
+ *                                    pValor é valido
+ * 
+ *  Assertivas de saída esperadas   - CAR_CondRetOK
+ *                                    *pValor = pCarta->valor
  *
  ***********************************************************************/
 
@@ -178,6 +209,13 @@ CAR_tpCondRet CAR_ObterValor( CAR_tppCarta pCarta , int * pValor ) ;
  *  $FV Valor retornado
  *     CAR_CondRetOk    -   imprimiu ok.
  *     CAR_CondRetCartaNaoExiste    -   caso a carta a ser impressa não existir.
+ * 
+ *  Assertivas de entrada esperadas - pCarta != NULL
+ *                                    pCarta->naipe é válido
+ *                                    pCarta->valor é válido
+ * 
+ *  Assertivas de saída esperadas   - CAR_CondRetOK
+ *                                    pCarta foi impressa
  *
  ***********************************************************************/
 
