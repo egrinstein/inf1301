@@ -20,15 +20,12 @@
  *     =criar
  *                   - chama a função  MON_CriarMonte.
  *                   Irá criar um monte com 3 cartas previamente escolhidas
-                     a partir de uma pilha criada com tais cartas.
+ *                   a partir de uma pilha criada com tais cartas.
  *                   Como só podemos retirar cartas e não colocá-las
  *                   no monte, não importa quais serão elas.
  *
- *     =pop <char> <int>
-                     - chama a função MON_PopCartaMonte.
-                     Onde o parâmetro se refere ao valor do naipe
-                     e o valor da carta fornecida pelo usuário.
-                     Esses valores serão testados.
+ *     =pop
+ *                   - chama a função MON_PopCartaMonte.
  *
  *     =destruir
  *             - chama a função MON_DestruirMonte.
@@ -133,8 +130,8 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     else if ( strcmp( ComandoTeste , POP_MON_CMD  ) == 0 )
     {
         
-        NumLidos = LER_LerParametros( "cii" ,&NaipeEsperado, &ValorEsperado, &CondRetEsperada ) ;
-        if ( NumLidos != 3 )
+        NumLidos = LER_LerParametros( "i" , &CondRetEsperada ) ;
+        if ( NumLidos != 1 )
         {
             return TST_CondRetParm ;
         } /* if */
@@ -142,31 +139,10 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
         
         CondRetObtido = MON_PopCartaMonte ( monteDado, &CartaObtida ) ;
         
-        Ret =  TST_CompararInt( CondRetEsperada , CondRetObtido ,
+        return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                "Retorno errado ao dar pop no Monte." );
 
-         if ( Ret != TST_CondRetOK )
-            {
-               return Ret ;
-            } /* if */
 
-         if ( CondRetObtido != PIL_CondRetOK )
-            {
-               return CondRetObtido ;
-            } /* if */
-
-         CAR_ObterNaipe( CartaObtida , &NaipeObtido );
-            Ret = TST_CompararInt( NaipeEsperado , NaipeObtido ,
-                                    "Carta obtida está errada." );
-
-         if ( Ret != TST_CondRetOK )
-            {
-               return Ret ;
-            } /* if */
-
-         CAR_ObterValor( CartaObtida , &ValorObtido );
-            return TST_CompararInt( ValorEsperado , ValorObtido ,
-                                    "Carta obtida está errada." );
     } /* fim ativa: Testar MON Pop carta */
     
     /* Testar MON Destruir Monte */
