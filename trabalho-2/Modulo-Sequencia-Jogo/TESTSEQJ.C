@@ -231,7 +231,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     else if ( strcmp( ComandoTeste , PUSH_SEQJ_CMD ) == 0 )
     {
         
-        NumLidos = LER_LerParametros( "icii" ,&NaipeEsperado, &ValorEsperado,&posVetorSeqJ,
+        NumLidos = LER_LerParametros( "ciii" ,&NaipeEsperado, &ValorEsperado,&posVetorSeqJ,
                                      &CondRetEsperada ) ;
         if ( NumLidos != 4 )
         {
@@ -258,7 +258,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     else if ( strcmp( ComandoTeste , POP_SEQJ_CMD ) == 0 )
     {
         
-        NumLidos = LER_LerParametros( "icii" ,&NaipeEsperado, &ValorEsperado,&posVetorSeqJ,
+        NumLidos = LER_LerParametros( "ciii" ,&NaipeEsperado, &ValorEsperado,&posVetorSeqJ,
                                      &CondRetEsperada ) ;
         if ( NumLidos != 4 )
         {
@@ -271,7 +271,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
         }
         CondRetObtido = SEQJ_PopCartaSequencia(vSeqJ[posVetorSeqJ],&cartaDada);
         
-        ret =  TST_CompararInt( CondRetEsperada , CondRetObtido ,
+        Ret =  TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                "Retorno errado ao dar pop na sequencia." );
 
         if ( Ret != TST_CondRetOK )
@@ -350,31 +350,6 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
                               "Retorno errado ao verificar se pilha completa.") ;
         
     } /* fim ativa:  Testar SEQJ Verifica sequência completa */
-
-    /* Testar SEQJ Move Pilha de sequência1 para sequência2 */
-
-    else if ( strcmp( ComandoTeste , MOVER_SEQJ_CMD ) == 0 )
-    {
-        
-        NumLidos = LER_LerParametros( "iiii" ,&posVetorSeqJ, &posVetorSeqJ2, &numCartasMover,
-                                     &CondRetEsperada ) ;
-        if ( NumLidos != 4 )
-        {
-            return TST_CondRetParm ;
-        } /* if */
-
-        if (posVetorSeqJ > 2 || posVetorSeqJ < 0 || posVetorSeqJ2 > 2 || posVetorSeqJ2 < 0 )
-        {
-            return TST_CondRetParm ;
-        }
-
-
-        CondRetObtido = SEQJ_MovePilhaCarta(vSeqJ[posVetorSeqJ] ,vSeqJ[posVetorSeqJ2], numCartasMover);
-        
-        return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                              "Retorno errado ao verificar se pilha completa.") ;
-        
-    } /* fim ativa:  Testar SEQJ Move Pilha de sequência1 para sequência2 */
 
     return TST_CondRetNaoConhec ;
     
