@@ -11,7 +11,6 @@
 !!!    0  Linha:     6  // 
     9  == Push carta da seq 0 (nao existe ainda)
    12  == Pop carta da seq 0 (nao existe ainda)
->>>    1  Linha:    13  Retorno errado ao dar pop na sequencia. Deveria ser: 0  É: 1
    15  == Obter pilha da seq 0 (nao existe ainda)
    18  == Verificar Completa da seq 0 (nao existe ainda)
    22  == Criar incompleta na pos 0 (começa apenas com um k de copas)
@@ -38,14 +37,14 @@
    74  == Pop carta da seq 0
    77  == Destruir 0
    80  == Destruir 1
-!!!    1  Linha:    84  // fim 
+!!!    0  Linha:    84  // fim 
 
 !!! Número de linhas lidas:          84
 !!! Número de casos de teste:        28
 !!! Número comandos corretos:        27
-!!! Número de falhas encontradas:     1
+!!! Número de falhas encontradas:     0
 
-!!! Foram encontrados problemas
+!!! Não foram encontrados problemas
 
 
 !!! Numero de espacos ainda alocados: 0
