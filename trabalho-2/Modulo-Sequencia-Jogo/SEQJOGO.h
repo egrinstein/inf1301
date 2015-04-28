@@ -85,6 +85,13 @@ typedef struct SEQJ_tagSeqJogo * SEQJ_tppSeqJ ;
  *  $FV Valor retornado
  *     SEQJ_CondRetOk    -   criou ok.
  *     SEQJ_CondRetFaltouMemoria -   faltou memória para alocar espaço para a sequência.
+ * 
+ * 
+ *  Assertivas de entrada esperadas - pPilha != NULL
+ * 
+ *  Assertivas de saída esperadas   - SEQJ_CondRetOK
+ *                                     pSeqJ != NULL
+ *           
  *
  ***********************************************************************/
 
@@ -104,6 +111,11 @@ SEQJ_tpCondRet SEQJ_CriarSeqJogo ( SEQJ_tppSeqJ * pSeqJ, PIL_tppPilha pPilha ) ;
  *  $FV Valor retornado
  *     SEQJ_CondRetOk    -   excluiu ok.
  *
+ *  Assertivas de entrada esperadas - pSeqJ != NULL
+ * 
+ *  Assertivas de saída esperadas   - SEQJ_CondRetOK
+ *                                     pSeqJ == NULL
+ * 
  ***********************************************************************/
 
 SEQJ_tpCondRet SEQJ_DestroiSequencia ( SEQJ_tppSeqJ pSeqJ ) ;
@@ -124,6 +136,11 @@ SEQJ_tpCondRet SEQJ_DestroiSequencia ( SEQJ_tppSeqJ pSeqJ ) ;
 *  $FV Valor retornado
 *     SEQJ_CondRetOK      - push com sucesso.
 *     SEQJ_CondRetSequenciaVazia - sesquencia nao foi criada.
+* 
+*   Assertivas de entrada esperadas - pSeqJ != NULL
+*                                      pCarta !=NULL
+* 
+*  Assertivas de saída esperadas   - SEQJ_CondRetOK
 *
 ***********************************************************************/
 
@@ -146,6 +163,11 @@ SEQJ_tpCondRet SEQJ_PushCartaSequencia( SEQJ_tppSeqJ pSeqJ, CAR_tppCarta pCarta 
 *  $FV Valor retornado
 *     SEQJ_CondRetOK      - pop com sucesso.
 *     SEQJ_CondRetSequenciaVazia - nao existem carta para pop
+* 
+*  Assertivas de entrada esperadas - pSeqJ != NULL
+* 
+*  Assertivas de saída esperadas   - SEQJ_CondRetOK
+*                                      pCarta != NULL
 *
 ***********************************************************************/
 
@@ -169,6 +191,11 @@ SEQJ_tpCondRet SEQJ_PopCartaSequencia( SEQJ_tppSeqJ pSeqJ, CAR_tppCarta * pCarta
 *     SEQJ_CondRetOK                 - preencheu pilha com sucesso com sucesso.
 *     SEQJ_CondRetSequenciaVazia     - sequência vazia.
 *     SEQJ_CondRetNumCartasIncorreto - não tem 13 cartas viradas.
+* 
+*  Assertivas de entrada esperadas - pSeqJ != NULL
+* 
+*  Assertivas de saída esperadas   - SEQJ_CondRetOK
+*                                      pPilha != NULL
 *
 ***********************************************************************/
 
@@ -189,8 +216,13 @@ SEQJ_tpCondRet SEQJ_ObtemPilhaSeqJ( SEQJ_tppSeqJ pSeqJ, PIL_tppPilha *pPilha ) ;
 *              
 *
 *  $FV Valor retornado
-*     SEQJ_CondRetOk                      -   pop com sucesso.
+*     SEQJ_CondRetOk                      -   existe sequência.
 *     SEQJ_CondRetCartasForaDaSequencia   - nao existe sequência completa.
+* 
+* *   Assertivas de entrada esperadas - pSeqJ != NULL
+* 
+*  Assertivas de saída esperadas   - SEQJ_CondRetOK se existe uma sequencia completa.
+*                                    
 *
 ***********************************************************************/
 
