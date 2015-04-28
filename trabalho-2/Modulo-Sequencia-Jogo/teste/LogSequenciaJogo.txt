@@ -1,0 +1,44 @@
+
+!!! Inicio dos testes
+!!!      Construto sob teste: C:\Users\Leonardo\documents\visual studio 2012\Projects\PacienciaSpider\Debug\PacienciaSpider.exe
+!!!      Script de teste:     C:\Users\Leonardo\Documents\PUC\Computaçao\Programação Modular\inf1301\trabalho-2\Modulo-Sequencia-Jogo\teste\TesteSequenciaJogo.script
+
+!!!    0  Linha:     1  // Script:    TesteMonte.script 
+!!!    0  Linha:     2  // Autor:     Eric Grinstein 
+!!!    0  Linha:     3  //			  Jordana Mecler 
+!!!    0  Linha:     4  //			  Leonardo Wajnsztok 
+!!!    0  Linha:     5  // Propósito: Testar o módulo Monte. 
+!!!    0  Linha:     6  // 
+    9  == Criar incompleta na pos 0 (começa apenas com um k de copas)
+   12  == Criar completa na pos 1
+   15  == Verificar primeira (incompleta)
+   18  == Verificar segunda (completa)
+   21  == Obter completa (não pode, pois apenas 1 carta esta virada e precisa de pelo menos 13)
+   24  == Obter incompleta
+   27  == Push carta sequencia pos 1
+   29  == Push carta sequencia pos 1
+   31  == Push carta sequencia pos 1
+   33  == Push carta sequencia pos 1
+   35  == Push carta sequencia pos 1
+   37  == Push carta sequencia pos 1
+   39  == Push carta sequencia pos 1
+   41  == Push carta sequencia pos 1
+   43  == Push carta sequencia pos 1
+   45  == Push carta sequencia pos 1
+   47  == Push carta sequencia pos 1
+   49  == Push carta sequencia pos 1
+   52  == Verificar primeira (completa)
+   55  == Obter completa (agora pode, pois as cartas estão todas viradas)
+   58  == Destruir 0
+   61  == Destruir 1
+!!!    0  Linha:    65  // fim 
+
+!!! Número de linhas lidas:          65
+!!! Número de casos de teste:        22
+!!! Número comandos corretos:        22
+!!! Número de falhas encontradas:     0
+
+!!! Não foram encontrados problemas
+
+
+!!! Numero de espacos ainda alocados: 0
