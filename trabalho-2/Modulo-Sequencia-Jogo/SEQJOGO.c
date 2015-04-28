@@ -117,6 +117,11 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
       CAR_tppCarta cartaAux;
       PIL_tpCondRet condRet;
 
+      if (pSeqJ->pPilha == NULL)
+      {
+        return SEQJ_CondRetSequenciaVazia;
+      }
+
       condRet = PIL_VerCarta(pSeqJ->pPilha, &cartaAux, 0 );
 
       if(condRet != PIL_CondRetOK)
@@ -139,6 +144,11 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
    SEQJ_tpCondRet SEQJ_PushCartaSequencia( SEQJ_tppSeqJ pSeqJ, CAR_tppCarta pCarta )
    {
       CAR_tppCarta cartaAux;
+
+      if (pSeqJ->pPilha == NULL)
+      {
+        return SEQJ_CondRetSequenciaVazia;
+      }
 
       // se tiverem cartas na seq, verificar se pode colocar
 

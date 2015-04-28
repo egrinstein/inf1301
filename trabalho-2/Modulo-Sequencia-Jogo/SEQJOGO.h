@@ -143,7 +143,8 @@ SEQJ_tpCondRet SEQJ_ViraPrimeiraCarta( SEQJ_tppSeqJ pSeqJ ) ;
 *  $FV Valor retornado
 *     SEQJ_CondRetOK      - push com sucesso.
 *     SEQJ_CondReTCartasForaDaSequencia  - a carta está fora da sequência
-*                                          e não pode ser colocada..
+*                                          e não pode ser colocada.
+*     SEQJ_CondRetSequenciaVazia - sesquencia nao foi criada.
 *
 ***********************************************************************/
 
@@ -164,7 +165,8 @@ SEQJ_tpCondRet SEQJ_PushCartaSequencia( SEQJ_tppSeqJ pSeqJ, CAR_tppCarta pCarta 
 *              
 *
 *  $FV Valor retornado
-*     SEQJ_CondRetOK      - push com sucesso.
+*     SEQJ_CondRetOK      - pop com sucesso.
+*     SEQJ_CondRetSequenciaVazia - nao existem carta para pop
 *
 ***********************************************************************/
 
