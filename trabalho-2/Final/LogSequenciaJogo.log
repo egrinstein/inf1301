@@ -1,0 +1,51 @@
+
+!!! Inicio dos testes
+!!!      Construto sob teste: C:\Users\e1311354\Documents\Visual Studio 2010\Projects\SEQJOGO\Debug\SEQJOGO.exe
+!!!      Script de teste:     TesteSequenciaJogo.script
+
+!!!    0  Linha:     1  // Script:    TesteMonte.script 
+!!!    0  Linha:     2  // Autor:     Eric Grinstein 
+!!!    0  Linha:     3  //			  Jordana Mecler 
+!!!    0  Linha:     4  //			  Leonardo Wajnsztok 
+!!!    0  Linha:     5  // Propósito: Testar o módulo Monte. 
+!!!    0  Linha:     6  // 
+    9  == Push carta da seq 0 (nao existe ainda)
+   12  == Pop carta da seq 0 (nao existe ainda)
+>>>    1  Linha:    13  Retorno errado ao dar pop na sequencia. Deveria ser: 0  É: 1
+   15  == Obter pilha da seq 0 (nao existe ainda)
+   18  == Verificar Completa da seq 0 (nao existe ainda)
+   22  == Criar incompleta na pos 0 (começa apenas com um k de copas)
+   25  == Criar completa na pos 1
+   28  == Verificar primeira (incompleta)
+   31  == Verificar segunda (completa)
+   34  == Obter completa (não pode, pois apenas 1 carta esta virada e precisa de pelo menos 13)
+   37  == Obter incompleta
+   40  == Push carta sequencia pos 1
+   42  == Push carta sequencia pos 1
+   44  == Push carta sequencia pos 1
+   46  == Push carta sequencia pos 1
+   48  == Push carta sequencia pos 1
+   50  == Push carta sequencia pos 1
+   52  == Push carta sequencia pos 1
+   54  == Push carta sequencia pos 1
+   56  == Push carta sequencia pos 1
+   58  == Push carta sequencia pos 1
+   60  == Push carta sequencia pos 1
+   62  == Push carta sequencia pos 1
+   65  == Verificar primeira (completa)
+   68  == Obter completa (agora pode, pois as cartas estão todas viradas)
+   71  == Push carta da seq 0
+   74  == Pop carta da seq 0
+   77  == Destruir 0
+   80  == Destruir 1
+!!!    1  Linha:    84  // fim 
+
+!!! Número de linhas lidas:          84
+!!! Número de casos de teste:        28
+!!! Número comandos corretos:        27
+!!! Número de falhas encontradas:     1
+
+!!! Foram encontrados problemas
+
+
+!!! Numero de espacos ainda alocados: 0
