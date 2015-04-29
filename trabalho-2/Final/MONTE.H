@@ -78,6 +78,11 @@ typedef struct MON_tagMonte * MON_tppMonte ;
  *     MON_CondRetOk    -   criou ok.
  *     MON_CondRetFaltouMemoria -   faltou memÃ³ria para alocar espaÃ§o para o monte.
  *
+ *  Assertivas de entrada esperadas - pPilha != NULL.
+ * 
+ *  Assertivas de saída esperadas   - MON_CondRetOk
+ *                                     MON_CondRetFaltouMemoria se pMonte == NULL
+ *
  ***********************************************************************/
 
 MON_tpCondRet MON_CriarMonte ( MON_tppMonte * pMonte , PIL_tppPilha pPilha) ;
@@ -85,38 +90,49 @@ MON_tpCondRet MON_CriarMonte ( MON_tppMonte * pMonte , PIL_tppPilha pPilha) ;
 
 /***********************************************************************
  *
- *  $FC FunÃ§Ã£o: CAR  Destruir monte
+ *  $FC Função: CAR  Destruir monte
  *
- *  $ED DescriÃ§Ã£o da funÃ§Ã£o
+ *  $ED Descrição da função
  *     Destroi um monte.
  *
- *  $EP ParÃ¢metros
- *     $P pMonte - ponteiro para o monte a ser excluÃ­da.
+ *  $EP Parâmetros
+ *     $P pMonte - ponteiro para o monte a ser excluída.
  *
  *  $FV Valor retornado
  *     MON_CondRetOk    -   excluiu ok.
+ * 
+ *  Assertivas de entrada esperadas - pMonte != NULL.
+ * 
+ *  Assertivas de saída esperadas   - pMonte == NULL
+ *                                   
  *
  ***********************************************************************/
+***********************************************************************/
 
 MON_tpCondRet MON_DestruirMonte ( MON_tppMonte pMonte ) ;
 
 
 /***********************************************************************
 *
-*  $FC FunÃ§Ã£o: MON Pop Carta
+*  $FC Função: MON Pop Carta
 *
-*  $ED DescriÃ§Ã£o da funÃ§Ã£o
+*  $ED Descrição da função
 *     Remove carta do topo do monte
 *     
 *
-*  $EP ParÃ¢metros
+*  $EP Parâmetros
 *     pMonte - ponteiro para o monte.
-*     pCarta - endereÃ§o que receberÃ¡ a carta removida.
+*     pCarta - endereço que receberá a carta removida.
 *              
 *
 *  $FV Valor retornado
 *     MON_CondRetOk     -   pop com sucesso.
 *     MON_CondRetMonteVazio     - monte vazio.
+* 
+*  Assertivas de entrada esperadas - pMonte != NULL.
+*                                      pCarta == NULL
+* 
+*  Assertivas de saída esperadas   - pCarta != NULL
 *
 ***********************************************************************/
 
