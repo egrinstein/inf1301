@@ -19,32 +19,37 @@
    31  == Verificar segunda (completa)
    34  == Obter completa (nÃ£o pode, pois apenas 1 carta esta virada e precisa de pelo menos 13)
    37  == Obter incompleta
-   40  == Push carta sequencia pos 1
-   42  == Push carta sequencia pos 1
-   44  == Push carta sequencia pos 1
-   46  == Push carta sequencia pos 1
-   48  == Push carta sequencia pos 1
-   50  == Push carta sequencia pos 1
+   40  == Pop carta da seq 0 (esvazia a sequencia)
+   43  == Push carta sequencia 0 na sequencia vazia, entao ok
+   46  == Pop carta da seq 0, esvazia de novo
+   49  == Pop carta da seq 0, mas nao tem carta
    52  == Push carta sequencia pos 1
    54  == Push carta sequencia pos 1
    56  == Push carta sequencia pos 1
    58  == Push carta sequencia pos 1
    60  == Push carta sequencia pos 1
    62  == Push carta sequencia pos 1
-   65  == Push carta sequencia pos 1, porÃ©m fora da sequÃªncia, mesmo naipe
-   68  == Verificar primeira (completa)
-   71  == Obter completa (agora pode, pois as cartas estÃ£o todas viradas)
-   74  == Push carta sequencia 0
-   77  == Push carta sequencia 0, mesmo naipe, mas fora de sequencia (nao ok)
-   80  == Push carta sequencia 0, naipe diferente, mas na sequencia (ok)
-   83  == Pop carta da seq 0
-   86  == Destruir 0
-   89  == Destruir 1
-!!!    0  Linha:    93  // fim 
+   64  == Push carta sequencia pos 1
+   66  == Push carta sequencia pos 1
+   68  == Push carta sequencia pos 1
+   70  == Push carta sequencia pos 1
+   72  == Push carta sequencia pos 1
+   74  == Push carta sequencia pos 1
+   76  == Push carta sequencia pos 1
+   79  == Push carta sequencia pos 1, porÃ©m fora da sequÃªncia, mesmo naipe
+   82  == Verificar primeira (completa)
+   85  == Obter completa (agora pode, pois as cartas estÃ£o todas viradas)
+   88  == Push carta sequencia 0
+   91  == Push carta sequencia 0, mesmo naipe, mas fora de sequencia (nao ok)
+   94  == Push carta sequencia 0, naipe diferente, mas na sequencia (ok)
+   97  == Pop carta da seq 0
+  100  == Destruir 0
+  103  == Destruir 1
+!!!    0  Linha:   107  // fim 
 
-!!! Número de linhas lidas:          93
-!!! Número de casos de teste:        31
-!!! Número comandos corretos:        31
+!!! Número de linhas lidas:         107
+!!! Número de casos de teste:        36
+!!! Número comandos corretos:        36
 !!! Número de falhas encontradas:     0
 
 !!! Não foram encontrados problemas
