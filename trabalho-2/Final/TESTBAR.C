@@ -29,11 +29,10 @@
 *					onde o primeiro parâmetro é o número da baralho
 *					a ser alterado, o segundo é o número de naipes que
 *					o baralho terá.
-*     =pop <int> <char> <int>
+*     =pop <int>
 *					- chama a função BAR_PopCarta,
 *					onde o parâmetro se refere ao número da baralho a ser removido
-*					seu topo. Depois, é testado o valor do naipe com o <char> fornecido,
-*				        assim como o valor do valor <int> também fornecido.
+*					seu topo. 
 *     
 *     =embaralhar <int> 
 *                   - chama a função BAR_Embaralhar, onde o primeiro parâmetro
@@ -94,6 +93,7 @@ BAR_tppBaralho vBaralhos[10];
          BAR_tpCondRet CondRetObtido   = BAR_CondRetOK ;
          BAR_tpCondRet CondRetEsperada = BAR_CondRetFaltouMemoria ;
                                       /* inicializa para qualquer coisa */
+		 BAR_tpCondRet CondRetEsperadaCarta = BAR_CondRetOK ;
 
          
 
@@ -157,9 +157,9 @@ BAR_tppBaralho vBaralhos[10];
 
          else if ( strcmp( ComandoTeste , POP_CMD ) == 0 )
          {			
-            NumLidos = LER_LerParametros( "icii" ,
-                               &NumBaralho , &NaipeEsperado , &ValorEsperado , &CondRetEsperada ) ;
-            if ( NumLidos != 4 || NumBaralho >= MAX_BARS || NumBaralho < 0 )
+            NumLidos = LER_LerParametros( "ii" ,
+                               &NumBaralho , &CondRetEsperada ) ;
+            if ( NumLidos != 2 || NumBaralho >= MAX_BARS || NumBaralho < 0 )
             {
                return TST_CondRetParm ;
             } /* if */
@@ -167,32 +167,8 @@ BAR_tppBaralho vBaralhos[10];
             CondRetObtido = BAR_PopCarta( vBaralhos[NumBaralho] , &CartaObtida ) ;
 
 			
-            Ret = TST_CompararInt( CondRetEsperada , CondRetObtido ,
+            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                             "Retorno errado ao operar 'pop' no baralho") ;
-
-			if ( Ret != TST_CondRetOK )
-            {
-               return Ret ;
-            } /* if */
-
-			if ( CondRetObtido != BAR_CondRetOK )
-            {
-               return CondRetObtido ;
-            } /* if */
-
-			CAR_ObterNaipe( CartaObtida , &NaipeObtido );
-            Ret = TST_CompararChar( NaipeEsperado , NaipeObtido ,
-                                    "Carta obtida está errada." );
-
-			if ( Ret != TST_CondRetOK )
-            {
-               return Ret ;
-            } /* if */
-
-			CAR_ObterValor( CartaObtida , &ValorObtido );
-            return TST_CompararInt( ValorEsperado , ValorObtido ,
-                                    "Carta obtida está errada." );
-
 
          } /* fim ativa: Testar BAR Pop Carta da Baralho */
 
@@ -209,7 +185,9 @@ BAR_tppBaralho vBaralhos[10];
                return TST_CondRetParm ;
             } /* if */
 
-            return BAR_Embaralhar( vBaralhos[NumBaralho] ) ;
+			CondRetObtido = BAR_Embaralhar( vBaralhos[NumBaralho] ) ;
+            return TST_CompararInt( CondRetEsperada , CondRetObtido,
+												"Retorno errado ao embaralhar") ;
 	
 
          } /* Fim ativa: Testar BAR Embaralhar Baralho de cartas*/

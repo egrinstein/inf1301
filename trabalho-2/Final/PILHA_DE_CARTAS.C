@@ -70,14 +70,20 @@ void ExcluirCarta( void * pValor ) ;
 
    PIL_tpCondRet PIL_DestruirPilha( PIL_tppPilha pPilha )
    {
-	
+	LIS_tpCondRet Ret ;
+
 	if ( pPilha->pListaCartas == NULL )
 	{	
 	 	free( pPilha ) ;
 		return PIL_CondRetOK ;
 	}
 	
-	LIS_DestruirLista( pPilha->pListaCartas ) ;
+	Ret = LIS_DestruirLista( pPilha->pListaCartas ) ;
+	if( Ret != LIS_CondRetOK )
+	{
+		return PIL_CondRetPilhaVazia ;
+
+	} /* if */
 
 	free( pPilha ) ;
 
@@ -97,7 +103,7 @@ void ExcluirCarta( void * pValor ) ;
 
 	LIS_IrInicioLista( pPilha->pListaCartas ) ;
 
-	LIS_InserirElementoAntes( pPilha->pListaCartas , pCarta ) ; 
+	Ret = LIS_InserirElementoAntes( pPilha->pListaCartas , pCarta ) ; 
 	if( Ret != LIS_CondRetOK )
 	{
 		return PIL_CondRetFaltouMemoria ;
@@ -119,13 +125,13 @@ void ExcluirCarta( void * pValor ) ;
 
 	if ( posicao < 0 )
 	{
-		* pCarta = NULL ; 
+		* pCarta = NULL ;
 		return PIL_CondRetParamIncorreto ;	
 	}
 
-	LIS_IrInicioLista( pPilha->pListaCartas ) ; 
+	LIS_IrFinalLista( pPilha->pListaCartas ) ; 
 
-	Ret = LIS_AvancarElementoCorrente( pPilha->pListaCartas , posicao ) ;
+	Ret = LIS_AvancarElementoCorrente( pPilha->pListaCartas , - posicao ) ;
 
 	if ( Ret == LIS_CondRetFimLista )
 	{
@@ -139,7 +145,7 @@ void ExcluirCarta( void * pValor ) ;
 		return PIL_CondRetPilhaVazia ;
 	}
 	
-    LIS_ObterValor( pPilha->pListaCartas , pCarta) ;
+    LIS_ObterValor( pPilha->pListaCartas , pCarta ) ;
 
 	return PIL_CondRetOK ; 	
 
