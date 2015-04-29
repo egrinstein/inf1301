@@ -2,7 +2,7 @@
 #define PILHA_DE_CARTAS_
 /***************************************************************************
 *
-*  $MCD MÃ³dulo de definiÃ§Ã£o: PIL  Pilha de Cartas
+*  $MCD Módulo de definição: PIL  Pilha de Cartas
 *
 *  Arquivo gerado:              PIL.H
 *  Letras identificadoras:      PIL
@@ -12,9 +12,9 @@
 *	    Leonardo Wajnsztok
 *
 *
-*  $ED DescriÃ§Ã£o do mÃ³dulo
-*     Cria pilha homogÃªnea armazenadora de tipo cartas de baralho.
-*     O mÃ³dulo permite a criaÃ§Ã£o de mÃºltiplas pilhas.
+*  $ED Descrição do módulo
+*     Cria pilha homogênea armazenadora de tipo cartas de baralho.
+*     O módulo permite a criação de múltiplas pilhas.
 *   
 ***************************************************************************/
  
@@ -26,19 +26,19 @@
 
 #include "CARTA.h"
 
-/***** DeclaraÃ§Ãµes exportadas pelo mÃ³dulo *****/
+/***** Declarações exportadas pelo módulo *****/
 
-/* Tipo referÃªncia para uma pilha de cartas */
+/* Tipo referência para uma pilha de cartas */
 
 typedef struct PIL_tagPilha * PIL_tppPilha ;
 
 /***********************************************************************
 *
-*  $TC Tipo de dados: PIL CondiÃ§Ãµes de retorno
+*  $TC Tipo de dados: PIL Condições de retorno
 *
 *
-*  $ED DescriÃ§Ã£o do tipo
-*     CondiÃ§Ãµes de retorno das funÃ§Ãµes da lista
+*  $ED Descrição do tipo
+*     Condições de retorno das funções da lista
 *
 ***********************************************************************/
 
@@ -48,55 +48,65 @@ typedef struct PIL_tagPilha * PIL_tppPilha ;
                /* Concluiu corretamente */
 
          PIL_CondRetPilhaVazia = 1 ,
-               /* A pilha nÃ£o contÃ©m elementos */
+               /* A pilha não contém elementos */
 
 		 PIL_CondRetParamIncorreto = 2,
-               /* ParÃ¢metro incorreto ao tentar ver carta na pilha */
+               /* Parâmetro incorreto ao tentar ver carta na pilha */
 	
          PIL_CondRetFimPilha = 3,
 	       /* Fim da pilha atingido ao tentar ver carta */
 
          PIL_CondRetFaltouMemoria = 4
-               /* Faltou memÃ³ria ao tentar inserir na pilha */
+               /* Faltou memória ao tentar inserir na pilha */
 
    } PIL_tpCondRet ;
 
 
 /***********************************************************************
 *
-*  $FC FunÃ§Ã£o: PIL Criar Pilha de Cartas Vazia
+*  $FC Função: PIL Criar Pilha de Cartas Vazia
 *
-*  $ED DescriÃ§Ã£o da funÃ§Ã£o
+*  $ED Descrição da função
 *     Cria uma pilha de cartas de baralho vazia
 *
-*  $EP ParÃ¢metros
-*	pPilha - EndereÃ§o que receberÃ¡ um ponteiro para a pilha criada. 
+*  $EP Parâmetros
+*	pPilha - Endereço que receberá um ponteiro para a pilha criada. 
 *	
 *  $FV Valor retornado
 *	PIL_CondRetOK - Criou sem problemas
-*	PIL_CondRetFaltouMemoria - Faltou memÃ³ria na criaÃ§Ã£o da pilha
+*	PIL_CondRetFaltouMemoria - Faltou memória na criação da pilha
 *
+*  $AE Assertivas de Entrada - nenhuma
+*
+*  $AS Assertivas de Saída - Se condRet == OK:
+*							 ponteiro para pilha vazia é criada em *pPilha
+*		
+*							 CondRet == FaltouMemória:
+*							 * pPilha = NULL
 ***********************************************************************/
 
     PIL_tpCondRet PIL_CriarPilhaVazia( PIL_tppPilha * pPilha ) ;
 
 /***********************************************************************
 *
-*  $FC FunÃ§Ã£o: PIL Destruir pilha
+*  $FC Função: PIL Destruir pilha
 *
-*  $ED DescriÃ§Ã£o da funÃ§Ã£o
-*     DestrÃ³i a lista fornecida.
-*     O parÃ¢metro ponteiro para a lista nÃ£o Ã© modificado.
-*     Se ocorrer algum erro durante a destruiÃ§Ã£o, a pilha resultarÃ¡
+*  $ED Descrição da função
+*     Destrói a lista fornecida.
+*     O parâmetro ponteiro para a lista não é modificado.
+*     Se ocorrer algum erro durante a destruição, a pilha resultará
 *     estruturalmente incorreta.
-*     OBS. nÃ£o existe previsÃ£o para possÃ­veis falhas de execuÃ§Ã£o.
+*     OBS. não existe previsão para possíveis falhas de execução.
 *
-*  $EP ParÃ¢metros
-*     pPilha de Cartas - ponteiro para a pilha a ser destruÃ­da
+*  $EP Parâmetros
+*     pPilha de Cartas - ponteiro para a pilha a ser destruída
 *
 *  $FV Valor retornado
 *     PIL_CondRetOK    - destruiu sem problemas
 *
+*  $AE Assertivas de Entrada - pPilha != NULL
+*
+*  $AS Assertivas de Saída - pPilha = NULL
 ***********************************************************************/
 
    PIL_tpCondRet PIL_DestruirPilha( PIL_tppPilha pPilha );
@@ -104,18 +114,23 @@ typedef struct PIL_tagPilha * PIL_tppPilha ;
 
 /***********************************************************************
 *
-*  $FC FunÃ§Ã£o: PIL Push Carta
+*  $FC Função: PIL Push Carta
 *
-*  $ED DescriÃ§Ã£o da funÃ§Ã£o
+*  $ED Descrição da função
 *      Insere carta no topo da pilha de cartas
 *
-*  $EP ParÃ¢metros
-*     pPilha de Cartas - ponteiro para a pilha onde a carta serÃ¡ inserida
+*  $EP Parâmetros
+*     pPilha de Cartas - ponteiro para a pilha onde a carta será inserida
 *     pCarta - Carta a ser inserida no topo da pilha
 *
 *  $FV Valor retornado
 *     PIL_CondRetOK    - inseriu sem problemas
 *     
+*  $AE Assertivas de Entrada - pCarta é uma carta válida
+*							   pPilha é uma pilha válida
+*							   (pode ser vazia)
+*
+*  $AS Assertivas de Saída - pCarta é inserido no topo da pilha
 *
 ***********************************************************************/
 
@@ -124,20 +139,29 @@ typedef struct PIL_tagPilha * PIL_tppPilha ;
 
 /***********************************************************************
 *
-*  $FC FunÃ§Ã£o: PIL Pop Carta
+*  $FC Função: PIL Pop Carta
 *
-*  $ED DescriÃ§Ã£o da funÃ§Ã£o
+*  $ED Descrição da função
 *     Remove carta do topo da pilha
 *     
 *
-*  $EP ParÃ¢metros
+*  $EP Parâmetros
 *     pPilha de Cartas - ponteiro para a pilha onde o topo deve ser removido
-*     pCarta - endereÃ§o que receberÃ¡ a carta removida.
+*     pCarta - endereço que receberá a carta removida.
 *              
 *
 *  $FV Valor retornado
 *     PIL_CondRetOK
 *     PIL_CondRetPilhaVazia
+*
+*  $AE Assertivas de Entrada - pPilha é uma pilha válida (pode ser vazia)
+*
+*  $AS Assertivas de Saída - Se condRet == OK:
+*							 carta é removida do topo da pilha e colocada em
+*							 *pCarta.
+*		
+*							 Se condRet == PilhaVazia
+*							 *pCarta = NULL
 *
 ***********************************************************************/
 
@@ -145,30 +169,38 @@ typedef struct PIL_tagPilha * PIL_tppPilha ;
 
 /***********************************************************************
 *
-*  $FC FunÃ§Ã£o: PIL  VerCarta
+*  $FC Função: PIL  VerCarta
 *
-*  $ED DescriÃ§Ã£o da funÃ§Ã£o
-*      Permite ver uma carta da pilha, mesmo que nÃ£o o topo;
-*      Essa funÃ§Ã£o nÃ£o destrÃ³i a carta vista.
+*  $ED Descrição da função
+*      Permite ver uma carta da pilha, mesmo que não o topo;
+*      Essa função não destrói a carta vista.
 *
-*  $EP ParÃ¢metros
-*     pPilha de Cartas - ponteiro para a pilha onde serÃ¡ vista a carta
-*     pCarta - ponteiro que guardarÃ¡ o endereÃ§o da carta a ser vista.
-*     posicao - distÃ¢ncia do topo da pilha Ã  carta a ser vista.
+*  $EP Parâmetros
+*     pPilha de Cartas - ponteiro para a pilha onde será vista a carta
+*     pCarta - ponteiro que guardará o endereço da carta a ser vista.
+*     posicao - distância do topo da pilha à carta a ser vista.
 *
 *  $FV Valor retornado
 *     PIL_CondRetOK
 *     PIL_CondRetPilhaVazia
-*     PIL_CondRetParamIncorreto - posicao Ã© um valor negativo
-*     PIL_CondRetFimPilha - a carta a ser vista estÃ¡ alÃ©m do tamanho da pilha
+*     PIL_CondRetParamIncorreto - posicao é um valor negativo
+*     PIL_CondRetFimPilha - a carta a ser vista está além do tamanho da pilha
 *
+*  $AE Assertivas de Entrada - pPilha é uma pilha válida (pode ser vazia)
+*
+*  $AS Assertivas de Saída - Se condRet == OK:
+*							 pCarta recebe ponteiro para carta da posição 'posição' da 
+*							 pPilha. A carta continua na pilha.
+*		
+*							 Caso contrário:
+*							 * pCarta = NULL
 ***********************************************************************/
 
      PIL_tpCondRet PIL_VerCarta( PIL_tppPilha pPilha , CAR_tppCarta * pCarta , int posicao );
 
 #undef PILHA_DE_CARTAS_EXT
 
-/********** Fim do mÃ³dulo de definiÃ§Ã£o: PIL Pilha de Cartas  **********/
+/********** Fim do módulo de definição: PIL Pilha de Cartas  **********/
 
 #else
 #endif

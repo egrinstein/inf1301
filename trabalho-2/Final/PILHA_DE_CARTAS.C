@@ -1,6 +1,6 @@
 /***************************************************************************
 *
-*  $MCD MÃ³dulo de ImplementaÃ§Ã£o: PIL  Pilha de Cartas
+*  $MCD Módulo de Implementação: PIL  Pilha de Cartas
 *
 *  Arquivo gerado:              PIL.C
 *  Letras identificadoras:      PIL
@@ -19,39 +19,40 @@
 #include "PILHA_DE_CARTAS.H"
 #undef PILHA_DE_CARTAS_OWN
 
-/* DefiniÃ§Ãµes encapsuladas no mÃ³dulo */
+/* Definições encapsuladas no módulo */
 
 #define NULL 0
 
-/* Tipo referÃªncia para uma pilha de cartas */
+/* Tipo referência para uma pilha de cartas */
 
 typedef struct PIL_tagPilha {
 	LIS_tppLista pListaCartas ;	
-		/*Ponteiro para lista que guardarÃ¡ as cartas*/
+		/*Ponteiro para lista que guardará as cartas*/
 } PIL_tpPilha ;
 
-/***** ProtÃ³tipos das funÃ§Ãµes encapuladas no mÃ³dulo *****/
+/***** Protótipos das funções encapuladas no módulo *****/
 
 void ExcluirCarta( void * pValor ) ;
 
-/*****  CÃ³digo das funÃ§Ãµes exportadas pelo mÃ³dulo  *****/
+/*****  Código das funções exportadas pelo módulo  *****/
 
 /***************************************************************************
 *
-*  FunÃ§Ã£o: PIL Criar Pilha Vazia 
+*  Função: PIL Criar Pilha Vazia 
 *****/
 
    PIL_tpCondRet PIL_CriarPilhaVazia( PIL_tppPilha * pPilha )
    {
       LIS_tpCondRet condRet ;
       
+	  *pPilha = NULL ;
 	  *pPilha = ( PIL_tpPilha * ) malloc( sizeof( PIL_tpPilha ) ) ;
       if( *pPilha == NULL )
       {
 			return PIL_CondRetFaltouMemoria ;
       } /* if */
 	
-      condRet = LIS_CriarLista( &((*pPilha)->pListaCartas) , ExcluirCarta ) ; 
+      condRet = LIS_CriarLista( &((*pPilha)->pListaCartas) , CAR_ExcluirCarta ) ; 
 
       if ( condRet == LIS_CondRetFaltouMemoria )
       {
@@ -60,62 +61,50 @@ void ExcluirCarta( void * pValor ) ;
 
       return PIL_CondRetOK ;
 
-   } /* Fim funÃ§Ã£o: PIL  &Criar Pilha Vazia */
+   } /* Fim função: PIL  &Criar Pilha Vazia */
 
 /***************************************************************************
 *
-*  FunÃ§Ã£o: PIL Destruir Pilha de Cartas 
+*  Função: PIL Destruir Pilha de Cartas 
 *****/
 
    PIL_tpCondRet PIL_DestruirPilha( PIL_tppPilha pPilha )
    {
-		
-	   LIS_tpCondRet Ret ;
-
-
+	
 	if ( pPilha->pListaCartas == NULL )
 	{	
 	 	free( pPilha ) ;
 		return PIL_CondRetOK ;
 	}
+	
+	LIS_DestruirLista( pPilha->pListaCartas ) ;
 
-	Ret = LIS_DestruirLista( pPilha->pListaCartas ) ;
-
-	if( Ret != LIS_CondRetOK )
-	{
-		return PIL_CondRetPilhaVazia ;
-
-	} /* if */
+	free( pPilha ) ;
 
 	return PIL_CondRetOK ; 	
 
-   }/* Fim funÃ§Ã£o: PIL Destruir Pilha de Cartas */
+   }/* Fim função: PIL Destruir Pilha de Cartas */
 
 
 /***************************************************************************
 *
-*  FunÃ§Ã£o: PIL Push Carta 
+*  Função: PIL Push Carta 
 *****/
 
    PIL_tpCondRet PIL_PushCarta( PIL_tppPilha pPilha , CAR_tppCarta pCarta )
    {
-	   LIS_tpCondRet Ret ;
 
-	LIS_IrFinalLista( pPilha->pListaCartas ) ;
+	LIS_IrInicioLista( pPilha->pListaCartas ) ;
 
-	Ret = LIS_InserirElementoApos( pPilha->pListaCartas , pCarta ) ; 
-	if( Ret != LIS_CondRetOK )
-	{
-		return PIL_CondRetFaltouMemoria ;
-	} /* if */
+	LIS_InserirElementoAntes( pPilha->pListaCartas , pCarta ) ; 
 
 	return PIL_CondRetOK ; 	
 
-   }/* Fim funÃ§Ã£o: PIL Push Carta */
+   }/* Fim função: PIL Push Carta */
 
 /***************************************************************************
 *
-*  FunÃ§Ã£o: PIL VerCarta 
+*  Função: PIL VerCarta 
 *****/
 
    PIL_tpCondRet PIL_VerCarta( PIL_tppPilha pPilha , CAR_tppCarta * pCarta , int posicao )
@@ -124,32 +113,35 @@ void ExcluirCarta( void * pValor ) ;
 
 	if ( posicao < 0 )
 	{
+		* pCarta = NULL ; 
 		return PIL_CondRetParamIncorreto ;	
 	}
 
-	LIS_IrFinalLista( pPilha->pListaCartas ) ; 
+	LIS_IrInicioLista( pPilha->pListaCartas ) ; 
 
-	Ret = LIS_AvancarElementoCorrente( pPilha->pListaCartas , - posicao ) ;
+	Ret = LIS_AvancarElementoCorrente( pPilha->pListaCartas , posicao ) ;
 
 	if ( Ret == LIS_CondRetFimLista )
 	{
+		* pCarta = NULL ;
 		return PIL_CondRetFimPilha ;
 	}
 
 	if ( Ret == LIS_CondRetListaVazia )
 	{
+		* pCarta = NULL ;
 		return PIL_CondRetPilhaVazia ;
 	}
 	
-    LIS_ObterValor( pPilha->pListaCartas ,(void**) &(*pCarta)) ;
+    LIS_ObterValor( pPilha->pListaCartas , pCarta) ;
 
 	return PIL_CondRetOK ; 	
 
-   }/* Fim funÃ§Ã£o: PIL VerCarta */
+   }/* Fim função: PIL VerCarta */
 
 /***************************************************************************
 *
-*  FunÃ§Ã£o: PIL PopCarta 
+*  Função: PIL PopCarta 
 *****/
 
    PIL_tpCondRet PIL_PopCarta( PIL_tppPilha pPilha , CAR_tppCarta * pCarta )
@@ -163,21 +155,21 @@ void ExcluirCarta( void * pValor ) ;
 			return condRet ;
 		}
 
-		CAR_ObterNaipe( *pCarta, &naipe );
+		CAR_ObterNaipe( *pCarta, &naipe ); //será que tem que tratar condret daqui?
 		CAR_ObterValor( *pCarta, &valor );
 
 		LIS_ExcluirElemento( pPilha->pListaCartas ); 
 
-		/*LIS_ExcluirElemento irÃ¡ destruir a carta junto do nÃ³.
-			 Ã‰ necessÃ¡rio que ela seja criada novamente*/
+		/*LIS_ExcluirElemento irá destruir a carta junto do nó.
+			 É necessário que ela seja criada novamente*/
 		CAR_CriarCarta( pCarta ) ;
 		CAR_PreencheCarta( *pCarta , naipe, valor ) ;
 
 		return PIL_CondRetOK ; 	
 
-   }/* Fim funÃ§Ã£o: PIL Pop Carta */
+   }/* Fim função: PIL Pop Carta */
 
-/*****  CÃ³digo das funÃ§Ãµes encapsuladas no mÃ³dulo  *****/
+/*****  Código das funções encapsuladas no módulo  *****/
 
 void ExcluirCarta( void * pValor ) 
 {
@@ -185,4 +177,4 @@ void ExcluirCarta( void * pValor )
 }
 
 
-/********** Fim do mÃ³dulo de implementaÃ§Ã£o: PIL  Pilha de cartas  **********/
+/********** Fim do módulo de implementação: PIL  Pilha de cartas  **********/

@@ -14,7 +14,8 @@
 *
 *  $ED Descrição do módulo
 *     Cria um baralho de 104 cartas com número de naipes 
-*     podendo variar de 1 a 4.
+*     podendo variar de 1 a 4. Cada carta possui também um valor, 
+*     que varia de 1 (Ás) a 13 (Rei)
 *     
 ***************************************************************************/
  
@@ -26,7 +27,11 @@
 
 #include "CARTA.h"
 
-/***** Declarações exportadas pelo módulo *****/
+/***** Definições exportadas pelo módulo *****/
+
+#define TAM_BARALHO 104
+#define VALORES_POSSIVEIS 13
+	/* A=1, 2=2 ... K=13 */
 
 /* Tipo referência para um baralho de cartas */
 
@@ -72,7 +77,13 @@ typedef struct BAR_tagBaralho * BAR_tppBaralho ;
 *  $FV Valor retornado
 *	BAR_CondRetOK - Criou sem problemas
 *	BAR_CondRetFaltouMemoria - Faltou memória na criação do baralho
-*	BAR_CondRetParamIncorreto - Número de naipes diferente de [1,4]
+*
+*  $AE Assertivas de Entrada - Nenhuma
+*
+*  $AS Assertivas de Saída - Caso falte memória (A função retorna BAR_CondRetFaltouMemoria),
+*							 pBaralho = NULL
+*                            Caso contrário (A função retorna BAR_CondRetOK)
+*                            um baralho de 0 naipes e uma pilha de cartas nula é criado.
 *
 ***********************************************************************/
 
@@ -90,6 +101,10 @@ typedef struct BAR_tagBaralho * BAR_tppBaralho ;
 *
 *  $FV Valor retornado
 *     BAR_CondRetOK    - destruiu sem problemas
+*
+*  $AE Assertivas de Entrada - pBaralho != NULL
+*
+*  $AS Assertivas de Saída - pBaralho = NULL
 *
 ***********************************************************************/
 
@@ -110,8 +125,26 @@ typedef struct BAR_tagBaralho * BAR_tppBaralho ;
 *
 *  $FV Valor retornado
 *     BAR_CondRetOK    - preencheu sem problemas
+*	  BAR_CondRetParamIncorreto - Número de naipes diferente de [1,4]
 *     BAR_CondRetFaltouMemória - Faltou memória no 
 *				 preenchimento do baralho
+*
+*  $AE Assertivas de Entrada - pBaralho é um baralho vazio, isto é,
+*							   com 0 naipes e uma pilha de cartas vazia.
+*
+*  $AS Assertivas de Saída - Se condRet == OK
+*                            Baralho com numNaipes e pilha de cartas de
+*                            tamanho TAM_BARALHO é criada. O número de 
+*                            cartas de cada naipe é TAM_BARALHO/numNaipes
+*
+*							 Se condRet == paramIncorreto:
+*							 Baralho continua com 0 naipes e pilha de cartas nula.
+*
+*							 Se condRet == FaltouMemória:
+*	                         Baralho possui naipes = numNaipes. A pilha de cartas pode
+*							 ser nula, vazia ou ter de 1 a TAM_BARALHO - 1 cartas.
+*                            nada se pode dizer sobre a distribuição dos naipes.
+*
 *
 ***********************************************************************/
 
@@ -135,6 +168,15 @@ typedef struct BAR_tagBaralho * BAR_tppBaralho ;
 *     BAR_CondRetOK
 *     BAR_CondRetBaralhoVazio
 *
+*  $AE Assertivas de Entrada - pBaralho != NULL
+*
+*  $AS Assertivas de Saída - Se condRet == BaralhoVazio:
+*							 *pCarta = NULL
+*
+*                            Caso contrário (A função retorna BAR_CondRetOK)
+*                            *pCarta é uma carta de baralho válida (naipe
+*							 válido e valor válido)
+*
 ***********************************************************************/
 
       BAR_tpCondRet BAR_PopCarta( BAR_tppBaralho pBaralho , CAR_tppCarta * pCarta );
@@ -155,6 +197,22 @@ typedef struct BAR_tagBaralho * BAR_tppBaralho ;
 *     BAR_CondRetOK
 *     BAR_CondRetBaralhoVazio
 *     BAR_CondRetFaltouMemoria - Faltou memória durante o embaralhamento
+*
+*  $AE Assertivas de Entrada - pBaralho != NULL
+*
+*  $AS Assertivas de Saída - Se condRet == BaralhoVazio:
+*							 Baralho continua da mesma forma em que estava
+*							 antes da chamada da função
+*
+*							 Se condRet == Faltou Memória:
+*							 Nada se pode dizer; o baralho pode com menos cartas
+*							 do que antes da chamada da função
+*
+*                            Se condRet == OK:
+*							 O novo baralho possui uma ordem diferente 
+*							 em sua pilha de cartas de antes da chamada da 
+*							 função.
+*
 *
 ***********************************************************************/
 

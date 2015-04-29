@@ -181,7 +181,7 @@ BAR_tppBaralho vBaralhos[10];
             } /* if */
 
 			CAR_ObterNaipe( CartaObtida , &NaipeObtido );
-            Ret = TST_CompararInt( NaipeEsperado , NaipeObtido ,
+            Ret = TST_CompararChar( NaipeEsperado , NaipeObtido ,
                                     "Carta obtida está errada." );
 
 			if ( Ret != TST_CondRetOK )

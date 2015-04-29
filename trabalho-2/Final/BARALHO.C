@@ -22,14 +22,11 @@
 #undef BARALHO_DE_CARTAS_OWN
 
 
-#define TAM_BARALHO 104
-#define VALORES_POSSIVEIS 13
-	/* A=1, 2=2 ... K=13 */
 #define PILHAS_AUX_EMBARALHAMENTO 10
 
 /***********************************************************************
 *
-*  $TC Tipo de dados: LIS Descritor da cabeÃ§a de baralho
+*  $TC Tipo de dados: LIS Descritor da cabeça de baralho
 *
 *
 ***********************************************************************/
@@ -37,19 +34,19 @@
   typedef struct BAR_tagBaralho {
 
          int numNaipes ;
-               /* NÃºmero de naipes do baralho */
+               /* Número de naipes do baralho */
 
-         PIL_tppPilha pPilCartas ;
+         BAR_tppBaralho pPilCartas ;
 			/* Ponteiro para pilha com todas as cartas do baralho */
 
    } BAR_tpBaralho ;
 
 
-/*****  CÃ³digo das funÃ§Ãµes exportadas pelo mÃ³dulo  *****/
+/*****  Código das funções exportadas pelo módulo  *****/
 
 /***************************************************************************
 *
-*  FunÃ§Ã£o: BAR Criar Baralho
+*  Função: BAR Criar Baralho
 *****/
 
    BAR_tpCondRet BAR_CriarBaralho( BAR_tppBaralho * pBaralho )
@@ -69,27 +66,30 @@
       
       return BAR_CondRetOK ;
 
-   } /* Fim funÃ§Ã£o: BAR  &Criar Baralho Vazia */
+   } /* Fim função: BAR  &Criar Baralho Vazia */
 
 /***************************************************************************
 *
-*  FunÃ§Ã£o: BAR Destruir Baralho de Cartas 
+*  Função: BAR Destruir Baralho de Cartas 
 *****/
 
    BAR_tpCondRet BAR_DestruirBaralho( BAR_tppBaralho pBaralho )
    {
-	PIL_DestruirPilha( pBaralho->pPilCartas ) ;
+	
+	if ( pBaralho->pPilCartas != NULL )
+		 PIL_DestruirPilha( pBaralho->pPilCartas ) ;
 
 	free( pBaralho ) ;
+	pBaralho = NULL ;
 
 	return BAR_CondRetOK ; 	
 
-   }/* Fim funÃ§Ã£o: BAR Destruir Baralho de Cartas */
+   }/* Fim função: BAR Destruir Baralho de Cartas */
 
 
 /***************************************************************************
 *
-*  FunÃ§Ã£o: BAR Preencher Baralho de Cartas 
+*  Função: BAR Preencher Baralho de Cartas 
 *****/
 
    BAR_tpCondRet BAR_PreencherBaralho( BAR_tppBaralho pBaralho , int numNaipes )
@@ -99,11 +99,12 @@
 
 	CAR_tppCarta cartaCriada ;	
 	
-	char auxNaipes ,
-		naipeUsado[] = {'p','o','c','e'} ;
+	char vetNaipes[ 4 ] = { 'c' , 'e' , 'o' , 'p' } ;
+					/* Copas, espadas, ouros, paus */
+	int auxNaipes,
+		 naipeDaVez;
 
-	int auxValor ,
-				naipeDaVez;
+	int auxValor ;
 
 	int cartasFaltando = TAM_BARALHO ;
 
@@ -125,8 +126,7 @@
 	while ( cartasFaltando )
 	{
 		naipeDaVez = ( auxNaipes % numNaipes ) ;
-				/* garante que 1 <= naipeDaVez <= numNaipes */
-
+				/* garante que 0 <= naipeDaVez < numNaipes */
 
 		for (auxValor=1 ; auxValor <= VALORES_POSSIVEIS ; auxValor++ )
 		{
@@ -137,21 +137,22 @@
 				return BAR_CondRetFaltouMemoria ;
 			}
 
-			CAR_PreencheCarta( cartaCriada , naipeUsado[naipeDaVez] , auxValor ) ;
+			CAR_PreencheCarta( cartaCriada , vetNaipes[naipeDaVez] , auxValor ) ;
 			PIL_PushCarta( pBaralho->pPilCartas , cartaCriada ) ;
 			cartasFaltando-- ;
 		}
 		auxNaipes++ ;
 	}
-
+	
+	
 	return BAR_CondRetOK ;
 
 	
-   }/* Fim funÃ§Ã£o: BAR Preencher Baralho de Cartas */
+   }/* Fim função: BAR Preencher Baralho de Cartas */
 
 /***************************************************************************
 *
-*  FunÃ§Ã£o: BAR Embaralhar Baralho de Cartas  
+*  Função: BAR Embaralhar Baralho de Cartas  
 *****/
 
    BAR_tpCondRet BAR_Embaralhar( BAR_tppBaralho pBaralho )
@@ -160,7 +161,6 @@
 	PIL_tpCondRet Ret ;
 	int contPilha ;
 		
-
 	CAR_tppCarta cartaAux ;
 
 	int numPilhaAleat ;	 
@@ -171,7 +171,7 @@
 	}
 	
 
-	/* InicializaÃ§Ã£o das pilhas auxiliares */
+	/* Inicialização das pilhas auxiliares */
 	for (contPilha = 0 ; contPilha < PILHAS_AUX_EMBARALHAMENTO ; contPilha++ )
 	{
 		Ret = PIL_CriarPilhaVazia( &pilhaAux[contPilha] ) ;
@@ -180,14 +180,15 @@
 			return BAR_CondRetFaltouMemoria ;
 		}
 	}	
-	/* InicializaÃ§Ã£o das pilhas auxiliares */
+
+	/* Inicialização das pilhas auxiliares */
 
 
-	/* DistribuiÃ§Ã£o dos baralhos nas pilhas auxiliares */
+	/* Distribuição dos baralhos nas pilhas auxiliares */
 
 	srand( time(NULL) );
 		/* usa o tempo atual como 
-		   semente para a randomizaÃ§Ã£o */
+		   semente para a randomização */
 
 	while ( PIL_PopCarta( pBaralho->pPilCartas , &cartaAux )
 			!= PIL_CondRetPilhaVazia )
@@ -196,10 +197,10 @@
 		PIL_PushCarta( pilhaAux[ numPilhaAleat ] , cartaAux ) ;
 	}
 
-	/* DistribuiÃ§Ã£o dos baralhos nas pilhas auxiliares */
+	/* Distribuição dos baralhos nas pilhas auxiliares */
 
 	
-	/* ReinserÃ§Ã£o das cartas no baralho */
+	/* Reinserção das cartas no baralho */
 	for ( contPilha = 0 ; contPilha < PILHAS_AUX_EMBARALHAMENTO ;
 								 contPilha++ )	
 	{
@@ -208,31 +209,40 @@
 		{
 			PIL_PushCarta( pBaralho->pPilCartas , cartaAux ) ;
 		}
+		
 		PIL_DestruirPilha( pilhaAux[ contPilha ] ) ;
 	}
 
-	/* ReinserÃ§Ã£o das cartas no baralho */
+	/* Fim Reinserção das cartas no baralho */
 
 	return BAR_CondRetOK ;
 
-   }/* Fim funÃ§Ã£o: BAR Embaralhar Baralho de Cartas */
+   }/* Fim função: BAR Embaralhar Baralho de Cartas */
 
 /***************************************************************************
 *
-*  FunÃ§Ã£o: BAR PopCarta 
+*  Função: BAR PopCarta 
 *****/
 
    BAR_tpCondRet BAR_PopCarta( BAR_tppBaralho pBaralho , CAR_tppCarta * pCarta )
    {
 	    if ( pBaralho->pPilCartas == NULL )
 	    {
-		return BAR_CondRetBaralhoVazio ; 
+			* pCarta = NULL ;
+			return BAR_CondRetBaralhoVazio ; 
 	    }
 
-	    PIL_PopCarta( pBaralho->pPilCartas , pCarta ) ;
+	    if ( PIL_PopCarta( pBaralho->pPilCartas , pCarta )
+			 == PIL_CondRetPilhaVazia )
+		{
+			* pCarta = NULL ;
+			return BAR_CondRetBaralhoVazio ;
+		}
 
 	    return BAR_CondRetOK ;
 
-   }/* Fim funÃ§Ã£o: BAR Pop Carta */
+   }/* Fim função: BAR Pop Carta */
 
-/********** Fim do mÃ³dulo de implementaÃ§Ã£o: BAR  Baralho de cartas  **********/
+/********** Fim do módulo de implementação: BAR  Baralho de cartas  **********/
+
+

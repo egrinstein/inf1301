@@ -1,5 +1,5 @@
 /***************************************************************************
-*  $MCI M√≥dulo de implementa√ß√£o: M√≥dulo de teste espec√≠fico
+*  $MCI MÛdulo de implementaÁ„o: MÛdulo de teste especÌfico
 *
 *  Arquivo gerado:              TESTBAR.C
 *  Letras identificadoras:      TBAR
@@ -10,36 +10,37 @@
 *			lw - Leonardo Wajnsztok
 *
 *
-*  $ED Descri√ß√£o do m√≥dulo
-*     Este m√≥dulo cont√©m as fun√ß√µes espec√≠ficas para o teste do
-*     m√≥dulo baralho de cartas. √â poss√≠vel testar com esse m√≥dulo a 
-*     cria√ß√£o de 10 baralhos de cartas (que ser√£o armazenados internamente
+*  $ED DescriÁ„o do mÛdulo
+*     Este mÛdulo contÈm as funÁıes especÌficas para o teste do
+*     mÛdulo baralho de cartas. … possÌvel testar com esse mÛdulo a 
+*     criaÁ„o de 10 baralhos de cartas (que ser„o armazenados internamente
 *     em um vetor.
 *
-*  $EIU Interface com o usu√°rio pessoa
-*     Comandos de teste espec√≠ficos para testar o m√≥dulo baralho de cartas:
+*  $EIU Interface com o usu·rio pessoa
+*     Comandos de teste especÌficos para testar o mÛdulo baralho de cartas:
 *
-*     =criar  <int> - chama a fun√ß√£o BAR_CriarBaralho, criando um baralho
-*					  no slot dado pelo par√¢metro fornecido.
+*     =criar  <int> - chama a funÁ„o BAR_CriarBaralho, criando um baralho
+*					  no slot dado pelo par‚metro fornecido.
 *					  O baralho pode ser criada do slot 0 ao slot 9. 
-*					  Qualquer n√∫mero fornecido fora deste intervalo √© tratado como par√¢metro incorreto.
+*					  Qualquer n˙mero fornecido fora deste intervalo È tratado como par‚metro incorreto.
 *					  O mesmo vale para os outros comandos de teste.
 *     =preencher <int> <int> 
-*                   - chama a fun√ß√£o BAR_PreencherBaralho,
-*					onde o primeiro par√¢metro √© o n√∫mero da baralho
-*					a ser alterado, o segundo √© o n√∫mero de naipes que
-*					o baralho ter√°.
-*     =pop <int>
-*					- chama a fun√ß√£o BAR_PopCarta,
-*					onde o par√¢metro se refere ao n√∫mero da baralho a ser removido
-*					seu topo. 
+*                   - chama a funÁ„o BAR_PreencherBaralho,
+*					onde o primeiro par‚metro È o n˙mero da baralho
+*					a ser alterado, o segundo È o n˙mero de naipes que
+*					o baralho ter·.
+*     =pop <int> <char> <int>
+*					- chama a funÁ„o BAR_PopCarta,
+*					onde o par‚metro se refere ao n˙mero da baralho a ser removido
+*					seu topo. Depois, È testado o valor do naipe com o <char> fornecido,
+*				        assim como o valor do valor <int> tambÈm fornecido.
 *     
 *     =embaralhar <int> 
-*                   - chama a fun√ß√£o BAR_Embaralhar, onde o primeiro par√¢metro
-*                     se refere ao n√∫mero da baralho a ser embaralhado.
+*                   - chama a funÁ„o BAR_Embaralhar, onde o primeiro par‚metro
+*                     se refere ao n˙mero da baralho a ser embaralhado.
 *
-*     =destroi <int>  - chama a fun√ß√£o BAR_DestruirBaralho, onde o inteiro dado se refere ao
-*                     n√∫mero da baralho a ser destru√≠do.
+*     =destroi <int>  - chama a funÁ„o BAR_DestruirBaralho, onde o inteiro dado se refere ao
+*                     n˙mero da baralho a ser destruÌdo.
 *
 ***************************************************************************/
 
@@ -54,7 +55,7 @@
 #include    "CARTA.H"
 #include    "BARALHO.H"
 
-/* Tabela dos nomes dos comandos de teste espec√≠ficos */
+/* Tabela dos nomes dos comandos de teste especÌficos */
 
 #define     CRIAR_BAR_CMD       "=criar"
 #define     PREENCHER_CMD       "=preencher"
@@ -62,24 +63,24 @@
 #define     EMBARALHAR_CMD		"=embaralhar"
 #define     DESTROI_CMD         "=destruir"
 
-/* M√°ximo de baralhos a serem testadas simult√¢neamente */
+/* M·ximo de baralhos a serem testadas simult‚neamente */
 
 #define     MAX_BARS            10
 
 BAR_tppBaralho vBaralhos[10];
 
-/*****  C√≥digo das func√µes exportadas pelo m√≥dulo  *****/
+/*****  CÛdigo das funcıes exportadas pelo mÛdulo  *****/
 
 
 /***********************************************************************
 *
-*  $FC Fun√ß√£o: TBAR Efetuar opera√ß√µes de teste espec√≠ficas para baralho de cartas
+*  $FC FunÁ„o: TBAR Efetuar operaÁıes de teste especÌficas para baralho de cartas
 *
-*  $ED Descri√ß√£o da fun√ß√£o
-*     Efetua os diversos comandos de teste espec√≠ficos para o m√≥dulo
+*  $ED DescriÁ„o da funÁ„o
+*     Efetua os diversos comandos de teste especÌficos para o mÛdulo
 *     baralho sendo testado.
 *
-*  $EP Par√¢metros
+*  $EP Par‚metros
 *     $P ComandoTeste - String contendo o comando
 *
 *  $FV Valor retornado
@@ -93,7 +94,6 @@ BAR_tppBaralho vBaralhos[10];
          BAR_tpCondRet CondRetObtido   = BAR_CondRetOK ;
          BAR_tpCondRet CondRetEsperada = BAR_CondRetFaltouMemoria ;
                                       /* inicializa para qualquer coisa */
-		 BAR_tpCondRet CondRetEsperadaCarta = BAR_CondRetOK ;
 
          
 
@@ -157,9 +157,9 @@ BAR_tppBaralho vBaralhos[10];
 
          else if ( strcmp( ComandoTeste , POP_CMD ) == 0 )
          {			
-            NumLidos = LER_LerParametros( "ii" ,
-                               &NumBaralho , &CondRetEsperada ) ;
-            if ( NumLidos != 2 || NumBaralho >= MAX_BARS || NumBaralho < 0 )
+            NumLidos = LER_LerParametros( "icii" ,
+                               &NumBaralho , &NaipeEsperado , &ValorEsperado , &CondRetEsperada ) ;
+            if ( NumLidos != 4 || NumBaralho >= MAX_BARS || NumBaralho < 0 )
             {
                return TST_CondRetParm ;
             } /* if */
@@ -167,8 +167,32 @@ BAR_tppBaralho vBaralhos[10];
             CondRetObtido = BAR_PopCarta( vBaralhos[NumBaralho] , &CartaObtida ) ;
 
 			
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+            Ret = TST_CompararInt( CondRetEsperada , CondRetObtido ,
                             "Retorno errado ao operar 'pop' no baralho") ;
+
+			if ( Ret != TST_CondRetOK )
+            {
+               return Ret ;
+            } /* if */
+
+			if ( CondRetObtido != BAR_CondRetOK )
+            {
+               return CondRetObtido ;
+            } /* if */
+
+			CAR_ObterNaipe( CartaObtida , &NaipeObtido );
+            Ret = TST_CompararChar( NaipeEsperado , NaipeObtido ,
+                                    "Carta obtida est· errada." );
+
+			if ( Ret != TST_CondRetOK )
+            {
+               return Ret ;
+            } /* if */
+
+			CAR_ObterValor( CartaObtida , &ValorObtido );
+            return TST_CompararInt( ValorEsperado , ValorObtido ,
+                                    "Carta obtida est· errada." );
+
 
          } /* fim ativa: Testar BAR Pop Carta da Baralho */
 
@@ -185,9 +209,7 @@ BAR_tppBaralho vBaralhos[10];
                return TST_CondRetParm ;
             } /* if */
 
-			CondRetObtido = BAR_Embaralhar( vBaralhos[NumBaralho] ) ;
-            return TST_CompararInt( CondRetEsperada , CondRetObtido,
-												"Retorno errado ao embaralhar") ;
+            return BAR_Embaralhar( vBaralhos[NumBaralho] ) ;
 	
 
          } /* Fim ativa: Testar BAR Embaralhar Baralho de cartas*/
@@ -215,6 +237,6 @@ BAR_tppBaralho vBaralhos[10];
 
       return TST_CondRetNaoConhec ;
 
-   } /* Fim fun√ß√£o: TBAR Efetuar opera√ß√µes de teste espec√≠ficas para baralho de cartas */
+   } /* Fim funÁ„o: TBAR Efetuar operaÁıes de teste especÌficas para baralho de cartas */
 
-/********** Fim do m√≥dulo de implementa√ß√£o: M√≥dulo de teste espec√≠fico **********/
+/********** Fim do mÛdulo de implementaÁ„o: MÛdulo de teste especÌfico **********/

@@ -2,26 +2,26 @@
 // Autor:     Eric Grinstein
 //			  Jordana Mecler
 //			  Leonardo Wajnsztok
-// Propﾃｳsito: Testar o mﾃｳdulo 
+// Propito: Testar o mulo 
 //			  Pilha de Cartas.
 //
 
 == Criar pilha numero 0
 =criar      0 0
 
-== Pop ﾃ《 de paus, pilha vazia.
+== Pop ﾁs de paus, pilha vazia.
 =pop 0 'p' 1 1
 
-== Push ﾃ《 de paus na pilha 0
+== Push ﾁs de paus na pilha 0
 =push 0 'p' 1 0
 
-== Ver ﾃ《 de paus na pilha 0
+== Ver ﾁs de paus na pilha 0
 =ver 0 0 'p' 1 0 
 
-== Pop ﾃ《 de Paus da pilha 0
+== Pop ﾁs de Paus da pilha 0
 =pop 0 'p' 1 0
 
-== Pop ﾃ《 de paus, pilha vazia.
+== Pop ﾁs de paus, pilha vazia.
 =pop 0 'p' 1 1
 
 == Ver carta, pilha vazia.
@@ -30,10 +30,10 @@
 == Destruir pilha numero 0
 =destruir   0 0
 
-== Criar pilha nﾃｺmero 1
+== Criar pilha n伹ero 1
 =criar 1 0
 
-== Criar pilha nﾃｺmero 2
+== Criar pilha n伹ero 2
 =criar 2 0
 
 == Destruir pilha 2

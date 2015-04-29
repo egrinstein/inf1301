@@ -22,9 +22,6 @@
 #undef BARALHO_DE_CARTAS_OWN
 
 
-#define TAM_BARALHO 104
-#define VALORES_POSSIVEIS 13
-	/* A=1, 2=2 ... K=13 */
 #define PILHAS_AUX_EMBARALHAMENTO 10
 
 /***********************************************************************
@@ -78,9 +75,12 @@
 
    BAR_tpCondRet BAR_DestruirBaralho( BAR_tppBaralho pBaralho )
    {
-	PIL_DestruirPilha( pBaralho->pPilCartas ) ;
+	
+	if ( pBaralho->pPilCartas != NULL )
+		 PIL_DestruirPilha( pBaralho->pPilCartas ) ;
 
 	free( pBaralho ) ;
+	pBaralho = NULL ;
 
 	return BAR_CondRetOK ; 	
 
@@ -99,7 +99,9 @@
 
 	CAR_tppCarta cartaCriada ;	
 	
-	char auxNaipes,
+	char vetNaipes[ 4 ] = { 'c' , 'e' , 'o' , 'p' } ;
+					/* Copas, espadas, ouros, paus */
+	int auxNaipes,
 		 naipeDaVez;
 
 	int auxValor ;
@@ -123,8 +125,8 @@
 	auxNaipes = 0;
 	while ( cartasFaltando )
 	{
-		naipeDaVez = ( auxNaipes % numNaipes ) + 1 ;
-				/* garante que 1 <= naipeDaVez <= numNaipes */
+		naipeDaVez = ( auxNaipes % numNaipes ) ;
+				/* garante que 0 <= naipeDaVez < numNaipes */
 
 		for (auxValor=1 ; auxValor <= VALORES_POSSIVEIS ; auxValor++ )
 		{
@@ -135,12 +137,14 @@
 				return BAR_CondRetFaltouMemoria ;
 			}
 
-			CAR_PreencheCarta( cartaCriada , naipeDaVez , auxValor ) ;
+			CAR_PreencheCarta( cartaCriada , vetNaipes[naipeDaVez] , auxValor ) ;
+			PIL_PushCarta( pBaralho->pPilCartas , cartaCriada ) ;
 			cartasFaltando-- ;
 		}
 		auxNaipes++ ;
 	}
-
+	
+	
 	return BAR_CondRetOK ;
 
 	
@@ -157,7 +161,6 @@
 	PIL_tpCondRet Ret ;
 	int contPilha ;
 		
-
 	CAR_tppCarta cartaAux ;
 
 	int numPilhaAleat ;	 
@@ -177,6 +180,7 @@
 			return BAR_CondRetFaltouMemoria ;
 		}
 	}	
+
 	/* Inicialização das pilhas auxiliares */
 
 
@@ -200,15 +204,16 @@
 	for ( contPilha = 0 ; contPilha < PILHAS_AUX_EMBARALHAMENTO ;
 								 contPilha++ )	
 	{
-		while ( PIL_PopCarta( pilhaAux[ numPilhaAleat ] , &cartaAux )
+		while ( PIL_PopCarta( pilhaAux[ contPilha ] , &cartaAux )
 			       != PIL_CondRetPilhaVazia )
 		{
 			PIL_PushCarta( pBaralho->pPilCartas , cartaAux ) ;
 		}
-		PIL_DestruirPilha( pilhaAux[ numPilhaAleat ] ) ;
+		
+		PIL_DestruirPilha( pilhaAux[ contPilha ] ) ;
 	}
 
-	/* Reinserção das cartas no baralho */
+	/* Fim Reinserção das cartas no baralho */
 
 	return BAR_CondRetOK ;
 
@@ -223,10 +228,16 @@
    {
 	    if ( pBaralho->pPilCartas == NULL )
 	    {
-		return BAR_CondRetBaralhoVazio ; 
+			* pCarta = NULL ;
+			return BAR_CondRetBaralhoVazio ; 
 	    }
 
-	    PIL_PopCarta( pBaralho->pPilCartas , pCarta ) ;
+	    if ( PIL_PopCarta( pBaralho->pPilCartas , pCarta )
+			 == PIL_CondRetPilhaVazia )
+		{
+			* pCarta = NULL ;
+			return BAR_CondRetBaralhoVazio ;
+		}
 
 	    return BAR_CondRetOK ;
 

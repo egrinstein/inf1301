@@ -2,7 +2,7 @@
 #define BARALHO_DE_CARTAS_
 /***************************************************************************
 *
-*  $MCD MÃ³dulo de definiÃ§Ã£o: BAR  Baralho de Cartas
+*  $MCD Módulo de definição: BAR  Baralho de Cartas
 *
 *  Arquivo gerado:              BAR.H
 *  Letras identificadoras:      BAR
@@ -12,9 +12,10 @@
 *	    Leonardo Wajnsztok
 *
 *
-*  $ED DescriÃ§Ã£o do mÃ³dulo
-*     Cria um baralho de 104 cartas com nÃºmero de naipes 
-*     podendo variar de 1 a 4.
+*  $ED Descrição do módulo
+*     Cria um baralho de 104 cartas com número de naipes 
+*     podendo variar de 1 a 4. Cada carta possui também um valor, 
+*     que varia de 1 (Ás) a 13 (Rei)
 *     
 ***************************************************************************/
  
@@ -26,19 +27,23 @@
 
 #include "CARTA.h"
 
-/***** DeclaraÃ§Ãµes exportadas pelo mÃ³dulo *****/
+/***** Definições exportadas pelo módulo *****/
 
-/* Tipo referÃªncia para um baralho de cartas */
+#define TAM_BARALHO 104
+#define VALORES_POSSIVEIS 13
+	/* A=1, 2=2 ... K=13 */
+
+/* Tipo referência para um baralho de cartas */
 
 typedef struct BAR_tagBaralho * BAR_tppBaralho ;
 
 /***********************************************************************
 *
-*  $TC Tipo de dados: BAR CondiÃ§Ãµes de retorno
+*  $TC Tipo de dados: BAR Condições de retorno
 *
 *
-*  $ED DescriÃ§Ã£o do tipo
-*     CondiÃ§Ãµes de retorno das funÃ§Ãµes da lista
+*  $ED Descrição do tipo
+*     Condições de retorno das funções da lista
 *
 ***********************************************************************/
 
@@ -48,31 +53,37 @@ typedef struct BAR_tagBaralho * BAR_tppBaralho ;
                /* Concluiu corretamente */
 
          BAR_CondRetBaralhoVazio ,
-               /* O baralho nÃ£o foi preenchido */
+               /* O baralho não foi preenchido */
 
 		 BAR_CondRetParamIncorreto ,
-               /* NÃºmero de naipes incorretos  */
+               /* Número de naipes incorretos  */
 
          BAR_CondRetFaltouMemoria
-               /* Faltou memÃ³ria ao criar baralho */
+               /* Faltou memória ao criar baralho */
 
    } BAR_tpCondRet ;
 
 
 /***********************************************************************
 *
-*  $FC FunÃ§Ã£o: BAR Criar Baralho de Cartas
+*  $FC Função: BAR Criar Baralho de Cartas
 *
-*  $ED DescriÃ§Ã£o da funÃ§Ã£o
+*  $ED Descrição da função
 *     Cria um baralho de cartas de baralho vazio
 *
-*  $EP ParÃ¢metros
-*	pBaralho - EndereÃ§o que receberÃ¡ um ponteiro para o baralho criado 
+*  $EP Parâmetros
+*	pBaralho - Endereço que receberá um ponteiro para o baralho criado 
 *	
 *  $FV Valor retornado
 *	BAR_CondRetOK - Criou sem problemas
-*	BAR_CondRetFaltouMemoria - Faltou memÃ³ria na criaÃ§Ã£o do baralho
-*	BAR_CondRetParamIncorreto - NÃºmero de naipes diferente de [1,4]
+*	BAR_CondRetFaltouMemoria - Faltou memória na criação do baralho
+*
+*  $AE Assertivas de Entrada - Nenhuma
+*
+*  $AS Assertivas de Saída - Caso falte memória (A função retorna BAR_CondRetFaltouMemoria),
+*							 pBaralho = NULL
+*                            Caso contrário (A função retorna BAR_CondRetOK)
+*                            um baralho de 0 naipes e uma pilha de cartas nula é criado.
 *
 ***********************************************************************/
 
@@ -80,16 +91,20 @@ typedef struct BAR_tagBaralho * BAR_tppBaralho ;
 
 /***********************************************************************
 *
-*  $FC FunÃ§Ã£o: BAR Destruir baralho
+*  $FC Função: BAR Destruir baralho
 *
-*  $ED DescriÃ§Ã£o da funÃ§Ã£o
-*	DestrÃ³i baralho de cartas
+*  $ED Descrição da função
+*	Destrói baralho de cartas
 *
-*  $EP ParÃ¢metros
-*     pBaralho de Cartas - ponteiro para o baralho a ser destruÃ­do
+*  $EP Parâmetros
+*     pBaralho de Cartas - ponteiro para o baralho a ser destruído
 *
 *  $FV Valor retornado
 *     BAR_CondRetOK    - destruiu sem problemas
+*
+*  $AE Assertivas de Entrada - pBaralho != NULL
+*
+*  $AS Assertivas de Saída - pBaralho = NULL
 *
 ***********************************************************************/
 
@@ -98,20 +113,38 @@ typedef struct BAR_tagBaralho * BAR_tppBaralho ;
 
 /***********************************************************************
 *
-*  $FC FunÃ§Ã£o: BAR Preencher Baralho de Cartas
+*  $FC Função: BAR Preencher Baralho de Cartas
 *
-*  $ED DescriÃ§Ã£o da funÃ§Ã£o
-*      Preenche baralho de cartas homogÃªneamente com
-*      os naipes fornecidos na criaÃ§Ã£o do baralho.
+*  $ED Descrição da função
+*      Preenche baralho de cartas homogêneamente com
+*      os naipes fornecidos na criação do baralho.
 *
-*  $EP ParÃ¢metros
+*  $EP Parâmetros
 *     pBaralho - ponteiro para o baralho a ser preenchido
-*     numNaipes - nÃºmero de naipes que terÃ¡ o baralho
+*     numNaipes - número de naipes que terá o baralho
 *
 *  $FV Valor retornado
 *     BAR_CondRetOK    - preencheu sem problemas
-*     BAR_CondRetFaltouMemÃ³ria - Faltou memÃ³ria no 
+*	  BAR_CondRetParamIncorreto - Número de naipes diferente de [1,4]
+*     BAR_CondRetFaltouMemória - Faltou memória no 
 *				 preenchimento do baralho
+*
+*  $AE Assertivas de Entrada - pBaralho é um baralho vazio, isto é,
+*							   com 0 naipes e uma pilha de cartas vazia.
+*
+*  $AS Assertivas de Saída - Se condRet == OK
+*                            Baralho com numNaipes e pilha de cartas de
+*                            tamanho TAM_BARALHO é criada. O número de 
+*                            cartas de cada naipe é TAM_BARALHO/numNaipes
+*
+*							 Se condRet == paramIncorreto:
+*							 Baralho continua com 0 naipes e pilha de cartas nula.
+*
+*							 Se condRet == FaltouMemória:
+*	                         Baralho possui naipes = numNaipes. A pilha de cartas pode
+*							 ser nula, vazia ou ter de 1 a TAM_BARALHO - 1 cartas.
+*                            nada se pode dizer sobre a distribuição dos naipes.
+*
 *
 ***********************************************************************/
 
@@ -120,20 +153,29 @@ typedef struct BAR_tagBaralho * BAR_tppBaralho ;
 
 /***********************************************************************
 *
-*  $FC FunÃ§Ã£o: BAR Pop Carta
+*  $FC Função: BAR Pop Carta
 *
-*  $ED DescriÃ§Ã£o da funÃ§Ã£o
+*  $ED Descrição da função
 *     Remove carta do topo do baralho
 *     
 *
-*  $EP ParÃ¢metros
+*  $EP Parâmetros
 *     pBaralho de Cartas - ponteiro para o baralho onde o topo deve ser removido
-*     pCarta - endereÃ§o que receberÃ¡ a carta removida.
+*     pCarta - endereço que receberá a carta removida.
 *              
 *
 *  $FV Valor retornado
 *     BAR_CondRetOK
 *     BAR_CondRetBaralhoVazio
+*
+*  $AE Assertivas de Entrada - pBaralho != NULL
+*
+*  $AS Assertivas de Saída - Se condRet == BaralhoVazio:
+*							 *pCarta = NULL
+*
+*                            Caso contrário (A função retorna BAR_CondRetOK)
+*                            *pCarta é uma carta de baralho válida (naipe
+*							 válido e valor válido)
 *
 ***********************************************************************/
 
@@ -141,20 +183,36 @@ typedef struct BAR_tagBaralho * BAR_tppBaralho ;
 
 /***********************************************************************
 *
-*  $FC FunÃ§Ã£o: BAR Embaralhar
+*  $FC Função: BAR Embaralhar
 *
-*  $ED DescriÃ§Ã£o da funÃ§Ã£o
-*      Randomiza a posiÃ§Ã£o das cartas no baralho. Para a randomizaÃ§Ã£o,
-*      as cartas sÃ£o separadas aleatoriamente em 5 pilhas e depois juntas.
+*  $ED Descrição da função
+*      Randomiza a posição das cartas no baralho. Para a randomização,
+*      as cartas são separadas aleatoriamente em 5 pilhas e depois juntas.
 *      
 *
-*  $EP ParÃ¢metros
+*  $EP Parâmetros
 *     pBaralho de Cartas - ponteiro para o baralho a ser embaralhado
 *
 *  $FV Valor retornado
 *     BAR_CondRetOK
 *     BAR_CondRetBaralhoVazio
-*     BAR_CondRetFaltouMemoria - Faltou memÃ³ria durante o embaralhamento
+*     BAR_CondRetFaltouMemoria - Faltou memória durante o embaralhamento
+*
+*  $AE Assertivas de Entrada - pBaralho != NULL
+*
+*  $AS Assertivas de Saída - Se condRet == BaralhoVazio:
+*							 Baralho continua da mesma forma em que estava
+*							 antes da chamada da função
+*
+*							 Se condRet == Faltou Memória:
+*							 Nada se pode dizer; o baralho pode com menos cartas
+*							 do que antes da chamada da função
+*
+*                            Se condRet == OK:
+*							 O novo baralho possui uma ordem diferente 
+*							 em sua pilha de cartas de antes da chamada da 
+*							 função.
+*
 *
 ***********************************************************************/
 
@@ -162,7 +220,7 @@ typedef struct BAR_tagBaralho * BAR_tppBaralho ;
 
 #undef BARALHO_DE_CARTAS_EXT
 
-/********** Fim do mÃ³dulo de definiÃ§Ã£o: BAR Baralho de Cartas  **********/
+/********** Fim do módulo de definição: BAR Baralho de Cartas  **********/
 
 #else
 #endif

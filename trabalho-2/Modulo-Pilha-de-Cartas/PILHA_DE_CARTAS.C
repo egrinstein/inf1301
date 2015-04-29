@@ -1,4 +1,3 @@
-
 /***************************************************************************
 *
 *  $MCD Módulo de Implementação: PIL  Pilha de Cartas
@@ -13,7 +12,7 @@
 ***************************************************************************/
  
 #include "lista.h"
-#include "CARTA.H"
+
 #include <malloc.h>
 
 #define PILHA_DE_CARTAS_OWN
@@ -46,13 +45,14 @@ void ExcluirCarta( void * pValor ) ;
    {
       LIS_tpCondRet condRet ;
       
+	  *pPilha = NULL ;
 	  *pPilha = ( PIL_tpPilha * ) malloc( sizeof( PIL_tpPilha ) ) ;
       if( *pPilha == NULL )
       {
 			return PIL_CondRetFaltouMemoria ;
       } /* if */
 	
-      condRet = LIS_CriarLista( &((*pPilha)->pListaCartas) , ExcluirCarta ) ; 
+      condRet = LIS_CriarLista( &((*pPilha)->pListaCartas) , CAR_ExcluirCarta ) ; 
 
       if ( condRet == LIS_CondRetFaltouMemoria )
       {
@@ -76,10 +76,10 @@ void ExcluirCarta( void * pValor ) ;
 	 	free( pPilha ) ;
 		return PIL_CondRetOK ;
 	}
-
+	
 	LIS_DestruirLista( pPilha->pListaCartas ) ;
 
-	//free( pPilha ) ;
+	free( pPilha ) ;
 
 	return PIL_CondRetOK ; 	
 
@@ -94,9 +94,9 @@ void ExcluirCarta( void * pValor ) ;
    PIL_tpCondRet PIL_PushCarta( PIL_tppPilha pPilha , CAR_tppCarta pCarta )
    {
 
-	LIS_IrFinalLista( pPilha->pListaCartas ) ;
+	LIS_IrInicioLista( pPilha->pListaCartas ) ;
 
-	LIS_InserirElementoApos( pPilha->pListaCartas , pCarta ) ; 
+	LIS_InserirElementoAntes( pPilha->pListaCartas , pCarta ) ; 
 
 	return PIL_CondRetOK ; 	
 
@@ -113,24 +113,27 @@ void ExcluirCarta( void * pValor ) ;
 
 	if ( posicao < 0 )
 	{
+		* pCarta = NULL ; 
 		return PIL_CondRetParamIncorreto ;	
 	}
 
-	LIS_IrFinalLista( pPilha->pListaCartas ) ; 
+	LIS_IrInicioLista( pPilha->pListaCartas ) ; 
 
-	Ret = LIS_AvancarElementoCorrente( pPilha->pListaCartas , - posicao ) ;
+	Ret = LIS_AvancarElementoCorrente( pPilha->pListaCartas , posicao ) ;
 
 	if ( Ret == LIS_CondRetFimLista )
 	{
+		* pCarta = NULL ;
 		return PIL_CondRetFimPilha ;
 	}
 
 	if ( Ret == LIS_CondRetListaVazia )
 	{
+		* pCarta = NULL ;
 		return PIL_CondRetPilhaVazia ;
 	}
 	
-        * pCarta = ( CAR_tppCarta ) LIS_ObterValor( pPilha->pListaCartas ) ;
+    LIS_ObterValor( pPilha->pListaCartas , pCarta) ;
 
 	return PIL_CondRetOK ; 	
 
@@ -175,5 +178,3 @@ void ExcluirCarta( void * pValor )
 
 
 /********** Fim do módulo de implementação: PIL  Pilha de cartas  **********/
-
-

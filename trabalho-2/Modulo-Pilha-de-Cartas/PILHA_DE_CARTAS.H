@@ -24,7 +24,7 @@
    #define PILHA_DE_CARTAS_EXT extern
 #endif
 
-
+#include "CARTA.h"
 
 /***** Declarações exportadas pelo módulo *****/
 
@@ -76,6 +76,13 @@ typedef struct PIL_tagPilha * PIL_tppPilha ;
 *	PIL_CondRetOK - Criou sem problemas
 *	PIL_CondRetFaltouMemoria - Faltou memória na criação da pilha
 *
+*  $AE Assertivas de Entrada - nenhuma
+*
+*  $AS Assertivas de Saída - Se condRet == OK:
+*							 ponteiro para pilha vazia é criada em *pPilha
+*		
+*							 CondRet == FaltouMemória:
+*							 * pPilha = NULL
 ***********************************************************************/
 
     PIL_tpCondRet PIL_CriarPilhaVazia( PIL_tppPilha * pPilha ) ;
@@ -97,6 +104,9 @@ typedef struct PIL_tagPilha * PIL_tppPilha ;
 *  $FV Valor retornado
 *     PIL_CondRetOK    - destruiu sem problemas
 *
+*  $AE Assertivas de Entrada - pPilha != NULL
+*
+*  $AS Assertivas de Saída - pPilha = NULL
 ***********************************************************************/
 
    PIL_tpCondRet PIL_DestruirPilha( PIL_tppPilha pPilha );
@@ -116,6 +126,11 @@ typedef struct PIL_tagPilha * PIL_tppPilha ;
 *  $FV Valor retornado
 *     PIL_CondRetOK    - inseriu sem problemas
 *     
+*  $AE Assertivas de Entrada - pCarta é uma carta válida
+*							   pPilha é uma pilha válida
+*							   (pode ser vazia)
+*
+*  $AS Assertivas de Saída - pCarta é inserido no topo da pilha
 *
 ***********************************************************************/
 
@@ -138,6 +153,15 @@ typedef struct PIL_tagPilha * PIL_tppPilha ;
 *  $FV Valor retornado
 *     PIL_CondRetOK
 *     PIL_CondRetPilhaVazia
+*
+*  $AE Assertivas de Entrada - pPilha é uma pilha válida (pode ser vazia)
+*
+*  $AS Assertivas de Saída - Se condRet == OK:
+*							 carta é removida do topo da pilha e colocada em
+*							 *pCarta.
+*		
+*							 Se condRet == PilhaVazia
+*							 *pCarta = NULL
 *
 ***********************************************************************/
 
@@ -162,6 +186,14 @@ typedef struct PIL_tagPilha * PIL_tppPilha ;
 *     PIL_CondRetParamIncorreto - posicao é um valor negativo
 *     PIL_CondRetFimPilha - a carta a ser vista está além do tamanho da pilha
 *
+*  $AE Assertivas de Entrada - pPilha é uma pilha válida (pode ser vazia)
+*
+*  $AS Assertivas de Saída - Se condRet == OK:
+*							 pCarta recebe ponteiro para carta da posição 'posição' da 
+*							 pPilha. A carta continua na pilha.
+*		
+*							 Caso contrário:
+*							 * pCarta = NULL
 ***********************************************************************/
 
      PIL_tpCondRet PIL_VerCarta( PIL_tppPilha pPilha , CAR_tppCarta * pCarta , int posicao );
