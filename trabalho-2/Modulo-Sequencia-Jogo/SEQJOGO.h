@@ -123,24 +123,27 @@ SEQJ_tpCondRet SEQJ_DestroiSequencia ( SEQJ_tppSeqJ pSeqJ ) ;
 
 /***********************************************************************
 *
-*  $FC Função: SEQJ Push Carta na sequência de jogo
+*  $FC FunÃ§Ã£o: SEQJ Push Carta na sequÃªncia de jogo
 *
-*  $ED Descrição da função
-*     A função da push em uma carta no inicio da Sequencia. 
+*  $ED DescriÃ§Ã£o da funÃ§Ã£o
+*     A função da push em uma carta no inicio da Sequencia.  
 *
-*  $EP Parâmetros
-*     pSeqJ   - sequência de jogo.
-*     pCarta  - carta a ser colocada na sequência de jogo.
+*  $EP ParÃ¢metros
+*     pSeqJ   - sequÃªncia de jogo.
+*     pCarta  - carta a ser colocada na sequÃªncia de jogo.
 *              
 *
 *  $FV Valor retornado
 *     SEQJ_CondRetOK      - push com sucesso.
 *     SEQJ_CondRetSequenciaVazia - sesquencia nao foi criada.
+*     SEQJ_CondRetCartasForaDaSequencia - carta não está na sequência.
 * 
 *   Assertivas de entrada esperadas - pSeqJ != NULL
-*                                      pCarta !=NULL
+*                                      pCarta !=NULL 
+*                                     pCarta é sequencia da primeira carta
+*                                     de pSeqJ->pPilha
 * 
-*  Assertivas de saída esperadas   - SEQJ_CondRetOK
+*  Assertivas de saÃ­da esperadas   - SEQJ_CondRetOK
 *
 ***********************************************************************/
 

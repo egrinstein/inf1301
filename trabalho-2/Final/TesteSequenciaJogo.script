@@ -62,14 +62,23 @@
 == Push carta sequencia pos 1
 =pushCarta 'c' 1 0 0
 
+== Push carta sequencia pos 1, porém fora da sequência, mesmo naipe
+=pushCarta 'c' 7 0 4
+
 == Verificar primeira (completa)
 =verificarCompleta 0 0
 
 == Obter completa (agora pode, pois as cartas estão todas viradas)
 =obterPilha 0 0
 
-== Push carta da seq 0
+== Push carta sequencia 0
 =pushCarta 'e' 12 0 0
+
+== Push carta sequencia 0, mesmo naipe, mas fora de sequencia (nao ok)
+=pushCarta 'e' 13 0 4
+
+== Push carta sequencia 0, naipe diferente, mas na sequencia (ok)
+=pushCarta 'p' 11 0 0
 
 == Pop carta da seq 0 
 =popCarta 0 0

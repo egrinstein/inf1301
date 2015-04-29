@@ -121,6 +121,20 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
       {
         return SEQJ_CondRetSequenciaVazia;
       }
+
+           // se tiverem cartas na seq, verificar se pode colocar
+
+      if( totalCartasNaSeq( pSeqJ ) != 0 )  
+      {
+        PIL_VerCarta( pSeqJ->pPilha, &cartaAux, 0 ); 
+
+        if ( !ehSequenciaValor( cartaAux, pCarta ))
+        {
+            return SEQJ_CondRetCartasForaDaSequencia;
+        }
+      }  
+
+      //senao apenas dar push
 	  
       PIL_PushCarta( pSeqJ->pPilha, pCarta);
 
