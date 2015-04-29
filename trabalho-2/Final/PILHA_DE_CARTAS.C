@@ -93,10 +93,16 @@ void ExcluirCarta( void * pValor ) ;
 
    PIL_tpCondRet PIL_PushCarta( PIL_tppPilha pPilha , CAR_tppCarta pCarta )
    {
+	LIS_tpCondRet Ret ;
 
 	LIS_IrInicioLista( pPilha->pListaCartas ) ;
 
 	LIS_InserirElementoAntes( pPilha->pListaCartas , pCarta ) ; 
+	if( Ret != LIS_CondRetOK )
+	{
+		return PIL_CondRetFaltouMemoria ;
+	} /* if */	
+
 
 	return PIL_CondRetOK ; 	
 
@@ -155,7 +161,7 @@ void ExcluirCarta( void * pValor ) ;
 			return condRet ;
 		}
 
-		CAR_ObterNaipe( *pCarta, &naipe ); //será que tem que tratar condret daqui?
+		CAR_ObterNaipe( *pCarta, &naipe ); 
 		CAR_ObterValor( *pCarta, &valor );
 
 		LIS_ExcluirElemento( pPilha->pListaCartas ); 

@@ -125,12 +125,18 @@ typedef struct PIL_tagPilha * PIL_tppPilha ;
 *
 *  $FV Valor retornado
 *     PIL_CondRetOK    - inseriu sem problemas
-*     
+*	  PIL_CondRetFaltouMemoria
+*
 *  $AE Assertivas de Entrada - pCarta é uma carta válida
 *							   pPilha é uma pilha válida
 *							   (pode ser vazia)
 *
-*  $AS Assertivas de Saída - pCarta é inserido no topo da pilha
+*  $AS Assertivas de Saída - se CondRet == OK
+*							 pCarta é inserido no topo da pilha
+*
+*							 se CondRet == Faltou Memória
+*							 pCarta não é inserido. Pilha continua
+*							 no estado que estava.
 *
 ***********************************************************************/
 
