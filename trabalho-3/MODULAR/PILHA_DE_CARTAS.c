@@ -168,6 +168,7 @@ void ExcluirCarta( void * pValor ) ;
        
 		PIL_tpCondRet condRet = PIL_VerCarta( pPilha , pCarta , 0 ) ;
        
+		LIS_IrFinalLista( pPilha->pListaCartas ) ;
         
 		if ( condRet != PIL_CondRetOK )
 		{

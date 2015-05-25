@@ -29,6 +29,7 @@ void CriaPilha( PIL_tppPilha *pilha , BAR_tppBaralho baralho , int numCartas )
         PIL_PushCarta( *pilha , carta ) ;
     }
 }
+
 void CriarMontes( MON_tppMonte monte[] , BAR_tppBaralho baralho )
 {
     int i;
@@ -43,32 +44,6 @@ void CriarMontes( MON_tppMonte monte[] , BAR_tppBaralho baralho )
     
 
 }
-
-void ExcluirLista( void * pLista )
-{
-    LIS_DestruirLista( (LIS_tppLista) pLista );
-}
-
-void ExcluirMonte( void * pMonte )
-{
-    LIS_DestruirLista( (LIS_tppLista) pMonte );
-}
-
-void ExcluirSeqJogo( void * pSeqJogo )
-{
-    LIS_DestruirLista( (LIS_tppLista) pSeqJogo );
-}
-
-void ExcluirSeqFim( void * pSeqFim )
-{
-    LIS_DestruirLista( (LIS_tppLista) pSeqFim);
-}
-
-void ExcluirBaralho( void * pBaralho )
-{
-    LIS_DestruirLista( (LIS_tppLista) pBaralho);
-}
-
 
 void CriarSeqsJogo( SEQJ_tppSeqJ seqsJogo[] ,BAR_tppBaralho baralho )
 {
@@ -99,6 +74,34 @@ void CriarSeqsFinais( SEQFIM_tppSeqFim seqsFinais[] )
     }
 
 }
+
+
+
+void ExcluirLista( void * pLista )
+{
+    LIS_DestruirLista( (LIS_tppLista) pLista );
+}
+
+void ExcluirMonte( void * pMonte )
+{
+     MON_DestruirMonte( (MON_tppMonte) pMonte );
+}
+
+void ExcluirSeqJogo( void * pSeqJogo )
+{
+    SEQJ_DestroiSequencia( (SEQJ_tppSeqJ) pSeqJogo );
+}
+
+void ExcluirSeqFim( void * pSeqFim )
+{
+    SEQFIM_DestroiSeqFim( (SEQFIM_tppSeqFim) pSeqFim );
+}
+
+void ExcluirBaralho( void * pBaralho )
+{
+    BAR_DestruirBaralho( (BAR_tppBaralho) pBaralho);
+}
+
 
 
 int novoJogo ( LIS_tppLista * listaPrincipal)
@@ -133,16 +136,17 @@ int novoJogo ( LIS_tppLista * listaPrincipal)
     LIS_CriarLista( &listaSeqJogo , ExcluirSeqJogo ) ;
     LIS_CriarLista( &listaSeqFim , ExcluirSeqFim ) ;
 
-    LIS_InserirElementoAntes( * listaPrincipal , listaMonte ) ;
-    LIS_InserirElementoAntes( * listaPrincipal , listaBaralho ) ;
-    LIS_InserirElementoAntes( * listaPrincipal , listaSeqJogo ) ;
-    LIS_InserirElementoAntes( * listaPrincipal , listaSeqFim ) ;
+	LIS_InserirElementoApos( * listaPrincipal , listaBaralho ) ;
+    LIS_InserirElementoApos( * listaPrincipal , listaMonte ) ;
+    LIS_InserirElementoApos( * listaPrincipal , listaSeqJogo ) ;
+    LIS_InserirElementoApos( * listaPrincipal , listaSeqFim ) ;
+
 
     BAR_CriarBaralho( &baralho ) ;
     BAR_PreencherBaralho ( baralho , numNaipes ) ;
 
     BAR_Embaralhar( baralho ) ;
-    LIS_InserirElementoAntes( listaBaralho , baralho ) ;
+    LIS_InserirElementoApos( listaBaralho , baralho ) ;
 
     CriarMontes( montes , baralho ) ;
     for (i=0 ; i < 5 ; i++)
@@ -163,7 +167,6 @@ int novoJogo ( LIS_tppLista * listaPrincipal)
     {
         LIS_InserirElementoAntes( listaSeqFim , seqsFinais[i] ) ;
     }
-
 
 	return 1;
 }
@@ -226,24 +229,29 @@ void tratarMoveMonte( LIS_tppLista listaPrincipal )
 	SEQJ_tppSeqJ SeqAtual ;
 
 	LIS_IrInicioLista( listaPrincipal ) ;
-	LIS_ObterValor( listaPrincipal , (void**)&ListaDeMontes ) ;
+	LIS_AvancarElementoCorrente( listaPrincipal , 1 ) ; /* a lista de montes é o segundo
+															elemento da lista principal*/
+	LIS_ObterValor( listaPrincipal , ( void **)&ListaDeMontes ) ;
 
-	LIS_IrFinalLista( listaPrincipal ) ;
-	LIS_ObterValor( listaPrincipal , (void**)&ListaDeSeq );
+	LIS_IrInicioLista( listaPrincipal ) ;
+	LIS_AvancarElementoCorrente( listaPrincipal , 2 ) ; /* a lista de sequencias de jogo é o 3ª
+															elemento da lista principal*/
+	LIS_ObterValor( listaPrincipal , ( void **)&ListaDeSeq );
 
 	LIS_IrFinalLista( ListaDeMontes ) ;
-	LIS_ObterValor( ListaDeMontes , (void**)&monte ) ;
+	LIS_ObterValor( ListaDeMontes , ( void **)&monte ) ;
 
 	LIS_IrInicioLista( ListaDeSeq ) ;
-	LIS_ObterValor( ListaDeSeq , (void**)&SeqAtual );
+	LIS_ObterValor( ListaDeSeq , ( void **)&SeqAtual );
 
 	for( i = 0 ; i < 10 ; i++ )
 	{
 		MON_PopCartaMonte ( monte, &cartaAux ) ;
-		SEQJ_PushCartaSequencia( SeqAtual , cartaAux ) ;
+		SEQJ_PushCartaSequencia( SeqAtual , cartaAux , 0) ;
 		LIS_AvancarElementoCorrente( ListaDeSeq, 1 ) ;
-		LIS_ObterValor( ListaDeSeq , (void**)SeqAtual) ;
+		LIS_ObterValor( ListaDeSeq , ( void** )&SeqAtual) ;
 	}
+
 
 	LIS_ExcluirElemento( ListaDeMontes ) ;
 }
@@ -263,7 +271,8 @@ int tratarMoveSequencia(LIS_tppLista listaPrincipal, int NumSeqOrigem, int NumSe
     SEQJ_tppSeqJ SeqOrigem ;
     SEQJ_tppSeqJ SeqDestino ;
     
-    LIS_IrFinalLista( ListaDeSeq ) ;
+	LIS_IrInicioLista( listaPrincipal ) ;
+	LIS_AvancarElementoCorrente( listaPrincipal , 2 ) ; 
     LIS_ObterValor(listaPrincipal, (void**)&ListaDeSeq) ;
 
 	LIS_IrInicioLista( ListaDeSeq ) ;
@@ -280,7 +289,7 @@ int tratarMoveSequencia(LIS_tppLista listaPrincipal, int NumSeqOrigem, int NumSe
         SEQJ_PopCartaSequencia( SeqOrigem, &cartaAux ) ;
 
 		PIL_PushCarta( pilhaAux , cartaAux ) ;
-
+					// o que é esse pilhaAux mesmo
 		if(i > 0)
 		{
 			verSeq = verificaCartasConsecutivas(cartaAux, cartaAnt);
@@ -288,7 +297,7 @@ int tratarMoveSequencia(LIS_tppLista listaPrincipal, int NumSeqOrigem, int NumSe
 			{
 				while( PIL_PopCarta( pilhaAux, &cartaAux) == 0 )
 				{
-					SEQJ_PushCartaSequencia( SeqOrigem , cartaAux ) ;
+					SEQJ_PushCartaSequencia( SeqOrigem , cartaAux , 1 ) ;
 				}
 				return 0; //Temos que colocar aviso ao usuário
 			}
@@ -302,7 +311,7 @@ int tratarMoveSequencia(LIS_tppLista listaPrincipal, int NumSeqOrigem, int NumSe
 	if( Ret != 1 )
 	{
 		verSeq = verificaCartasConsecutivas(cartaAux, cartaAnt );
-		SEQJ_PushCartaSequencia( SeqDestino, cartaAnt ) ;
+		SEQJ_PushCartaSequencia( SeqDestino, cartaAnt , 1) ;
 	}
 
 	if( verSeq > 0 )
@@ -311,13 +320,13 @@ int tratarMoveSequencia(LIS_tppLista listaPrincipal, int NumSeqOrigem, int NumSe
 		{
 			PIL_PopCarta( pilhaAux , &cartaAux ) ;
 
-			SEQJ_PushCartaSequencia( SeqDestino , cartaAux ) ;
+			SEQJ_PushCartaSequencia( SeqDestino , cartaAux , 1) ;
 		}
 	}
 	else
 	{
 		PIL_PopCarta( pilhaAux , &cartaAux ) ;
-		SEQJ_PushCartaSequencia( SeqOrigem , cartaAux ) ;
+		SEQJ_PushCartaSequencia( SeqOrigem , cartaAux , 1) ;
 		return 0 ;
 	}
 
@@ -360,7 +369,7 @@ int main (void)
 
 	while( caracterLido != 's' )
 	{
-		if( caracterLido == 'm' )
+		if( caracterLido == 't' )
 		{
 			if(CapturaOpcao(&SeqOrigem, &SeqDestino, &NumCartas) == 0)
 			{
@@ -372,7 +381,7 @@ int main (void)
 				printf("Erro de leitura\n");
 			}
 		}
-		if( caracterLido == 't' )
+		if( caracterLido == 'm' )
 		{
 			if(numMontes > 0)
 			{

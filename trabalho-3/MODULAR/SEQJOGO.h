@@ -131,6 +131,8 @@ SEQJ_tpCondRet SEQJ_DestroiSequencia ( SEQJ_tppSeqJ pSeqJ ) ;
 *  $EP ParÃƒÂ¢metros
 *     pSeqJ   - sequÃƒÂªncia de jogo.
 *     pCarta  - carta a ser colocada na sequÃƒÂªncia de jogo.
+*	  operacao - tipo da operacao: 1 caso seja uma transferencia entre
+*					sequencias, 0 caso seja uma carta vinda de um monte
 *              
 *
 *  $FV Valor retornado
@@ -142,12 +144,13 @@ SEQJ_tpCondRet SEQJ_DestroiSequencia ( SEQJ_tppSeqJ pSeqJ ) ;
 *                                      pCarta !=NULL 
 *                                     pCarta Ã© sequencia da primeira carta
 *                                     de pSeqJ->pPilha
+*                                     operacao == 0 || operacao == 1
 * 
 *  Assertivas de saÃƒÂ­da esperadas   - SEQJ_CondRetOK
 *
 ***********************************************************************/
 
-SEQJ_tpCondRet SEQJ_PushCartaSequencia( SEQJ_tppSeqJ pSeqJ, CAR_tppCarta pCarta ) ;
+SEQJ_tpCondRet SEQJ_PushCartaSequencia( SEQJ_tppSeqJ pSeqJ, CAR_tppCarta pCarta , int operacao ) ;
 
 
 /***********************************************************************

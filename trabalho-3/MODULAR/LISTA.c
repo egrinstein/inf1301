@@ -253,10 +253,6 @@
 
       tpElemLista * pElem ;
 
-      #ifdef _DEBUG
-         assert( pLista != NULL ) ;
-      #endif
-
       /* Criar elemento a inerir após */
 
          pElem = CriarElemento( pLista , pValor ) ;
@@ -405,10 +401,6 @@
 
    LIS_tpCondRet LIS_IrFinalLista( LIS_tppLista pLista )
    {
-
-      #ifdef _DEBUG
-         assert( pLista != NULL ) ;
-      #endif
        
        if( pLista == NULL )
        {

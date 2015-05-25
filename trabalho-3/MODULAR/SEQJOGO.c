@@ -113,7 +113,7 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
  *  FunÃƒÂ§ÃƒÂ£o: SEQJ &Push carta na sequencia
  *****/
 
-   SEQJ_tpCondRet SEQJ_PushCartaSequencia( SEQJ_tppSeqJ pSeqJ, CAR_tppCarta pCarta )
+   SEQJ_tpCondRet SEQJ_PushCartaSequencia( SEQJ_tppSeqJ pSeqJ, CAR_tppCarta pCarta , int operacao )
    {
       CAR_tppCarta cartaAux;
 
@@ -122,21 +122,24 @@ int ehMesmoNaipe( CAR_tppCarta carta1, CAR_tppCarta carta2 ) ;
         return SEQJ_CondRetSequenciaVazia;
       }
 
-           // se tiverem cartas na seq, verificar se pode colocar
+       // se tiverem cartas na seq, verificar se pode colocar
+	  if ( operacao == 1 )
+	  {
+		  if( totalCartasNaSeq( pSeqJ ) != 0 )  
+		  {
+			PIL_VerCarta( pSeqJ->pPilha, &cartaAux, 0 ); 
 
-      if( totalCartasNaSeq( pSeqJ ) != 0 )  
-      {
-        PIL_VerCarta( pSeqJ->pPilha, &cartaAux, 0 ); 
-
-        if ( !ehSequenciaValor( cartaAux, pCarta ))
-        {
-            return SEQJ_CondRetCartasForaDaSequencia;
-        }
-      }  
+			if ( !ehSequenciaValor( cartaAux, pCarta ))
+			{
+				return SEQJ_CondRetCartasForaDaSequencia;
+			}
+		  }  
+	  }
 
       //senao apenas dar push
 	  
       PIL_PushCarta( pSeqJ->pPilha, pCarta);
+	
 
       pSeqJ->numCartasViradas++;
 
