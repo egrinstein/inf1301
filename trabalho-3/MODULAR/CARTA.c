@@ -8,8 +8,8 @@
  *
  *  Projeto: Trabalho 2 - Programação Modular
  *  Autores: EG - Eric Grinstein
-             JM - Jordana Mecler
-             LW - Leonardo Wajnsztok
+ JM - Jordana Mecler
+ LW - Leonardo Wajnsztok
  *
  *  $HA Histórico de evolução:
  *     Versão      Autor            Data                Observações
@@ -35,12 +35,12 @@
 typedef struct CAR_tagCarta {
     
     char naipe ;
-        /* Naipe da carta
-         */
+    /* Naipe da carta
+     */
     
     int valor ;
-        /* Valor da carta
-         */
+    /* Valor da carta
+     */
     
 } CAR_tpCarta ;
 
@@ -159,7 +159,7 @@ CAR_tpCondRet CAR_ObterValor( CAR_tppCarta pCarta , int * pValor )
     {
         return CAR_CondRetCartaNaoExiste ;
     } /* if */
-
+    
     if( !VerificarValor( pCarta->valor ) )
     {
         return CAR_CondRetValorNaoExiste ;
@@ -194,7 +194,7 @@ CAR_tpCondRet CAR_ImprimeCarta( CAR_tppCarta pCarta )
         return CAR_CondRetValorNaoExiste ;
     } /* if */
     
-    printf("%d %c\n" , pCarta->valor , pCarta->naipe ) ;
+    printf("%2d%c " , pCarta->valor , pCarta->naipe ) ;
     
     return CAR_CondRetOK ;
     

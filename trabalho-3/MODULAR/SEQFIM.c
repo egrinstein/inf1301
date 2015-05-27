@@ -15,7 +15,7 @@
 #include <stdio.h>
 
 #define SEQUENCIA_FINAL_OWN
-#include "SEQFIM.H"
+#include "SEQFIM.h"
 #undef SEQUENCIA_FINAL_OWN
 
 /***********************************************************************

@@ -31,8 +31,8 @@
 #define SEQFIM_EXT extern
 #endif
 
-#include "PILHA_DE_CARTAS.H"
-#include "CARTA.H"
+#include "PILHA_DE_CARTAS.h"
+#include "CARTA.h"
 
 /***** Declarações exportadas pelo módulo *****/
 
