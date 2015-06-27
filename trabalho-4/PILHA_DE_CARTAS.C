@@ -170,7 +170,10 @@ PIL_tpCondRet PIL_Verifica ( PIL_tppPilha pPilha , int *numErros )
 PIL_tpCondRet PIL_CriarPilhaVazia( PIL_tppPilha * pPilha )
 {
 	LIS_tpCondRet condRet ;
-    
+#ifdef _DEBUG
+	CNT_CONTAR( "PIL_CriarPilhaVazia" ) ;
+#endif
+
 	*pPilha = NULL ;
     
 	*pPilha = ( PIL_tpPilha * ) malloc( sizeof( PIL_tpPilha ) ) ;
@@ -195,9 +198,8 @@ PIL_tpCondRet PIL_CriarPilhaVazia( PIL_tppPilha * pPilha )
 	}
 
     #ifdef _DEBUG
-
-		CED_MarcarEspacoAtivo(pPilha);
-
+		CNT_CONTAR("PIL_CriarPilhaVazia-pr0") ;
+		CED_MarcarEspacoAtivo(pPilha) ;
     #endif
 
 	return PIL_CondRetOK ;
@@ -213,11 +215,16 @@ PIL_tpCondRet PIL_DestruirPilha( PIL_tppPilha pPilha )
 {
     
    	LIS_tpCondRet Ret ;
-    
+
+#ifdef _DEBUG
+	CNT_CONTAR("PIL_DestruirPilha");
+#endif
     
 	if ( pPilha->pListaCartas == NULL )
 	{
-    	free( pPilha ) ;
+#ifdef _DEBUG
+		CNT_CONTAR( "PIL_DestruirPilha-if0" ) ;
+#endif
     	return PIL_CondRetOK ;
 	}
 
@@ -226,6 +233,9 @@ PIL_tpCondRet PIL_DestruirPilha( PIL_tppPilha pPilha )
     
 	if( Ret != LIS_CondRetOK )
 	{
+#ifdef _DEBUG
+	   	CNT_CONTAR( "PIL_DestruirPilha-if1" ) ;
+#endif
     	return PIL_CondRetPilhaVazia ;
    	 
 	} /* if */
@@ -233,9 +243,8 @@ PIL_tpCondRet PIL_DestruirPilha( PIL_tppPilha pPilha )
 	free(pPilha) ;
     
 	#ifdef _DEBUG
-
+		CNT_CONTAR( "PIL_DestruirPilha-pr0" ) ;
 		CED_MarcarEspacoNaoAtivo(pPilha);
-
     #endif
 
 	return PIL_CondRetOK ;
@@ -251,6 +260,11 @@ PIL_tpCondRet PIL_DestruirPilha( PIL_tppPilha pPilha )
 PIL_tpCondRet PIL_PushCarta( PIL_tppPilha pPilha , CAR_tppCarta pCarta )
 {
    	LIS_tpCondRet Ret ;
+
+#ifdef _DEBUG
+	CNT_CONTAR( "PIL_PushCarta" ) ;
+#endif
+
     
 	LIS_IrFinalLista( pPilha->pListaCartas ) ;
     
@@ -260,7 +274,13 @@ PIL_tpCondRet PIL_PushCarta( PIL_tppPilha pPilha , CAR_tppCarta pCarta )
     	return PIL_CondRetFaltouMemoria ;
 	} /* if */
     
+#ifdef _DEBUG
+    CNT_CONTAR( "PIL_PushCarta-pr0" ) ;
+#endif
+
 	return PIL_CondRetOK ;
+
+
     
 }/* Fim função: PIL Push Carta */
 
@@ -272,9 +292,18 @@ PIL_tpCondRet PIL_PushCarta( PIL_tppPilha pPilha , CAR_tppCarta pCarta )
 PIL_tpCondRet PIL_VerCarta( PIL_tppPilha pPilha , CAR_tppCarta * pCarta , int posicao )
 {
 	LIS_tpCondRet Ret ;
+
+#ifdef _DEBUG
+	CNT_CONTAR( "PIL_VerCarta" ) ;
+#endif
+
     
 	if ( posicao < 0 )
 	{
+#ifdef _DEBUG
+		CNT_CONTAR( "PIL_VerCarta-if0" ) ;
+#endif
+
     	return PIL_CondRetParamIncorreto ;
 	}
     
@@ -284,16 +313,25 @@ PIL_tpCondRet PIL_VerCarta( PIL_tppPilha pPilha , CAR_tppCarta * pCarta , int po
     
 	if ( Ret == LIS_CondRetFimLista )
 	{
+#ifdef _DEBUG
+		CNT_CONTAR( "PIL_VerCarta-if1" ) ;
+#endif
     	return PIL_CondRetFimPilha ;
 	}
     
 	if ( Ret == LIS_CondRetListaVazia )
 	{
+#ifdef _DEBUG
+		CNT_CONTAR( "PIL_VerCarta-if2" ) ;
+#endif
     	return PIL_CondRetPilhaVazia ;
 	}
     
 	LIS_ObterValor( pPilha->pListaCartas , (void**)pCarta ) ;
-    
+#ifdef _DEBUG
+	CNT_CONTAR( "PIL_VerCarta-pr0" ) ;
+#endif
+
 	return PIL_CondRetOK ;
     
 }/* Fim função: PIL VerCarta */
@@ -309,11 +347,17 @@ PIL_tpCondRet PIL_PopCarta( PIL_tppPilha pPilha , CAR_tppCarta * pCarta )
 	char naipe ;
     
 	PIL_tpCondRet condRet = PIL_VerCarta( pPilha , pCarta , 0 ) ;
-    
+
+#ifdef _DEBUG
+	CNT_CONTAR( "PIL_PopCarta" ) ;
+#endif
 	LIS_IrFinalLista( pPilha->pListaCartas ) ;
     
 	if ( condRet != PIL_CondRetOK )
 	{
+#ifdef _DEBUG
+		CNT_CONTAR( "PIL_PopCarta-if0" ) ;
+#endif
     	return condRet ;
 	}
     
@@ -328,7 +372,10 @@ PIL_tpCondRet PIL_PopCarta( PIL_tppPilha pPilha , CAR_tppCarta * pCarta )
     
 	CAR_CriarCarta( pCarta ) ;
 	CAR_PreencheCarta( *pCarta , naipe, valor ) ;
-    
+#ifdef _DEBUG
+	CNT_CONTAR( "PIL_PopCarta-pr0" ) ;
+#endif
+
 	return PIL_CondRetOK ;
     
 }/* Fim função: PIL Pop Carta */
@@ -343,9 +390,9 @@ void ExcluirCarta( void * pValor )
 {
 	CAR_ExcluirCarta( (CAR_tppCarta) pValor ) ;
 
-	#ifdef _DEBUG
-		CED_MarcarEspacoNaoAtivo(espaco);
-    #endif
+#ifdef _DEBUG
+	CED_MarcarEspacoNaoAtivo(espaco);
+#endif
 }
 
 
