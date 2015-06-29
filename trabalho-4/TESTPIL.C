@@ -1,5 +1,5 @@
 /***************************************************************************
-*  $MCI MÛdulo de implementaÁ„o: MÛdulo de teste especÌfico
+*  $MCI M√≥dulo de implementa√ß√£o: M√≥dulo de teste espec√≠fico
 *
 *  Arquivo gerado:              TESTPIL.C
 *  Letras identificadoras:      TPIL
@@ -10,40 +10,40 @@
 *			lw - Leonardo Wajnsztok
 *
 *
-*  $ED DescriÁ„o do mÛdulo
-*     Este mÛdulo contÈm as funÁıes especÌficas para o teste do
-*     mÛdulo pilha de cartas. … possÌvel testar com esse mÛdulo a 
-*     criaÁ„o de 10 pilhas de cartas (que ser„o armazenadas internamente
+*  $ED Descri√ß√£o do m√≥dulo
+*     Este m√≥dulo cont√©m as fun√ß√µes espec√≠ficas para o teste do
+*     m√≥dulo pilha de cartas. √â poss√≠vel testar com esse m√≥dulo a 
+*     cria√ß√£o de 10 pilhas de cartas (que ser√£o armazenadas internamente
 *     em um vetor.
 *
-*  $EIU Interface com o usu·rio pessoa
-*     Comandos de teste especÌficos para testar o mÛdulo pilha de cartas:
+*  $EIU Interface com o usu√°rio pessoa
+*     Comandos de teste espec√≠ficos para testar o m√≥dulo pilha de cartas:
 *
-*     =criar  <int> - chama a funÁ„o PIL_CriarPilhaVazia, criando 
-*					  criando-a no slot de pilhas dado pelo par‚metro fornecido.
-*					  A pilha pode ser criada do slot 0 ao slot 9. Qualquer n˙mero 
-*                     fornecido fora deste intervalo È tratado como par‚metro incorreto.
+*     =criar  <int> - chama a fun√ß√£o PIL_CriarPilhaVazia, criando 
+*					  criando-a no slot de pilhas dado pelo par√¢metro fornecido.
+*					  A pilha pode ser criada do slot 0 ao slot 9. Qualquer n√∫mero 
+*                     fornecido fora deste intervalo √© tratado como par√¢metro incorreto.
 *					  O mesmo vale para os outros comandos de teste.
 *     =push <int> <Char> <int>
-*                   - chama a funÁ„o PIL_PushCarta,
-*					onde o primeiro par‚metro È o n˙mero da pilha
-*					a ser alterada, o segundo È o naipe da carta a ser
-*					inserida e o ˙ltimo seu valor.
+*                   - chama a fun√ß√£o PIL_PushCarta,
+*					onde o primeiro par√¢metro √© o n√∫mero da pilha
+*					a ser alterada, o segundo √© o naipe da carta a ser
+*					inserida e o √∫ltimo seu valor.
 *     =pop <int> <char> <int>
-*					- chama a funÁ„o PIL_PopCarta,
-*					onde o par‚metro se refere ao n˙mero da pilha a ser removido
-*					seu topo. Depois, È testado o valor do naipe com o <char> fornecido,
-*				    assim como o valor do valor <int> tambÈm fornecido.
+*					- chama a fun√ß√£o PIL_PopCarta,
+*					onde o par√¢metro se refere ao n√∫mero da pilha a ser removido
+*					seu topo. Depois, √© testado o valor do naipe com o <char> fornecido,
+*				    assim como o valor do valor <int> tamb√©m fornecido.
 *     
 *     =ver <int> <int> <char> <int>
-*                   - chama a funÁ„o PIL_VerCarta, onde o primeiro par‚metro
-*                   se refere ao n˙mero da pilha a ser vista e o segundo a posiÁ„o da
-*					pilha em relaÁ„o ao topo a ser vista.
-*					Depois, È testado o valor do naipe com o <char> fornecido,
-*				    assim como o valor do valor <int> tambÈm fornecido.
+*                   - chama a fun√ß√£o PIL_VerCarta, onde o primeiro par√¢metro
+*                   se refere ao n√∫mero da pilha a ser vista e o segundo a posi√ß√£o da
+*					pilha em rela√ß√£o ao topo a ser vista.
+*					Depois, √© testado o valor do naipe com o <char> fornecido,
+*				    assim como o valor do valor <int> tamb√©m fornecido.
 *
-*     =destroi <int>  - chama a funÁ„o PIL_DestruirPilha, onde o inteiro dado se refere ao
-*                     n˙mero da pilha a ser destruÌda
+*     =destroi <int>  - chama a fun√ß√£o PIL_DestruirPilha, onde o inteiro dado se refere ao
+*                     n√∫mero da pilha a ser destru√≠da
 *
 ***************************************************************************/
 
@@ -54,11 +54,15 @@
 
 #include    "generico.h"
 #include    "lerparm.h"
+#ifdef _DEBUG
+	
+#include "CESPDIN.H"
 
+#endif
 #include    "CARTA.H"
 #include    "PILHA_DE_CARTAS.H"
 
-/* Tabela dos nomes dos comandos de teste especÌficos */
+/* Tabela dos nomes dos comandos de teste espec√≠ficos */
 
 #define     CRIAR_PIL_CMD       "=criar"
 #define     PUSH_CMD            "=push"
@@ -71,24 +75,24 @@
 	#define VERIFICAR_PILHA_CMD "=verificar"            
 #endif
 
-/* M·ximo de pilhas a serem testadas simult‚neamente */
+/* M√°ximo de pilhas a serem testadas simult√¢neamente */
 
 #define     MAX_PILS            10
 
 PIL_tppPilha vPilhas[ MAX_PILS ];
 
-/*****  CÛdigo das funcıes exportadas pelo mÛdulo  *****/
+/*****  C√≥digo das func√µes exportadas pelo m√≥dulo  *****/
 
 
 /***********************************************************************
 *
-*  $FC FunÁ„o: TPIL Efetuar operaÁıes de teste especÌficas para pilha de cartas
+*  $FC Fun√ß√£o: TPIL Efetuar opera√ß√µes de teste espec√≠ficas para pilha de cartas
 *
-*  $ED DescriÁ„o da funÁ„o
-*     Efetua os diversos comandos de teste especÌficos para o mÛdulo
+*  $ED Descri√ß√£o da fun√ß√£o
+*     Efetua os diversos comandos de teste espec√≠ficos para o m√≥dulo
 *     pilha sendo testado.
 *
-*  $EP Par‚metros
+*  $EP Par√¢metros
 *     $P ComandoTeste - String contendo o comando
 *
 *  $FV Valor retornado
@@ -198,7 +202,7 @@ PIL_tppPilha vPilhas[ MAX_PILS ];
 
 			CAR_ObterNaipe( CartaObtida , &NaipeObtido );
             Ret = TST_CompararInt( NaipeEsperado , NaipeObtido ,
-                                    "Carta obtida est· errada." );
+                                    "Carta obtida est√° errada." );
 
 			if ( Ret != TST_CondRetOK )
             {
@@ -207,7 +211,7 @@ PIL_tppPilha vPilhas[ MAX_PILS ];
 
 			CAR_ObterValor( CartaObtida , &ValorObtido );
             return TST_CompararInt( ValorEsperado , ValorObtido ,
-                                    "Carta obtida est· errada." );
+                                    "Carta obtida est√° errada." );
 
 
             } /* Testar PIL Ver Carta da Pilha */
@@ -240,7 +244,7 @@ PIL_tppPilha vPilhas[ MAX_PILS ];
 
 		    CAR_ObterNaipe( CartaObtida , &NaipeObtido );
 		    Ret = TST_CompararInt( NaipeEsperado , NaipeObtido ,
-		                            "Carta vista est· errada." );
+		                            "Carta vista est√° errada." );
 
 			if ( Ret != TST_CondRetOK )
             {
@@ -249,7 +253,7 @@ PIL_tppPilha vPilhas[ MAX_PILS ];
 
 	        CAR_ObterValor( CartaObtida , &ValorObtido );
             return TST_CompararInt( ValorEsperado , ValorObtido ,
-                                    "Carta vista est· errada." );
+                                    "Carta vista est√° errada." );
 
 
             } /* Testar PIL Ver Carta da Pilha */
@@ -265,10 +269,17 @@ PIL_tppPilha vPilhas[ MAX_PILS ];
 		       return TST_CondRetParm ;
 		    } /* if */
 
-		    CondRetObtido = PIL_DestruirPilha( vPilhas[NumPilha] ) ;
-
-		    return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-		                            "Retorno errado destruir pilha." );
+		   // CondRetObtido = PIL_DestruirPilha( vPilhas[NumPilha] ) ;
+#ifdef _DEBUG
+			CED_InicializarIteradorEspacos();
+			while( CED_ExisteEspacoCorrente() != 0)
+			{
+				CED_ExcluirEspacoCorrente();
+			}
+#endif
+			return TST_CondRetOK;
+		    //return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+		     //                       "Retorno errado destruir pilha." );
 
 	    } /* fim ativa: Testar PIL Destruir Pilha de Cartas */
 
@@ -309,6 +320,6 @@ PIL_tppPilha vPilhas[ MAX_PILS ];
 
         return TST_CondRetNaoConhec ;
 
-   } /* Fim funÁ„o: TPIL Efetuar operaÁıes de teste especÌficas para pilha de cartas */
+   } /* Fim fun√ß√£o: TPIL Efetuar opera√ß√µes de teste espec√≠ficas para pilha de cartas */
 
-/********** Fim do mÛdulo de implementaÁ„o: MÛdulo de teste especÌfico **********/
+/********** Fim do m√≥dulo de implementa√ß√£o: M√≥dulo de teste espec√≠fico **********/
