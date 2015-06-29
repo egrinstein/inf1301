@@ -27,4 +27,15 @@
 =destruir   0 0
 
 
+
+== Gravar contadores
+=registraracumulador "acumulador"
+
+== Terminar controlar contadores
+=pararcontagem
+
+== Terminar contagem
+=terminarcontadores
+
+
 // fim
