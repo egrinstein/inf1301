@@ -1,31 +1,31 @@
 //////////////////////////////////////////////////////////////////////
-// Contadores acumulados, gerado: 2015/06/29-16:47:22
+// Contadores acumulados, gerado: 2015/06/29-21:59:44
 //////////////////////////////////////////////////////////////////////
 
-Erro: pilha nula quando qtdNos > 0\=0
-Erro: pilha sem nós quando qtdNos > 0\=0
-Erro: pilha tem nós quando nao deveria\=0
-Erro: tipo da pilha é diferente dos seus nós\=0
-OK: pilha correta quando qtdNos > 0=0\=0
-OK: pilha existe mas nao tem nós\=0
-OK: pilha não existe\=0
-OK: tipo da pilha é o mesmo dos seus nós\=0
-PIL_CriarPilhaVazia\=1
-PIL_CriarPilhaVazia-pr0\=1
+PIL_CriarPilhaVazia\=5
+PIL_CriarPilhaVazia-pr0\=5
 PIL_DestruirPilha\=0
 PIL_DestruirPilha-if0\=0
 PIL_DestruirPilha-if1\=0
 PIL_DestruirPilha-pr0\=0
-PIL_PopCarta\=0
-PIL_PopCarta-if0\=0
-PIL_PopCarta-pr0\=0
-PIL_PushCarta\=3
-PIL_PushCarta-pr0\=3
-PIL_VerCarta\=0
+PIL_PopCarta\=3
+PIL_PopCarta-if0\=2
+PIL_PopCarta-pr0\=1
+PIL_PushCarta\=8
+PIL_PushCarta-pr0\=8
+PIL_VerCarta\=5
 PIL_VerCarta-if0\=0
 PIL_VerCarta-if1\=0
-PIL_VerCarta-if2\=0
-PIL_VerCarta-pr0\=0
+PIL_VerCarta-if2\=3
+PIL_VerCarta-pr0\=2
+erro-pilha-sem-nos-quando-qtdNos-maior-0\=0
+erro-pilha-tem-nos-quando-nao-deveria\=0
+erro-tipo-da-pilha-e-diferente-dos-seus-nos\=0
+ok-pilha-correta-quando-qtdNos-maior-0\=2
+ok-pilha-existe-mas-nao-tem-nos\=0
+ok-pilha-nao-existe\=0
+ok=tipo-da-pilha-e-o-mesmo-dos-seus-nos\=2
+﻿erro-pilha-nula-quando-qtdNos-maior-0\=0
 
 //////////////////////////////////////////////////////////////////////
 // Fim arquivo de contadores acumulados

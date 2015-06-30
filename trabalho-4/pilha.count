@@ -1,0 +1,23 @@
+Erro: pilha nula quando qtdNos > 0
+Erro: pilha sem nós quando qtdNos > 0
+OK: pilha correta quando qtdNos > 0
+OK: pilha não existe
+OK: pilha existe mas nao tem nós
+Erro: pilha tem nós quando nao deveria
+OK: tipo da pilha é o mesmo dos seus nós
+Erro: tipo da pilha é diferente dos seus nós
+PIL_CriarPilhaVazia
+PIL_CriarPilhaVazia-pr0
+PIL_DestruirPilha
+PIL_DestruirPilha-if0
+PIL_DestruirPilha-if1
+PIL_DestruirPilha-pr0
+PIL_PushCarta
+PIL_PushCarta-pr0
+PIL_VerCarta
+PIL_VerCarta-if1
+PIL_VerCarta-if2
+PIL_VerCarta-pr0
+PIL_PopCarta
+PIL_PopCarta-if0
+PIL_PopCarta-pr0

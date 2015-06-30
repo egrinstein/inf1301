@@ -108,17 +108,17 @@ PIL_tpCondRet PIL_Verifica ( PIL_tppPilha pPilha , int *numErros )
 		//pilha->pListaCartas != NULL
 		if( retLis == 5)
 		{
-			CNT_CONTAR("Erro: pilha nula quando qtdNos > 0");
+			CNT_CONTAR("erro-pilha-nula-quando-qtdNos-maior-0");
 			(*numErros) ++;
 		}
 		else if (retLis == 1)
 		{
-			CNT_CONTAR("Erro: pilha sem nós quando qtdNos > 0");
+			CNT_CONTAR("erro-pilha-sem-nos-quando-qtdNos-maior-0");
 			(*numErros) ++;
 		}
 		else
 		{
-			CNT_CONTAR("OK: pilha correta quando qtdNos > 0");
+			CNT_CONTAR("ok-pilha-correta-quando-qtdNos-maior-0");
 		}
 	}
 	else if( pPilha->qtdNos == 0)
@@ -130,15 +130,15 @@ PIL_tpCondRet PIL_Verifica ( PIL_tppPilha pPilha , int *numErros )
 		retLis2 = LIS_ObterValor( pPilha->pListaCartas, &pCarta);
 		if (retLis == 5 )
 		{
-			CNT_CONTAR("OK: pilha não existe");	
+			CNT_CONTAR("ok-pilha-nao-existe");	
 		}
 		else if ( retLis == 1)
 		{
-			CNT_CONTAR("OK: pilha existe mas nao tem nós");
+			CNT_CONTAR("ok-pilha-existe-mas-nao-tem-nos");
 		}
 		else if ( retLis == 0 && retLis2 == 0)
 		{
-			CNT_CONTAR("Erro: pilha tem nós quando nao deveria");
+			CNT_CONTAR("erro-pilha-tem-nos-quando-nao-deveria");
 			(*numErros) ++;
 		}
 	}
@@ -149,11 +149,11 @@ PIL_tpCondRet PIL_Verifica ( PIL_tppPilha pPilha , int *numErros )
 	{
 		if (pPilha->tipo == CAR_ObterTipo(pCarta))
 		{
-			CNT_CONTAR("OK: tipo da pilha é o mesmo dos seus nós");
+			CNT_CONTAR("ok=tipo-da-pilha-e-o-mesmo-dos-seus-nos");
 		}
 		else
 		{
-			CNT_CONTAR("Erro: tipo da pilha é diferente dos seus nós");
+			CNT_CONTAR("erro-tipo-da-pilha-e-diferente-dos-seus-nos");
 			(*numErros) ++;
 		}
 	}

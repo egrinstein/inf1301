@@ -1,11 +1,11 @@
-Erro: pilha nula quando qtdNos > 0\=0
-Erro: pilha sem nós quando qtdNos > 0\=0
-OK: pilha correta quando qtdNos > 0=0
-OK: pilha não existe\=0
-OK: pilha existe mas nao tem nós\=0
-Erro: pilha tem nós quando nao deveria\=0
-OK: tipo da pilha é o mesmo dos seus nós\=0
-Erro: tipo da pilha é diferente dos seus nós\=0
+﻿erro-pilha-nula-quando-qtdNos-maior-0
+erro-pilha-sem-nos-quando-qtdNos-maior-0
+ok-pilha-correta-quando-qtdNos-maior-0
+ok-pilha-nao-existe
+ok-pilha-existe-mas-nao-tem-nos
+erro-pilha-tem-nos-quando-nao-deveria
+ok=tipo-da-pilha-e-o-mesmo-dos-seus-nos
+erro-tipo-da-pilha-e-diferente-dos-seus-nos
 PIL_CriarPilhaVazia\=0
 PIL_CriarPilhaVazia-pr0\=0
 PIL_DestruirPilha\=0
