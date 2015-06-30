@@ -1,20 +1,20 @@
 /***************************************************************************
- *  $MCI M€dulo de implementa¡Ño: CAR  Carta
+ *  $MCI M√õdulo de implementa√Å‚Äûo: CAR  Carta
  *
  *  Arquivo gerado:              CARTA.c
  *  Letras identificadoras:      CAR
  *
- *  Nome da base de software:    Arcabou¡o para a automa¡Ño de testes de programas redigidos em C
+ *  Nome da base de software:    Arcabou√Åo para a automa√Å‚Äûo de testes de programas redigidos em C
  *
- *  Projeto: Trabalho 2 - Programa¡Ño Modular
+ *  Projeto: Trabalho 2 - Programa√Å‚Äûo Modular
  *  Autores: EG - Eric Grinstein
  JM - Jordana Mecler
  LW - Leonardo Wajnsztok
  *
- *  $HA Hist€rico de evolu¡Ño:
- *     VersÑo      Autor            Data                Observa¡?es
- *     1.0       EG,JM,LW        17/abr/2015       Corre¡Ño de condi¡?es de retorno
- *     1.0       EG,JM,LW        16/abr/2015       inÃcio do desenvolvimento
+ *  $HA Hist√õrico de evolu√Å‚Äûo:
+ *     Vers‚Äûo      Autor            Data                Observa√Å?es
+ *     1.0       EG,JM,LW        17/abr/2015       Corre√Å‚Äûo de condi√Å?es de retorno
+ *     1.0       EG,JM,LW        16/abr/2015       in√åcio do desenvolvimento
  *
  ***************************************************************************/
 
@@ -58,19 +58,19 @@ typedef struct CAR_tagCarta {
     
 } CAR_tpCarta ;
 
-/***** Prot€tipos das fun¡?es encapuladas no m€dulo *****/
+/***** Prot√õtipos das fun√Å?es encapuladas no m√õdulo *****/
 
 int VerificarNaipe( char naipe ) ;
 
 int VerificarValor( char valor ) ;
 
-/*****  C€digo das fun¡?es exportadas pelo m€dulo  *****/
+/*****  C√õdigo das fun√Å?es exportadas pelo m√õdulo  *****/
 
 #ifdef _DEBUG
 
     /***************************************************************************
      *
-     *  FunÁ„o: CAR  Obter tipo
+     *  Fun√ß√£o: CAR  Obter tipo
      *  ****/
 
     char CAR_ObterTipo(CAR_tppCarta pCarta)
@@ -85,7 +85,7 @@ int VerificarValor( char valor ) ;
 
     /***************************************************************************
      *
-     *  FunÁ„o: CAR  Obter tamanho em bytes
+     *  Fun√ß√£o: CAR  Obter tamanho em bytes
      *  ****/
 
     int CAR_ObterTamBytes(CAR_tppCarta pCarta)
@@ -101,7 +101,7 @@ int VerificarValor( char valor ) ;
 
 /***************************************************************************
  *
- *  Fun¡Ño: CAR  Criar carta
+ *  Fun√Å‚Äûo: CAR  Criar carta
  *  ****/
 
 CAR_tpCondRet CAR_CriarCarta( CAR_tppCarta * pCarta )
@@ -128,11 +128,11 @@ CAR_tpCondRet CAR_CriarCarta( CAR_tppCarta * pCarta )
     
     return CAR_CondRetOK ;
     
-} /* Fim fun¡Ño: CAR  Criar carta */
+} /* Fim fun√Å‚Äûo: CAR  Criar carta */
 
 /***************************************************************************
  *
- *  Fun¡Ño: CAR  Preencher carta
+ *  Fun√Å‚Äûo: CAR  Preencher carta
  *  ****/
 
 CAR_tpCondRet CAR_PreencheCarta ( CAR_tppCarta pCarta , char naipe , int valor )
@@ -158,11 +158,11 @@ CAR_tpCondRet CAR_PreencheCarta ( CAR_tppCarta pCarta , char naipe , int valor )
     
     return CAR_CondRetOK ;
     
-} /* Fim fun¡Ño: CAR  Preencher carta */
+} /* Fim fun√Å‚Äûo: CAR  Preencher carta */
 
 /***************************************************************************
  *
- *  Fun¡Ño: CAR  Excluir carta
+ *  Fun√Å‚Äûo: CAR  Excluir carta
  *  ****/
 
 CAR_tpCondRet CAR_ExcluirCarta( CAR_tppCarta pCarta )
@@ -182,11 +182,11 @@ CAR_tpCondRet CAR_ExcluirCarta( CAR_tppCarta pCarta )
     
     return CAR_CondRetOK ;
     
-} /* Fim fun¡Ño: CAR  Excluir carta */
+} /* Fim fun√Å‚Äûo: CAR  Excluir carta */
 
 /***************************************************************************
  *
- *  Fun¡Ño: CAR  Obter naipe da carta
+ *  Fun√Å‚Äûo: CAR  Obter naipe da carta
  *  ****/
 
 CAR_tpCondRet CAR_ObterNaipe( CAR_tppCarta pCarta , char * pNaipe )
@@ -206,11 +206,11 @@ CAR_tpCondRet CAR_ObterNaipe( CAR_tppCarta pCarta , char * pNaipe )
     
     return CAR_CondRetOK ;
     
-} /* Fim fun¡Ño: CAR  Obter naipe da carta */
+} /* Fim fun√Å‚Äûo: CAR  Obter naipe da carta */
 
 /***************************************************************************
  *
- *  Fun¡Ño: CAR  Obter valor da carta
+ *  Fun√Å‚Äûo: CAR  Obter valor da carta
  *  ****/
 
 CAR_tpCondRet CAR_ObterValor( CAR_tppCarta pCarta , int * pValor )
@@ -230,11 +230,11 @@ CAR_tpCondRet CAR_ObterValor( CAR_tppCarta pCarta , int * pValor )
     
     return CAR_CondRetOK ;
     
-} /* Fim fun¡Ño: CAR  Obter valor da carta */
+} /* Fim fun√Å‚Äûo: CAR  Obter valor da carta */
 
 /***************************************************************************
  *
- *  Fun¡Ño: CAR  Imprimir carta
+ *  Fun√Å‚Äûo: CAR  Imprimir carta
  *  ****/
 
 CAR_tpCondRet CAR_ImprimeCarta( CAR_tppCarta pCarta )
@@ -259,18 +259,18 @@ CAR_tpCondRet CAR_ImprimeCarta( CAR_tppCarta pCarta )
     
     return CAR_CondRetOK ;
     
-} /* Fim fun¡Ño: CAR  Imprimir carta */
+} /* Fim fun√Å‚Äûo: CAR  Imprimir carta */
 
 
-/*****  C€digo das fun¡?es encapsuladas no m€dulo  *****/
+/*****  C√õdigo das fun√Å?es encapsuladas no m√õdulo  *****/
 
 
 /***********************************************************************
  *
- *  $FC Fun¡Ño: CAR  -Verificar naipe da carta
+ *  $FC Fun√Å‚Äûo: CAR  -Verificar naipe da carta
  *
- *  $ED Descri¡Ño da fun¡Ño
- *    Verifica se o naipe est∑ de acordo
+ *  $ED Descri√Å‚Äûo da fun√Å‚Äûo
+ *    Verifica se o naipe est¬∑ de acordo
  *
  ***********************************************************************/
 
@@ -287,10 +287,10 @@ int VerificarNaipe( char naipe )
 
 /***********************************************************************
  *
- *  $FC Fun¡Ño: CAR  -Verificar valor da carta
+ *  $FC Fun√Å‚Äûo: CAR  -Verificar valor da carta
  *
- *  $ED Descri¡Ño da fun¡Ño
- *    Verifica se o valor est∑ de acordo
+ *  $ED Descri√Å‚Äûo da fun√Å‚Äûo
+ *    Verifica se o valor est¬∑ de acordo
  *
  ***********************************************************************/
 
@@ -305,6 +305,6 @@ int VerificarValor( char valor )
     return 0;
 }
 
-/********** Fim do m€dulo de implementa¡Ño: CAR  Carta **********/
+/********** Fim do m√õdulo de implementa√Å‚Äûo: CAR  Carta **********/
 
 
