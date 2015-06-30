@@ -18,10 +18,9 @@
 =push   0 'o' 2 0
 =push   0 'c' 3 0
 =deturpar 0 2
-=verificar 0 0
+=verificar 0 1
 
 == Deturpacao tipo 3: Alterar predecessor na pilha
-=criar  0 0
 =push 	0 'p' 1 0
 =push   0 'o' 2 0
 =push   0 'c' 3 0
