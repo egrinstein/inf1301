@@ -1,6 +1,6 @@
 /***************************************************************************
  *
- *  $MCD Módulo de Implementação: PIL  Pilha de Cartas
+ *  $MCD MÃ³dulo de ImplementaÃ§Ã£o: PIL  Pilha de Cartas
  *
  *  Arquivo gerado:          	PIL.C
  *  Letras identificadoras:  	PIL
@@ -26,9 +26,9 @@
     #include "CESPDIN.H"
 #endif
 
-/* Definições encapsuladas no módulo */
+/* DefiniÃ§Ãµes encapsuladas no mÃ³dulo */
 
-/* Tipo referência para uma pilha de cartas */
+/* Tipo referÃªncia para uma pilha de cartas */
 
 typedef struct PIL_tagPilha {
 
@@ -38,14 +38,14 @@ typedef struct PIL_tagPilha {
     #endif
 
 	LIS_tppLista pListaCartas ;
-	/*Ponteiro para lista que guardará as cartas*/
+	/*Ponteiro para lista que guardarÃ¡ as cartas*/
 } PIL_tpPilha ;
 
-/***** Protótipos das funções encapsuladas no módulo *****/
+/***** ProtÃ³tipos das funÃ§Ãµes encapsuladas no mÃ³dulo *****/
 
 void ExcluirCarta( void * pValor ) ;
 
-/*****  Código das funções exportadas pelo módulo  *****/
+/*****  CÃ³digo das funÃ§Ãµes exportadas pelo mÃ³dulo  *****/
 
 #ifdef _DEBUG
 
@@ -98,6 +98,7 @@ PIL_tpCondRet PIL_Verifica ( PIL_tppPilha pPilha , int *numErros )
 {
 	LIS_tpCondRet retLis, retLis2;
     CAR_tppCarta pCarta;
+	int numCartasAntes;
 	*numErros = 0;
 
 	retLis = LIS_IrInicioLista(pPilha->pListaCartas);
@@ -123,11 +124,12 @@ PIL_tpCondRet PIL_Verifica ( PIL_tppPilha pPilha , int *numErros )
 	}
 	else if( pPilha->qtdNos == 0)
 	{
-		// pilha->pListaCartas == NULL 
-		//ou 
-		//pListaCartas->Corr == NULL e pListaCartas->pOrigemLista == NULL e pListaCartas->pFimLista == NULL
+		/* Assertivas estruturais
+		 pilha->pListaCartas == NULL 
+		ou 
+		pListaCartas->Corr == NULL e pListaCartas->pOrigemLista == NULL e pListaCartas->pFimLista == NULL */
 
-		retLis2 = LIS_ObterValor( pPilha->pListaCartas, &pCarta);
+		retLis2 = LIS_ObterValor( pPilha->pListaCartas,(CAR_tppCarta) &pCarta);
 		if (retLis == 5 )
 		{
 			CNT_CONTAR("ok-pilha-nao-existe");	
@@ -144,18 +146,82 @@ PIL_tpCondRet PIL_Verifica ( PIL_tppPilha pPilha , int *numErros )
 	}
 	
 	// pilha->tipo == x e celula->tipo == x
-	retLis = LIS_ObterValor( pPilha->pListaCartas, &pCarta);
+	retLis = LIS_ObterValor( pPilha->pListaCartas,(void **) &pCarta);
 	if (retLis == 0)
 	{
 		if (pPilha->tipo == CAR_ObterTipo(pCarta))
 		{
-			CNT_CONTAR("ok=tipo-da-pilha-e-o-mesmo-dos-seus-nos");
+			CNT_CONTAR("ok-tipo-da-pilha-e-o-mesmo-dos-seus-nos");
 		}
 		else
 		{
 			CNT_CONTAR("erro-tipo-da-pilha-e-diferente-dos-seus-nos");
 			(*numErros) ++;
 		}
+	}
+	
+	/*Teste do sucessor - lixo atribuÃ­do ou altera*/
+	if ( LIS_RetornaSucessor( pPilha->pListaCartas ) == NULL )
+	{
+		CNT_CONTAR("erro-sucessor-nulo-quando-nao-deveria");
+		(*numErros) ++;
+	}
+	else 
+	{
+		CNT_CONTAR("ok-sucessor-nao-nulo");
+	}
+
+	/*Teste do antecessor - lixo atribuÃ­do ou altera*/
+	if ( LIS_RetornaAntecessor( pPilha->pListaCartas ) == NULL )
+	{
+		CNT_CONTAR("erro-antecessor-nulo-quando-nao-deveria");
+		(*numErros) ++;
+	}
+	else 
+	{
+		CNT_CONTAR("ok-antecessor-nao-nulo");
+	}
+
+	if ( LIS_VerificaCorrenteNull(pPilha->pListaCartas) )
+	{
+		CNT_CONTAR("erro-no-corrente-nulo");
+		(*numErros) ++;
+	}
+	else
+	{
+		CNT_CONTAR("ok-no-corrente-consistente");
+	}
+
+	if ( LIS_RetornaCartaCorrente(pPilha->pListaCartas) == NULL )
+	{
+		CNT_CONTAR("erro-carta-corrente-alterada");
+		(*numErros) ++;
+	}
+	else
+	{
+		CNT_CONTAR("ok-carta-corrente-consistente");
+	}
+
+	numCartasAntes = pPilha->qtdNos;
+
+	if (LIS_QtdNos(pPilha->pListaCartas) != numCartasAntes )
+	{
+		CNT_CONTAR("erro-no-corrente-destacado");
+		(*numErros)++;
+	}
+	else
+	{
+		CNT_CONTAR("ok-no-corrente-encadeado");
+	}
+
+	if ( LIS_OrigemNula(pPilha->pListaCartas) )
+	{
+		CNT_CONTAR("erro-origem-nula");
+		(*numErros)++;
+	}
+	else
+	{
+		CNT_CONTAR("ok-origem-consistente");
 	}
 
 }
@@ -164,7 +230,7 @@ PIL_tpCondRet PIL_Verifica ( PIL_tppPilha pPilha , int *numErros )
 
 /***************************************************************************
  *
- *  Função: PIL Criar Pilha Vazia
+ *  FunÃ§Ã£o: PIL Criar Pilha Vazia
  *****/
 
 PIL_tpCondRet PIL_CriarPilhaVazia( PIL_tppPilha * pPilha )
@@ -187,6 +253,7 @@ PIL_tpCondRet PIL_CriarPilhaVazia( PIL_tppPilha * pPilha )
 	#ifdef _DEBUG
 
 		(*pPilha)->tipo = 'c';
+		(*pPilha)->qtdNos = 0;
     
     #endif
 
@@ -204,11 +271,11 @@ PIL_tpCondRet PIL_CriarPilhaVazia( PIL_tppPilha * pPilha )
 
 	return PIL_CondRetOK ;
     
-} /* Fim função: PIL  &Criar Pilha Vazia */
+} /* Fim funÃ§Ã£o: PIL  &Criar Pilha Vazia */
 
 /***************************************************************************
  *
- *  Função: PIL Destruir Pilha de Cartas
+ *  FunÃ§Ã£o: PIL Destruir Pilha de Cartas
  *****/
 
 PIL_tpCondRet PIL_DestruirPilha( PIL_tppPilha pPilha )
@@ -249,12 +316,12 @@ PIL_tpCondRet PIL_DestruirPilha( PIL_tppPilha pPilha )
 
 	return PIL_CondRetOK ;
     
-}/* Fim função: PIL Destruir Pilha de Cartas */
+}/* Fim funÃ§Ã£o: PIL Destruir Pilha de Cartas */
 
 
 /***************************************************************************
  *
- *  Função: PIL Push Carta
+ *  FunÃ§Ã£o: PIL Push Carta
  *****/
 
 PIL_tpCondRet PIL_PushCarta( PIL_tppPilha pPilha , CAR_tppCarta pCarta )
@@ -276,17 +343,18 @@ PIL_tpCondRet PIL_PushCarta( PIL_tppPilha pPilha , CAR_tppCarta pCarta )
     
 #ifdef _DEBUG
     CNT_CONTAR( "PIL_PushCarta-pr0" ) ;
+	pPilha->qtdNos++;
 #endif
 
 	return PIL_CondRetOK ;
 
 
     
-}/* Fim função: PIL Push Carta */
+}/* Fim funÃ§Ã£o: PIL Push Carta */
 
 /***************************************************************************
  *
- *  Função: PIL VerCarta
+ *  FunÃ§Ã£o: PIL VerCarta
  *****/
 
 PIL_tpCondRet PIL_VerCarta( PIL_tppPilha pPilha , CAR_tppCarta * pCarta , int posicao )
@@ -334,11 +402,11 @@ PIL_tpCondRet PIL_VerCarta( PIL_tppPilha pPilha , CAR_tppCarta * pCarta , int po
 
 	return PIL_CondRetOK ;
     
-}/* Fim função: PIL VerCarta */
+}/* Fim funÃ§Ã£o: PIL VerCarta */
 
 /***************************************************************************
  *
- *  Função: PIL PopCarta
+ *  FunÃ§Ã£o: PIL PopCarta
  *****/
 
 PIL_tpCondRet PIL_PopCarta( PIL_tppPilha pPilha , CAR_tppCarta * pCarta )
@@ -367,37 +435,31 @@ PIL_tpCondRet PIL_PopCarta( PIL_tppPilha pPilha , CAR_tppCarta * pCarta )
     
 	LIS_ExcluirElemento( pPilha->pListaCartas );
     
-	/*LIS_ExcluirElemento irá destruir a carta junto do nó.
- 	É necessário que ela seja criada novamente*/
+	/*LIS_ExcluirElemento irÃ¡ destruir a carta junto do nÃ³.
+ 	Ã‰ necessÃ¡rio que ela seja criada novamente*/
     
 	CAR_CriarCarta( pCarta ) ;
 	CAR_PreencheCarta( *pCarta , naipe, valor ) ;
 #ifdef _DEBUG
 	CNT_CONTAR( "PIL_PopCarta-pr0" ) ;
+	pPilha->qtdNos--;
 #endif
 
 	return PIL_CondRetOK ;
     
-}/* Fim função: PIL Pop Carta */
+}/* Fim funÃ§Ã£o: PIL Pop Carta */
 
-/*****  Código das funções encapsuladas no módulo  *****/
+/*****  CÃ³digo das funÃ§Ãµes encapsuladas no mÃ³dulo  *****/
 
-#ifdef _DEBUG
-void ExcluirCarta( void * pValor , void * espaco )
-#else
+
 void ExcluirCarta( void * pValor )
-#endif
 {
 	CAR_ExcluirCarta( (CAR_tppCarta) pValor ) ;
 
 #ifdef _DEBUG
-	CED_MarcarEspacoNaoAtivo(espaco);
+	CED_MarcarEspacoNaoAtivo(pValor);
 #endif
 }
 
 
-/********** Fim do módulo de implementação: PIL  Pilha de cartas  **********/
-
-
-
-
+/********** Fim do mÃ³dulo de implementaÃ§Ã£o: PIL  Pilha de cartas  **********/
