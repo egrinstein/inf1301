@@ -115,6 +115,11 @@
          return LIS_CondRetFaltouMemoria ;
       } /* if */
 
+        #ifdef _DEBUG
+        
+          CED_MarcarEspacoAtivo(pLista);
+
+        #endif
        (*pLista)->pOrigemLista = NULL ;
        (*pLista)->pFimLista = NULL ;
        (*pLista)->pElemCorr = NULL ;
@@ -151,6 +156,12 @@
        } /* if */
        
        free( pLista ) ;
+
+        #ifdef _DEBUG
+        
+          CED_MarcarNaoEspacoAtivo(pLista);
+
+        #endif
        
        pLista = NULL ;
        
@@ -652,6 +663,12 @@
 
       free( pElem ) ;
 
+       #ifdef _DEBUG
+        
+          CED_MarcarEspacoAtivo(pElem);
+
+        #endif
+
       pLista->numElem-- ;
 
    } /* Fim função: LIS  -Liberar elemento da lista */
@@ -674,6 +691,12 @@
       {
          return NULL ;
       } /* if */
+
+          #ifdef _DEBUG
+        
+          CED_MarcarEspacoAtivo(pValor);
+
+        #endif
 
       pElem->pValor = pValor ;
       pElem->pAnt   = NULL  ;
