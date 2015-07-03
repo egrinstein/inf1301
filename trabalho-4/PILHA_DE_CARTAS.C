@@ -51,40 +51,59 @@ void ExcluirCarta( void * pValor ) ;
 
 PIL_tpCondRet PIL_Deturpa ( PIL_tppPilha pPilha , int acao )
 {
+	
 	if( acao == 1 )
 	{
+		LIS_IrInicioLista( pPilha->pListaCartas );
+		LIS_AvancarElementoCorrente( pPilha->pListaCartas , 1);
 		LIS_LiberaElemCorr( pPilha->pListaCartas ) ;
 	}
 	else if( acao == 2 )
 	{
+		LIS_IrInicioLista( pPilha->pListaCartas );
+		LIS_AvancarElementoCorrente( pPilha->pListaCartas , 1);
 		LIS_AlteraSucessor( pPilha->pListaCartas ) ;
 	}
 	else if( acao == 3 )
 	{
+		LIS_IrInicioLista( pPilha->pListaCartas );
+		LIS_AvancarElementoCorrente( pPilha->pListaCartas , 1);
 		LIS_AlteraPredecessor( pPilha->pListaCartas ) ;
 	}
 	else if( acao == 4 )
 	{
+		LIS_IrInicioLista( pPilha->pListaCartas );
+		LIS_AvancarElementoCorrente( pPilha->pListaCartas , 1);
 		LIS_AtribuiLixoSucessor( pPilha->pListaCartas ) ;
 	}
 	else if( acao == 5 )
 	{
+		LIS_IrInicioLista( pPilha->pListaCartas );
+		LIS_AvancarElementoCorrente( pPilha->pListaCartas , 1);
 		LIS_AtribuiLixoPredecessor( pPilha->pListaCartas ) ;
 	}
 	else if( acao == 6 )
 	{
+		LIS_IrInicioLista( pPilha->pListaCartas );
+		LIS_AvancarElementoCorrente( pPilha->pListaCartas , 1);
 		LIS_AtribuiNULLCarta( pPilha->pListaCartas ) ;
 	}
 	else if( acao == 7 )
 	{
+		LIS_IrInicioLista( pPilha->pListaCartas );
+		LIS_AvancarElementoCorrente( pPilha->pListaCartas , 1);
 		LIS_AlteraTipoCarta( pPilha->pListaCartas ) ;
 	}
 	else if( acao == 8 )
 	{
+		LIS_IrInicioLista( pPilha->pListaCartas );
+		LIS_AvancarElementoCorrente( pPilha->pListaCartas , 1);
 		LIS_DestacaCarta( pPilha->pListaCartas ) ;
 	}
 	else if( acao == 9 )
 	{
+		LIS_IrInicioLista( pPilha->pListaCartas );
+		LIS_AvancarElementoCorrente( pPilha->pListaCartas , 1);
 		LIS_AtribuiNULLCorrente( pPilha->pListaCartas ) ;
 	}
 	else if( acao == 10 )
@@ -99,6 +118,7 @@ PIL_tpCondRet PIL_Verifica ( PIL_tppPilha pPilha , int *numErros )
 	LIS_tpCondRet retLis, retLis2;
     CAR_tppCarta pCarta;
 	int numCartasAntes;
+	int i = 0;
 	*numErros = 0;
 
 	retLis = LIS_IrInicioLista(pPilha->pListaCartas);
@@ -129,7 +149,7 @@ PIL_tpCondRet PIL_Verifica ( PIL_tppPilha pPilha , int *numErros )
 		ou 
 		pListaCartas->Corr == NULL e pListaCartas->pOrigemLista == NULL e pListaCartas->pFimLista == NULL */
 
-		retLis2 = LIS_ObterValor( pPilha->pListaCartas,(CAR_tppCarta) &pCarta);
+		retLis2 = LIS_ObterValor( pPilha->pListaCartas, (void**) &pCarta);
 		if (retLis == 5 )
 		{
 			CNT_CONTAR("ok-pilha-nao-existe");	
@@ -163,8 +183,10 @@ PIL_tpCondRet PIL_Verifica ( PIL_tppPilha pPilha , int *numErros )
 	/*Teste do sucessor - lixo atribuído ou altera*/
 
 	LIS_IrInicioLista(pPilha->pListaCartas);
-	while( LIS_AvancarElementoCorrente( pPilha->pListaCartas, 1 ) == 0 )
+	i = 0 ;
+	do
 	{
+		i++;
 		if ( LIS_RetornaSucessor( pPilha->pListaCartas ) == NULL )
 		{
 			CNT_CONTAR("erro-sucessor-nulo-quando-nao-deveria");
@@ -172,41 +194,60 @@ PIL_tpCondRet PIL_Verifica ( PIL_tppPilha pPilha , int *numErros )
 		}
 		else 
 		{
+			printf("");
 			CNT_CONTAR("ok-sucessor-nao-nulo");
 		}
-	}
+	} while( (i < (pPilha->qtdNos -1))  && LIS_AvancarElementoCorrente( pPilha->pListaCartas, 1 ) == 0);
 
 
 	/*Teste do antecessor - lixo atribuído ou altera*/
-	if ( LIS_RetornaAntecessor( pPilha->pListaCartas ) == NULL )
+	i = 0;
+	LIS_IrFinalLista( pPilha->pListaCartas );
+	do
 	{
-		CNT_CONTAR("erro-antecessor-nulo-quando-nao-deveria");
-		(*numErros) ++;
-	}
-	else 
-	{
-		CNT_CONTAR("ok-antecessor-nao-nulo");
-	}
+		i++;
+		if ( LIS_RetornaAntecessor( pPilha->pListaCartas ) == NULL )
+		{
+			CNT_CONTAR("erro-antecessor-nulo-quando-nao-deveria");
+			(*numErros) ++;
+		}
+		else 
+		{
+			CNT_CONTAR("ok-antecessor-nao-nulo");
+		}
+	} while((i < pPilha->qtdNos -1) && LIS_AvancarElementoCorrente( pPilha->pListaCartas, -1 ) == 0);
 
-	if ( LIS_VerificaCorrenteNull(pPilha->pListaCartas) )
+	/* Teste do corrente - lixo atribuído ou altera */
+	i=0;
+	LIS_IrInicioLista( pPilha->pListaCartas );
+	do
 	{
-		CNT_CONTAR("erro-no-corrente-nulo");
-		(*numErros) ++;
-	}
-	else
-	{
-		CNT_CONTAR("ok-no-corrente-consistente");
-	}
+		if ( LIS_VerificaCorrenteNull(pPilha->pListaCartas) )
+		{
+			CNT_CONTAR("erro-no-corrente-nulo");
+			(*numErros) ++;
+		}
+		else
+		{
+			CNT_CONTAR("ok-no-corrente-consistente");
+		}
+	} while((i < pPilha->qtdNos -1) && LIS_AvancarElementoCorrente( pPilha->pListaCartas, 1 ) == 0);
 
-	if ( LIS_RetornaCartaCorrente(pPilha->pListaCartas) == NULL )
+	/* Teste da carta corrente - altera */
+	i=0;
+	LIS_IrInicioLista( pPilha->pListaCartas );
+	do
 	{
-		CNT_CONTAR("erro-carta-corrente-alterada");
-		(*numErros) ++;
-	}
-	else
-	{
-		CNT_CONTAR("ok-carta-corrente-consistente");
-	}
+		if ( LIS_RetornaCartaCorrente(pPilha->pListaCartas) == NULL )
+		{
+			CNT_CONTAR("erro-carta-corrente-alterada");
+			(*numErros) ++;
+		}
+		else
+		{
+			CNT_CONTAR("ok-carta-corrente-consistente");
+		}
+	}while((i < pPilha->qtdNos -1) && LIS_AvancarElementoCorrente( pPilha->pListaCartas, 1 ) == 0);
 
 	numCartasAntes = pPilha->qtdNos;
 
@@ -229,7 +270,7 @@ PIL_tpCondRet PIL_Verifica ( PIL_tppPilha pPilha , int *numErros )
 	{
 		CNT_CONTAR("ok-origem-consistente");
 	}
-
+	return PIL_CondRetOK;
 }
 
 #endif
