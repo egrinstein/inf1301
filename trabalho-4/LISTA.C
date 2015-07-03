@@ -34,6 +34,10 @@
 #include "LISTA.h"
 #undef LISTA_OWN
 
+#ifdef _DEBUG
+#include "CESPDIN.h"
+#endif
+
 
 /***********************************************************************
 *
@@ -159,7 +163,7 @@
 
         #ifdef _DEBUG
         
-          CED_MarcarNaoEspacoAtivo(pLista);
+          CED_MarcarEspacoNaoAtivo(pLista);
 
         #endif
        
@@ -593,6 +597,7 @@
    void LIS_LiberaElemCorr( LIS_tppLista pLista )
    {
 	free( pLista->pElemCorr ) ;
+	pLista->pElemCorr = NULL;
    }
    void LIS_AlteraSucessor( LIS_tppLista pLista )
    {
