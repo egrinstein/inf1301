@@ -161,15 +161,21 @@ PIL_tpCondRet PIL_Verifica ( PIL_tppPilha pPilha , int *numErros )
 	}
 	
 	/*Teste do sucessor - lixo atribuído ou altera*/
-	if ( LIS_RetornaSucessor( pPilha->pListaCartas ) == NULL )
+
+	LIS_IrInicioLista(pPilha->pListaCartas);
+	while( LIS_AvancarElementoCorrente( pPilha->pListaCartas, 1 ) == 0 )
 	{
-		CNT_CONTAR("erro-sucessor-nulo-quando-nao-deveria");
-		(*numErros) ++;
+		if ( LIS_RetornaSucessor( pPilha->pListaCartas ) == NULL )
+		{
+			CNT_CONTAR("erro-sucessor-nulo-quando-nao-deveria");
+			(*numErros) ++;
+		}
+		else 
+		{
+			CNT_CONTAR("ok-sucessor-nao-nulo");
+		}
 	}
-	else 
-	{
-		CNT_CONTAR("ok-sucessor-nao-nulo");
-	}
+
 
 	/*Teste do antecessor - lixo atribuído ou altera*/
 	if ( LIS_RetornaAntecessor( pPilha->pListaCartas ) == NULL )
