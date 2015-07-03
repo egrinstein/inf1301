@@ -1,7 +1,6 @@
 erro-pilha-nula-quando-qtdNos-maior-0
 erro-pilha-sem-nos-quando-qtdNos-maior-0
 ok-pilha-correta-quando-qtdNos-maior-0
-ok-pilha-nao-existe
 ok-pilha-existe-mas-nao-tem-nos
 erro-pilha-tem-nos-quando-nao-deveria
 ok-tipo-da-pilha-e-o-mesmo-dos-seus-nos
@@ -14,7 +13,6 @@ erro-no-corrente-nulo
 ok-no-corrente-consistente
 erro-carta-corrente-alterada
 ok-carta-corrente-consistente
-erro-no-corrente-destacado
 ok-no-corrente-encadeado
 erro-origem-nula
 ok-origem-consistente
