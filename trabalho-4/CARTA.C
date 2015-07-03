@@ -306,5 +306,3 @@ int VerificarValor( char valor )
 }
 
 /********** Fim do mÛdulo de implementaÁ„o: CAR  Carta **********/
-
-
