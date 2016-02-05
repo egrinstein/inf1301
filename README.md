@@ -2,7 +2,7 @@
 
 ## Members of the Team
 The tasks should be solved in groups of 3. [Jordana Mecler](https://github.com/jordanamecler),[Eric Grinstein](https://github.com/egrinstein)
-and [Leonardo Wajnsztok](https://github.com/leotok) composes our group.
+and [Leonardo Wajnsztok](https://github.com/leotok) compose our group.
 
 ## Description
 We made a fully functional, tested and instrumented Spider Solitaire in C.
